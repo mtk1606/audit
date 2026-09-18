@@ -1,0 +1,16 @@
+$ uv run ruff check src tests
+All checks passed!
+exit_code=0
+
+$ uv run ruff format --check src tests
+28 files already formatted
+exit_code=0
+
+$ uv run mypy --strict src
+Success: no issues found in 24 source files
+exit_code=0
+
+$ uv run pytest -q
+................................                                         [100%]
+32 passed in 2.62s
+exit_code=0

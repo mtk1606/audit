@@ -1,0 +1,62 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "data_root": "/workspace/scratch/542cfe7f0673/as-audit/data/raw/lobster",
+    "date": "2012-06-21",
+    "depth": 10,
+    "price_unit": "0.0001",
+    "quality": {
+      "fail_on_crossed_book": true,
+      "max_gap_pct": "0.001"
+    },
+    "reconstruction": "snapshot_assisted",
+    "source": "lobster",
+    "symbol": "MSFT",
+    "timezone": "America/New_York"
+  },
+  "config_hash": "fa1361a8d0a2682e025b082e6e8f9ef470a0044d1284202b92b44b3bd97ae1b3",
+  "data_checksums": {
+    "data/raw/lobster/MSFT_2012-06-21_34200000_57600000_message_10.csv": "669e5c35b1eab0f7336fa9ed919002e65b08d2aabd96bb4ae88d647184e7a18d",
+    "data/raw/lobster/MSFT_2012-06-21_34200000_57600000_orderbook_10.csv": "ec2f53467cf7bfb00b5702381bea7b4a061bb4c1730454df3679b272b3561c0e"
+  },
+  "data_quality": {
+    "clock_reversals": 0,
+    "cross_trades": 0,
+    "crossed_books": 0,
+    "halts": 0,
+    "independently_checked_levels": 156043,
+    "order_identity_complete": false,
+    "rows": 7814,
+    "sequence_check": "unavailable_in_lobster_message_format",
+    "sequence_gaps": null,
+    "snapshot_assisted": true,
+    "supplied_boundary_levels": 217,
+    "supplied_initial_levels": 20,
+    "zero_size_levels": 0
+  },
+  "elapsed_seconds": 0.4091267759999937,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.12.14",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "error": "event_index=7814: invalid exact second timestamp: '34397.878728270996'; context=(\"7804: ['34397.863515659', '1', '21698262', '200', '310800', '1']\", \"7805: ['34397.863523665', '1', '21698268', '100', '310800', '1']\", \"7806: ['34397.863586047', '1', '21698292', '200', '310800', '1']\", \"7807: ['34397.863616508', '1', '21698298', '200', '310700', '1']\", \"7808: ['34397.863636862', '1', '21698304', '500', '310800', '1']\", \"7809: ['34397.863830196', '3', '21698268', '100', '310800', '1']\", \"7810: ['34397.864373244', '3', '21641160', '100', '310700', '1']\", \"7811: ['34397.864402337', '3', '21696274', '100', '310700', '1']\", \"7812: ['34397.86451764', '3', '21470142', '200', '311100', '-1']\", \"7813: ['34397.8648897', '1', '21698578', '600', '310900', '-1']\", \"7814: ['34397.878728270996', '3', '21697406', '200', '310700', '1']\", \"['34397.879897217', '3', '21698292', '200', '310800', '1']\", \"['34397.879900145', '3', '21698298', '200', '310700', '1']\", \"['34397.884664855', '1', '21700280', '200', '310800', '1']\", \"['34397.884691612', '1', '21700284', '100', '310800', '1']\", \"['34397.921346099', '1', '21701510', '11', '311000', '-1']\", \"['34397.947047177', '3', '21696488', '900', '310700', '1']\", \"['34397.947062413', '3', '21698259', '900', '310800', '1']\", \"['34397.95933154', '3', '21696511', '100', '310700', '1']\", \"['34397.970324065', '3', '21698240', '100', '310800', '1']\", \"['34398.134131322', '3', '20476731', '100', '310400', '1']\")",
+  "finished_utc": "2026-09-18T20:10:01.722681+00:00",
+  "git_dirty": false,
+  "git_sha": "0260c039b9a7ccadf058528a96473f39c18d263d",
+  "n_events": 7814,
+  "n_fills": 0,
+  "run_id": "20260918T201001319175Z_0260c039b9_fa1361a8d0_65152051",
+  "seed": null,
+  "seed_reason": "M0 ingestion/validation has no random number generation",
+  "session_id": "MSFT/2012-06-21",
+  "started_utc": "2026-09-18T20:10:01.319175+00:00",
+  "status": "failed",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/data/quality.py\", line 67, in validate_pair\n    event = parse_event(event_row, metadata, midnight_ns=midnight)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/data/lobster.py\", line 48, in parse_event\n    ts += seconds_to_ns(row[0])\n          ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/data/lobster.py\", line 29, in seconds_to_ns\n    raise ValueError(f\"invalid exact second timestamp: {value!r}\")\nValueError: invalid exact second timestamp: '34397.878728270996'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/cli.py\", line 61, in validate\n    report = validate_pair(messages, books, metadata, cfg.quality)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/data/quality.py\", line 96, in validate_pair\n    raise DataQualityError(str(exc), index, tuple(context), report()) from exc\nasaudit.data.quality.DataQualityError: event_index=7814: invalid exact second timestamp: '34397.878728270996'; context=(\"7804: ['34397.863515659', '1', '21698262', '200', '310800', '1']\", \"7805: ['34397.863523665', '1', '21698268', '100', '310800', '1']\", \"7806: ['34397.863586047', '1', '21698292', '200', '310800', '1']\", \"7807: ['34397.863616508', '1', '21698298', '200', '310700', '1']\", \"7808: ['34397.863636862', '1', '21698304', '500', '310800', '1']\", \"7809: ['34397.863830196', '3', '21698268', '100', '310800', '1']\", \"7810: ['34397.864373244', '3', '21641160', '100', '310700', '1']\", \"7811: ['34397.864402337', '3', '21696274', '100', '310700', '1']\", \"7812: ['34397.86451764', '3', '21470142', '200', '311100', '-1']\", \"7813: ['34397.8648897', '1', '21698578', '600', '310900', '-1']\", \"7814: ['34397.878728270996', '3', '21697406', '200', '310700', '1']\", \"['34397.879897217', '3', '21698292', '200', '310800', '1']\", \"['34397.879900145', '3', '21698298', '200', '310700', '1']\", \"['34397.884664855', '1', '21700280', '200', '310800', '1']\", \"['34397.884691612', '1', '21700284', '100', '310800', '1']\", \"['34397.921346099', '1', '21701510', '11', '311000', '-1']\", \"['34397.947047177', '3', '21696488', '900', '310700', '1']\", \"['34397.947062413', '3', '21698259', '900', '310800', '1']\", \"['34397.95933154', '3', '21696511', '100', '310700', '1']\", \"['34397.970324065', '3', '21698240', '100', '310800', '1']\", \"['34398.134131322', '3', '20476731', '100', '310400', '1']\")\n"
+}

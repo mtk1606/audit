@@ -1,0 +1,60 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "data_root": "/workspace/scratch/542cfe7f0673/as-audit/data/raw/lobster",
+    "date": "2012-06-21",
+    "depth": 10,
+    "price_unit": "0.0001",
+    "quality": {
+      "fail_on_crossed_book": true,
+      "max_gap_pct": "0.001"
+    },
+    "reconstruction": "snapshot_assisted",
+    "source": "lobster",
+    "symbol": "AAPL",
+    "timezone": "America/New_York"
+  },
+  "config_hash": "086e1bfa66cab84b5d6fe5332a3bb5a179a0c4a436b135a098a58f4cb7351140",
+  "data_checksums": {
+    "data/raw/lobster/AAPL_2012-06-21_34200000_57600000_message_10.csv": "6562394b996138d5c4527b1282e77a1a385e844110550c34628fbd73bc5411e5",
+    "data/raw/lobster/AAPL_2012-06-21_34200000_57600000_orderbook_10.csv": "ed75450031996e81bdc5fc985f6afe6851c81d7b2b39bccf13c56d845fe6ff5d"
+  },
+  "data_quality": {
+    "clock_reversals": 0,
+    "cross_trades": 0,
+    "crossed_books": 0,
+    "halts": 0,
+    "independently_checked_levels": 7903238,
+    "order_identity_complete": false,
+    "rows": 400391,
+    "sequence_check": "unavailable_in_lobster_message_format",
+    "sequence_gaps": null,
+    "snapshot_assisted": true,
+    "supplied_boundary_levels": 104562,
+    "supplied_initial_levels": 20,
+    "zero_size_levels": 0
+  },
+  "elapsed_seconds": 12.88873832399986,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.12.14",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "finished_utc": "2026-09-18T20:10:14.213149+00:00",
+  "git_dirty": false,
+  "git_sha": "0260c039b9a7ccadf058528a96473f39c18d263d",
+  "n_events": 400391,
+  "n_fills": 0,
+  "run_id": "20260918T201001327825Z_0260c039b9_086e1bfa66_bd10226f",
+  "seed": null,
+  "seed_reason": "M0 ingestion/validation has no random number generation",
+  "session_id": "AAPL/2012-06-21",
+  "started_utc": "2026-09-18T20:10:01.327825+00:00",
+  "status": "passed"
+}

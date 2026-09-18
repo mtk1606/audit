@@ -1,0 +1,83 @@
+{
+  "purpose": "deterministic source-format audit; no normalization performed",
+  "records": [
+    {
+      "symbol": "AAPL",
+      "noninteger_nanosecond_rows": 0,
+      "max_distance_to_nearest_ns": "0",
+      "examples": [],
+      "source_sha256": "6562394b996138d5c4527b1282e77a1a385e844110550c34628fbd73bc5411e5"
+    },
+    {
+      "symbol": "AMZN",
+      "noninteger_nanosecond_rows": 2,
+      "max_distance_to_nearest_ns": "0.004000000000",
+      "examples": [
+        {
+          "row_1based": 29332,
+          "raw_seconds": "36754.716797047004",
+          "distance_to_nearest_ns": "0.004000000000"
+        },
+        {
+          "row_1based": 108276,
+          "raw_seconds": "43002.632812672004",
+          "distance_to_nearest_ns": "0.004000000000"
+        }
+      ],
+      "source_sha256": "c85a75b51f3616a683f825c2e03f984535e9329a8be5ab12325130d32223a2c5"
+    },
+    {
+      "symbol": "GOOG",
+      "noninteger_nanosecond_rows": 0,
+      "max_distance_to_nearest_ns": "0",
+      "examples": [],
+      "source_sha256": "6767177b0fd926ef9674185af9356828c30e2d4fb45b3cfed637d1c64e8eba19"
+    },
+    {
+      "symbol": "INTC",
+      "noninteger_nanosecond_rows": 5,
+      "max_distance_to_nearest_ns": "0.004000000000",
+      "examples": [
+        {
+          "row_1based": 178417,
+          "raw_seconds": "39737.672762831004",
+          "distance_to_nearest_ns": "0.004000000000"
+        },
+        {
+          "row_1based": 198430,
+          "raw_seconds": "40404.677912354004",
+          "distance_to_nearest_ns": "0.004000000000"
+        },
+        {
+          "row_1based": 387246,
+          "raw_seconds": "48202.608842094996",
+          "distance_to_nearest_ns": "0.004000000000"
+        }
+      ],
+      "source_sha256": "199c55b35f6c62f07b058922038c0b8d168bc3be9d2de94da19c901cd3f29927"
+    },
+    {
+      "symbol": "MSFT",
+      "noninteger_nanosecond_rows": 3,
+      "max_distance_to_nearest_ns": "0.004000000000",
+      "examples": [
+        {
+          "row_1based": 7815,
+          "raw_seconds": "34397.878728270996",
+          "distance_to_nearest_ns": "0.004000000000"
+        },
+        {
+          "row_1based": 273511,
+          "raw_seconds": "42734.846057878996",
+          "distance_to_nearest_ns": "0.004000000000"
+        },
+        {
+          "row_1based": 458263,
+          "raw_seconds": "51027.166903456004",
+          "distance_to_nearest_ns": "0.004000000000"
+        }
+      ],
+      "source_sha256": "669e5c35b1eab0f7336fa9ed919002e65b08d2aabd96bb4ae88d647184e7a18d"
+    }
+  ]
+}

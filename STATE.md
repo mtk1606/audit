@@ -1,29 +1,29 @@
 # as-audit state
-Updated: 2026-09-18T20:09:39.656459+00:00
+Updated: 2026-09-18T23:46:34.879412+00:00
 Milestone: M0, in progress
 
 ## Acceptance criteria
-- [x] Typed scaffold, pinned environment and local quality gate — 32 tests passed.
-- [x] AAPL validation command exits 0 in development — final clean-commit run pending.
-- [ ] Approved snapshot-assisted validation for all five tickers — final runs pending.
-- [ ] Live one-hour collector forced-disconnect acceptance — user hardware required.
+- [x] Typed scaffold, pinned dependencies, CI configuration and local tests.
+- [x] AAPL validation command exits 0; GOOG also passes.
+- [ ] All five samples pass: AMZN, INTC and MSFT reject non-integral nanosecond timestamps.
+- [ ] Live one-hour collector acceptance: not run; local disconnect fixture passes.
 
 ## Gate status
-ruff: pass  format: pass  mypy: pass  pytest: 32 passed, 0 failed
-Remote CI: configured, not executed.
+ruff: pass; format: pass; mypy: pass; pytest: 32 passed, 0 failed.
+Remote CI: not run.
 
 ## Open blockers
-Live collector evidence remains pending. M1 awaits human-owned golden table and derivation.
+Timestamp policy; live collector evidence. M1 also awaits the human-owned golden table and derivation.
 
 ## Awaiting user decision
-None for the approved M0 implementation. The gap-free history claim after disconnection remains unproven.
+Approve explicit nearest-nanosecond normalization with source provenance, or provide corrected inputs.
 
 ## Self-audit findings outstanding
-SUSPECT: Bounded LOBSTER snapshots do not establish full order identity or queue priority.
-SUSPECT: Reconnect snapshots do not reconstruct missed event history.
+BLOCKER: Ten source timestamps cannot be represented exactly as integer nanoseconds.
+SUSPECT: Bounded snapshots lack full queue identity; reconnect snapshots do not recover missed events.
 
 ## Next session should
-Finish real sample verification, review M0 acceptance gaps, and preserve the milestone boundary.
+Resolve timestamp policy, rerun failed samples, and review collector evidence. Remain in M0.
 
 ## Last commit message
-Implement M0 data validation and loss-aware collector
+Record M0 verification and timestamp policy blocker

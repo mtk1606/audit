@@ -32,3 +32,14 @@ Status: Approved. Supersedes the blocked statuses of the two preceding decisions
 Implementation detail: LOBSTER price_ticks use its native USD 0.0001 quantum, including sub-cent hidden executions found in the actual samples. The canonical metadata makes the scale explicit. This is an exact source encoding, not a modification of the PRD's later simulator quote increment. No M1 parameter has been populated.
 
 Implementation detail: Python 3.11-compatible NumPy is constrained below 2.4; the complete environment is pinned in uv.lock. The first resolved NumPy exposed Python 3.12-only stub syntax to the Python 3.11 mypy target. This was a dependency compatibility issue, not a scientific or test-criterion change.
+
+## 2026-09-18 Non-integral nanosecond source timestamps
+Context: M0 clean-commit validation against all five official level-10 samples.
+Problem: The canonical contract requires integer nanoseconds and forbids implicit data repairs. Ten raw timestamps have nonzero sub-nanosecond remainders: AMZN 2, INTC 5, MSFT 3. Each is 0.004 ns from the nearest integer ns. AAPL and GOOG have none. The validator correctly stops rather than truncating or rounding. Serialization noise is a hypothesis, not a verified cause.
+Evidence: docs/evidence/m0 contains all five validation manifests, timestamp_precision.json, and its diagnostic manifest. The diagnostic computes differences only; it does not modify input or normalize timestamps.
+Options:
+1. Approve explicit Decimal-based nearest-nanosecond normalization (ROUND_HALF_EVEN), preserving original source strings and exact deltas in provenance, counting adjusted records and timestamp collisions, and retaining source row order. This sacrifices sub-nanosecond literal precision and must appear in config and manifests. Strict mode should remain available and its rejection test should remain unchanged.
+2. Retain strict integer-nanosecond parsing and obtain provider-corrected inputs with verified provenance. This preserves the current contract but requires new source data.
+3. Adopt an exact finer-resolution or rational timestamp schema throughout the project. This preserves literal precision but changes the PRD's core types and downstream interfaces.
+Recommendation: Option 1, subject to user approval; do not infer a scientific tolerance threshold from these ten records. No rounding policy has been implemented or activated.
+Blocked on: Approval of the exact timestamp-normalization policy or provision of corrected inputs. The general instruction to continue was used to finish verification and packaging, not to silently relax this data contract.

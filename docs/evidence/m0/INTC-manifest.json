@@ -1,0 +1,62 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "data_root": "/workspace/scratch/542cfe7f0673/as-audit/data/raw/lobster",
+    "date": "2012-06-21",
+    "depth": 10,
+    "price_unit": "0.0001",
+    "quality": {
+      "fail_on_crossed_book": true,
+      "max_gap_pct": "0.001"
+    },
+    "reconstruction": "snapshot_assisted",
+    "source": "lobster",
+    "symbol": "INTC",
+    "timezone": "America/New_York"
+  },
+  "config_hash": "864f42088e91654e5f458e5d4907235038e64b4be4937503cfcb195a07d27808",
+  "data_checksums": {
+    "data/raw/lobster/INTC_2012-06-21_34200000_57600000_message_10.csv": "199c55b35f6c62f07b058922038c0b8d168bc3be9d2de94da19c901cd3f29927",
+    "data/raw/lobster/INTC_2012-06-21_34200000_57600000_orderbook_10.csv": "6bc4c4dc1e92d78e46d04f9e7914df2d8c2a9231928493e7395a9085e1fc91ab"
+  },
+  "data_quality": {
+    "clock_reversals": 0,
+    "cross_trades": 0,
+    "crossed_books": 0,
+    "halts": 0,
+    "independently_checked_levels": 3567505,
+    "order_identity_complete": false,
+    "rows": 178416,
+    "sequence_check": "unavailable_in_lobster_message_format",
+    "sequence_gaps": null,
+    "snapshot_assisted": true,
+    "supplied_boundary_levels": 795,
+    "supplied_initial_levels": 20,
+    "zero_size_levels": 0
+  },
+  "elapsed_seconds": 6.1606577819998165,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.12.14",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "error": "event_index=178416: invalid exact second timestamp: '39737.672762831004'; context=(\"178406: ['39737.150650882', '3', '95275992', '400', '273700', '1']\", \"178407: ['39737.150723847', '1', '95276001', '400', '273700', '1']\", \"178408: ['39737.150725871', '3', '95275997', '400', '273700', '1']\", \"178409: ['39737.150796189', '1', '95276004', '400', '273700', '1']\", \"178410: ['39737.150799529', '3', '95276001', '400', '273700', '1']\", \"178411: ['39737.150866692', '1', '95276009', '400', '273700', '1']\", \"178412: ['39737.150876298', '3', '95276004', '400', '273700', '1']\", \"178413: ['39737.150934093', '3', '95276009', '400', '273700', '1']\", \"178414: ['39737.415286084', '1', '95278106', '200', '273600', '1']\", \"178415: ['39737.50326897', '3', '94695123', '100', '273700', '1']\", \"178416: ['39737.672762831004', '1', '95280438', '600', '273900', '-1']\", \"['39737.67277206', '1', '95280442', '800', '273900', '-1']\", \"['39737.672788618', '3', '95275978', '100', '273700', '1']\", \"['39737.672897779', '3', '95280438', '600', '273900', '-1']\", \"['39737.672924214', '1', '95280513', '200', '273900', '-1']\", \"['39737.673464888', '1', '95280660', '100', '273900', '-1']\", \"['39737.673856528', '1', '95280722', '600', '273900', '-1']\", \"['39737.673926109', '1', '95280748', '400', '273700', '1']\", \"['39737.673968977', '3', '95280722', '600', '273900', '-1']\", \"['39737.745120893', '3', '95280442', '800', '273900', '-1']\", \"['39737.944037933', '3', '95271057', '100', '274100', '-1']\")",
+  "finished_utc": "2026-09-18T20:10:07.390762+00:00",
+  "git_dirty": false,
+  "git_sha": "0260c039b9a7ccadf058528a96473f39c18d263d",
+  "n_events": 178416,
+  "n_fills": 0,
+  "run_id": "20260918T201001235705Z_0260c039b9_864f42088e_00748875",
+  "seed": null,
+  "seed_reason": "M0 ingestion/validation has no random number generation",
+  "session_id": "INTC/2012-06-21",
+  "started_utc": "2026-09-18T20:10:01.235705+00:00",
+  "status": "failed",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/data/quality.py\", line 67, in validate_pair\n    event = parse_event(event_row, metadata, midnight_ns=midnight)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/data/lobster.py\", line 48, in parse_event\n    ts += seconds_to_ns(row[0])\n          ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/data/lobster.py\", line 29, in seconds_to_ns\n    raise ValueError(f\"invalid exact second timestamp: {value!r}\")\nValueError: invalid exact second timestamp: '39737.672762831004'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/cli.py\", line 61, in validate\n    report = validate_pair(messages, books, metadata, cfg.quality)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/542cfe7f0673/as-audit/src/asaudit/data/quality.py\", line 96, in validate_pair\n    raise DataQualityError(str(exc), index, tuple(context), report()) from exc\nasaudit.data.quality.DataQualityError: event_index=178416: invalid exact second timestamp: '39737.672762831004'; context=(\"178406: ['39737.150650882', '3', '95275992', '400', '273700', '1']\", \"178407: ['39737.150723847', '1', '95276001', '400', '273700', '1']\", \"178408: ['39737.150725871', '3', '95275997', '400', '273700', '1']\", \"178409: ['39737.150796189', '1', '95276004', '400', '273700', '1']\", \"178410: ['39737.150799529', '3', '95276001', '400', '273700', '1']\", \"178411: ['39737.150866692', '1', '95276009', '400', '273700', '1']\", \"178412: ['39737.150876298', '3', '95276004', '400', '273700', '1']\", \"178413: ['39737.150934093', '3', '95276009', '400', '273700', '1']\", \"178414: ['39737.415286084', '1', '95278106', '200', '273600', '1']\", \"178415: ['39737.50326897', '3', '94695123', '100', '273700', '1']\", \"178416: ['39737.672762831004', '1', '95280438', '600', '273900', '-1']\", \"['39737.67277206', '1', '95280442', '800', '273900', '-1']\", \"['39737.672788618', '3', '95275978', '100', '273700', '1']\", \"['39737.672897779', '3', '95280438', '600', '273900', '-1']\", \"['39737.672924214', '1', '95280513', '200', '273900', '-1']\", \"['39737.673464888', '1', '95280660', '100', '273900', '-1']\", \"['39737.673856528', '1', '95280722', '600', '273900', '-1']\", \"['39737.673926109', '1', '95280748', '400', '273700', '1']\", \"['39737.673968977', '3', '95280722', '600', '273900', '-1']\", \"['39737.745120893', '3', '95280442', '800', '273900', '-1']\", \"['39737.944037933', '3', '95271057', '100', '274100', '-1']\")\n"
+}

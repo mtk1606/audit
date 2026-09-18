@@ -1,0 +1,41 @@
+{
+  "allow_dirty": true,
+  "config": {
+    "data_root": "/workspace/scratch/542cfe7f0673/as-audit/data/raw/lobster",
+    "normalization_performed": false,
+    "purpose": "source_timestamp_diagnostic"
+  },
+  "config_hash": "96a3c2bf81b9f0fd116f80d05202e21d8a5abc8b874924d9c4e5ebf34b2382d3",
+  "data_checksums": {
+    "data/raw/lobster/AAPL_2012-06-21_34200000_57600000_message_10.csv": "6562394b996138d5c4527b1282e77a1a385e844110550c34628fbd73bc5411e5",
+    "data/raw/lobster/AMZN_2012-06-21_34200000_57600000_message_10.csv": "c85a75b51f3616a683f825c2e03f984535e9329a8be5ab12325130d32223a2c5",
+    "data/raw/lobster/GOOG_2012-06-21_34200000_57600000_message_10.csv": "6767177b0fd926ef9674185af9356828c30e2d4fb45b3cfed637d1c64e8eba19",
+    "data/raw/lobster/INTC_2012-06-21_34200000_57600000_message_10.csv": "199c55b35f6c62f07b058922038c0b8d168bc3be9d2de94da19c901cd3f29927",
+    "data/raw/lobster/MSFT_2012-06-21_34200000_57600000_message_10.csv": "669e5c35b1eab0f7336fa9ed919002e65b08d2aabd96bb4ae88d647184e7a18d"
+  },
+  "data_quality": {},
+  "elapsed_seconds": 4.550223322999955,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.12.14",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "finished_utc": "2026-09-18T23:45:29.111045+00:00",
+  "git_dirty": true,
+  "git_sha": "9f455da8af6f6affeccb98c9650ba67589ef149d",
+  "n_events": 0,
+  "n_fills": 0,
+  "report_sha256": "b7a631ee1b8c0bddadee6f7b6041d0a842f365c1523ab2c8218b8f721b4b4246",
+  "run_id": "20260918T234524586963Z_9f455da8af_96a3c2bf81_9f56e161",
+  "seed": null,
+  "seed_reason": "M0 ingestion/validation has no random number generation",
+  "session_id": "five-source-samples",
+  "started_utc": "2026-09-18T23:45:24.586963+00:00",
+  "status": "passed"
+}
