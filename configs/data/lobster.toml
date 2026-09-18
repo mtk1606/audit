@@ -1,0 +1,8 @@
+depth = 10
+price_unit = "0.0001"
+timezone = "America/New_York"
+reconstruction = "snapshot_assisted"
+
+[quality]
+max_gap_pct = "0.001"
+fail_on_crossed_book = true
