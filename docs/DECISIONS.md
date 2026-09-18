@@ -23,3 +23,12 @@ Options:
 2. Keep the original canonical schema and reject sessions containing unsupported source semantics; document the narrower adapter support.
 Recommendation: Option 1, with targeted source-format fixtures after approval.
 Blocked on: Approval to extend the canonical schema rather than silently deviating from the PRD.
+
+## 2026-09-18 Approved bounded reconstruction and event schema amendments
+Context: User responded “Approved” to both requested amendments in this chat.
+Decision: M0 may import explicitly identified boundary state from current reference snapshots while independently checking event-driven observable changes. EventType gains CROSS, and halt status is represented explicitly rather than as an executable price.
+Status: Approved. Supersedes the blocked statuses of the two preceding decisions. It does not establish full L3 order identity or FIFO priority.
+
+Implementation detail: LOBSTER price_ticks use its native USD 0.0001 quantum, including sub-cent hidden executions found in the actual samples. The canonical metadata makes the scale explicit. This is an exact source encoding, not a modification of the PRD's later simulator quote increment. No M1 parameter has been populated.
+
+Implementation detail: Python 3.11-compatible NumPy is constrained below 2.4; the complete environment is pinned in uv.lock. The first resolved NumPy exposed Python 3.12-only stub syntax to the Python 3.11 mypy target. This was a dependency compatibility issue, not a scientific or test-criterion change.

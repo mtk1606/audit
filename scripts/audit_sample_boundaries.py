@@ -17,10 +17,7 @@ from pathlib import Path
 
 
 def inspect(symbol: str, cache: Path) -> dict[str, object]:
-    url = (
-        "https://php.lobsterdata.com/info/sample/"
-        f"LOBSTER_SampleFile_{symbol}_2012-06-21_10.zip"
-    )
+    url = f"https://php.lobsterdata.com/info/sample/LOBSTER_SampleFile_{symbol}_2012-06-21_10.zip"
     path = cache / f"{symbol}.zip"
     if not path.exists():
         with urllib.request.urlopen(url, timeout=60) as response:
@@ -31,12 +28,8 @@ def inspect(symbol: str, cache: Path) -> dict[str, object]:
     counts: dict[str, int] = {}
     count = 0
     with zipfile.ZipFile(io.BytesIO(raw)) as archive:
-        messages = [
-            n for n in archive.namelist() if "message" in n and n.endswith(".csv")
-        ]
-        books = [
-            n for n in archive.namelist() if "orderbook" in n and n.endswith(".csv")
-        ]
+        messages = [n for n in archive.namelist() if "message" in n and n.endswith(".csv")]
+        books = [n for n in archive.namelist() if "orderbook" in n and n.endswith(".csv")]
         if len(messages) != 1 or len(books) != 1:
             raise ValueError("Expected exactly one message and one orderbook CSV")
         with (
@@ -58,9 +51,7 @@ def inspect(symbol: str, cache: Path) -> dict[str, object]:
                 seen.add(int(event[4]))  # Include current event before checking.
                 if index > 1 and witness is None:
                     for offset, side in [(0, "ask"), (2, "bid")]:
-                        for price, size in zip(
-                            row[offset::4], row[offset + 1 :: 4], strict=True
-                        ):
+                        for price, size in zip(row[offset::4], row[offset + 1 :: 4], strict=True):
                             if size > 0 and price not in seen:
                                 witness = {
                                     "row_1based": index,

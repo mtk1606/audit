@@ -1,0 +1,7 @@
+symbol = "BTC-USD"
+duration_seconds = 3600
+max_reconnects = 10
+reconnect_seconds = 1.0
+queue_capacity = 10000
+batch_size = 1000
+flush_seconds = 1.0

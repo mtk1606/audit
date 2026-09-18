@@ -1,33 +1,29 @@
 # as-audit state
-Updated: 2026-09-18T19:46:11.770158+00:00
+Updated: 2026-09-18T20:09:39.656459+00:00
 Milestone: M0, in progress
 
 ## Acceptance criteria
-- [ ] LOBSTER validation CLI prints a quality report and exits 0 — not implemented; reconstruction contract blocked.
-- [ ] Exact independent event-stream reconstruction for all five tickers — insufficient bounded source information; decision required.
-- [ ] Crypto collector one-hour forced-disconnect run produces a gap-free session — not implemented or run; external evidence required.
+- [x] Typed scaffold, pinned environment and local quality gate — 32 tests passed.
+- [x] AAPL validation command exits 0 in development — final clean-commit run pending.
+- [ ] Approved snapshot-assisted validation for all five tickers — final runs pending.
+- [ ] Live one-hour collector forced-disconnect acceptance — user hardware required.
 
 ## Gate status
-ruff: not run on src/tests; diagnostic script passes lint and formatting.
-mypy: not run on src; diagnostic script passes strict checking.
-pytest: not run; no application code or test suite exists.
-No production verification gate is claimed green.
+ruff: pass  format: pass  mypy: pass  pytest: 32 passed, 0 failed
+Remote CI: configured, not executed.
 
 ## Open blockers
-- Bounded LOBSTER reconstruction contract, documented with real sample counterexamples.
-- Canonical source event semantics require explicit decision.
-- M1 awaits human-owned golden table and derivation.
+Live collector evidence remains pending. M1 awaits human-owned golden table and derivation.
 
 ## Awaiting user decision
-Approve snapshot-assisted bounded replay with independent checks limited to observable event-driven changes, or supply full-depth reconstruction inputs. Approve CROSS and explicit halt-status representation, or restrict source support.
+None for the approved M0 implementation. The gap-free history claim after disconnection remains unproven.
 
 ## Self-audit findings outstanding
-BLOCKER: Using reference boundary cells to fill missing state and then claiming those cells independently reconstructed would make verification circular.
-SUSPECT: Canonical aggregate initial snapshots do not establish initial order identities or FIFO queue positions.
-SUSPECT: A reconnect snapshot cannot by itself satisfy a gap-free event-history claim.
+SUSPECT: Bounded LOBSTER snapshots do not establish full order identity or queue priority.
+SUSPECT: Reconnect snapshots do not reconstruct missed event history.
 
 ## Next session should
-Read the M0 PRD and decisions. Apply the user's reconstruction and schema decisions without changing statistical thresholds. Write failing adapter, boundary-provenance, and event-semantics tests before implementing. Preserve source hashes and the independent-versus-supplied distinction. M1 and all later milestones remain out of scope.
+Finish real sample verification, review M0 acceptance gaps, and preserve the milestone boundary.
 
 ## Last commit message
-Record reproducible source audit verification
+Implement M0 data validation and loss-aware collector
