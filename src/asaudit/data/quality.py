@@ -20,7 +20,10 @@ class QualityPolicy(BaseModel):
 
 class DataQualityError(ValueError):
     def __init__(
-        self, message: str, event_index: int, context: tuple[str, ...],
+        self,
+        message: str,
+        event_index: int,
+        context: tuple[str, ...],
         report: "DataQualityReport | None" = None,
     ) -> None:
         self.event_index = event_index
@@ -52,8 +55,10 @@ def validate_pair(
     rows = crossed = zero = halts = crosses = supplied = initial = checked = reversals = 0
 
     def report() -> DataQualityReport:
-        return DataQualityReport(rows, None, crossed, zero, halts, reversals,
-                                 crosses, initial, supplied, checked)
+        return DataQualityReport(
+            rows, None, crossed, zero, halts, reversals, crosses, initial, supplied, checked
+        )
+
     book: BoundedBook | None = None
     previous_ts: int | None = None
     history: deque[str] = deque(maxlen=10)

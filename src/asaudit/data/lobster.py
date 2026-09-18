@@ -4,7 +4,7 @@ import csv
 import re
 from collections.abc import Iterator, Sequence
 from dataclasses import dataclass
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -35,7 +35,7 @@ def seconds_to_ns(value: str) -> int:
 
 def session_midnight_ns(day: date, tz: str = "America/New_York") -> int:
     midnight = datetime(day.year, day.month, day.day, tzinfo=ZoneInfo(tz))
-    delta = midnight.astimezone(timezone.utc) - datetime(1970, 1, 1, tzinfo=timezone.utc)
+    delta = midnight.astimezone(UTC) - datetime(1970, 1, 1, tzinfo=UTC)
     return (delta.days * 86400 + delta.seconds) * 10**9
 
 
@@ -44,7 +44,11 @@ def parse_event(
 ) -> LOBEvent:
     if len(row) != 6:
         raise ValueError("expected six message fields")
-    ts = (session_midnight_ns(metadata.date, metadata.timezone) if midnight_ns is None else midnight_ns)
+    ts = (
+        session_midnight_ns(metadata.date, metadata.timezone)
+        if midnight_ns is None
+        else midnight_ns
+    )
     ts += seconds_to_ns(row[0])
     event_type = EventType(int(row[1]))
     order_id, size, price, side = int(row[2]), int(row[3]), int(row[4]), Side(int(row[5]))
@@ -87,8 +91,14 @@ def parse_snapshot(row: Sequence[str], ts_ns: int, depth: int) -> BookSnapshot:
             px.append(price)
             sz.append(size)
         sides.append((px, sz))
-    return BookSnapshot(ts_ns, _readonly(sides[0][0]), _readonly(sides[0][1]),
-                        _readonly(sides[1][0]), _readonly(sides[1][1]), depth)
+    return BookSnapshot(
+        ts_ns,
+        _readonly(sides[0][0]),
+        _readonly(sides[0][1]),
+        _readonly(sides[1][0]),
+        _readonly(sides[1][1]),
+        depth,
+    )
 
 
 def iter_lobster_events(path: Path, metadata: SessionMetadata) -> Iterator[LOBEvent]:

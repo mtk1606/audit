@@ -12,7 +12,7 @@ import re
 import time
 from collections import defaultdict
 from collections.abc import Mapping
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from pathlib import Path
 from typing import cast
@@ -47,8 +47,8 @@ def iso_to_ns(value: str) -> int:
     match = re.fullmatch(r"(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)(?:\.(\d{1,9}))?Z", value)
     if match is None:
         raise ValueError("expected UTC ISO timestamp with at most nine fractional digits")
-    stamp = datetime.strptime(match[1], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
-    delta = stamp - datetime(1970, 1, 1, tzinfo=timezone.utc)
+    stamp = datetime.strptime(match[1], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=UTC)
+    delta = stamp - datetime(1970, 1, 1, tzinfo=UTC)
     return (delta.days * 86400 + delta.seconds) * 10**9 + int((match[2] or "").ljust(9, "0"))
 
 
@@ -70,24 +70,36 @@ class ParquetJournal:
         sequence = payload.get("sequence")
         if sequence is not None:
             sequence = _integer(sequence, "sequence")
-        self.pending.append({
-            "segment_id": segment, "kind": kind, "symbol": self.symbol,
-            "recv_ts_ns": recv_ns, "exchange_ts_ns": exchange_ts, "sequence": sequence,
-            "payload": json.dumps(dict(payload), sort_keys=True, separators=(",", ":"), allow_nan=False),
-        })
+        self.pending.append(
+            {
+                "segment_id": segment,
+                "kind": kind,
+                "symbol": self.symbol,
+                "recv_ts_ns": recv_ns,
+                "exchange_ts_ns": exchange_ts,
+                "sequence": sequence,
+                "payload": json.dumps(
+                    dict(payload), sort_keys=True, separators=(",", ":"), allow_nan=False
+                ),
+            }
+        )
         if len(self.pending) >= self.batch_size:
             self.flush()
 
     def flush(self) -> None:
         groups: dict[tuple[str, str], list[dict[str, object]]] = defaultdict(list)
         for row in self.pending:
-            stamp = datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(
+            stamp = datetime(1970, 1, 1, tzinfo=UTC) + timedelta(
                 seconds=_integer(row["recv_ts_ns"], "recv_ts_ns") // 10**9
             )
             groups[(stamp.strftime("%Y-%m-%d"), stamp.strftime("%H"))].append(row)
         schema = {
-            "segment_id": pl.String, "kind": pl.String, "symbol": pl.String,
-            "recv_ts_ns": pl.Int64, "exchange_ts_ns": pl.Int64, "sequence": pl.Int64,
+            "segment_id": pl.String,
+            "kind": pl.String,
+            "symbol": pl.String,
+            "recv_ts_ns": pl.Int64,
+            "exchange_ts_ns": pl.Int64,
+            "sequence": pl.Int64,
             "payload": pl.String,
         }
         for (day, hour), rows in groups.items():
@@ -138,7 +150,11 @@ class FullChannelRecorder:
                 price, size, order_id = level
                 if not all(isinstance(x, str) for x in level):
                     raise ValueError("L3 snapshot values must be strings")
-                if not isinstance(price, str) or not isinstance(size, str) or not isinstance(order_id, str):
+                if (
+                    not isinstance(price, str)
+                    or not isinstance(size, str)
+                    or not isinstance(order_id, str)
+                ):
                     raise ValueError("invalid snapshot field types")
                 p, s = Decimal(price), Decimal(size)
                 if not p.is_finite() or not s.is_finite() or p <= 0 or s <= 0:
@@ -165,10 +181,16 @@ class FullChannelRecorder:
         if seq != self.last_sequence + 1:
             self.gaps += 1
             self.segment_gaps += 1
-            self.journal.append(self.segment, "gap", {
-                "expected": self.last_sequence + 1, "observed": seq,
-                "missing_events": max(0, seq - self.last_sequence - 1),
-            }, recv_ns)
+            self.journal.append(
+                self.segment,
+                "gap",
+                {
+                    "expected": self.last_sequence + 1,
+                    "observed": seq,
+                    "missing_events": max(0, seq - self.last_sequence - 1),
+                },
+                recv_ns,
+            )
             self.journal.flush()
             raise SequenceGap(f"expected {self.last_sequence + 1}, observed {seq}")
         stamp = message.get("time")
@@ -191,10 +213,16 @@ class FullChannelRecorder:
             return
         if reason != "completed":
             self.discontinuities += 1
-        self.journal.append(self.segment, "segment_end", {
-            "reason": reason, "last_sequence": self.last_sequence,
-            "gap_free": self.segment_gaps == 0 and reason == "completed",
-        }, recv_ns)
+        self.journal.append(
+            self.segment,
+            "segment_end",
+            {
+                "reason": reason,
+                "last_sequence": self.last_sequence,
+                "gap_free": self.segment_gaps == 0 and reason == "completed",
+            },
+            recv_ns,
+        )
         self.journal.flush()
         self.segment = None
 
@@ -209,8 +237,14 @@ async def capture_connection(
 ) -> None:
     """Buffer stream before REST snapshot. Any gap aborts this segment."""
     async with connect(websocket_url, max_size=8 * 1024 * 1024, open_timeout=15) as ws:
-        await ws.send(json.dumps({"type": "subscribe", "product_ids": [recorder.symbol], "channels": ["full"]}))
-        buffer: asyncio.Queue[tuple[dict[str, object], int] | Exception] = asyncio.Queue(queue_capacity)
+        await ws.send(
+            json.dumps(
+                {"type": "subscribe", "product_ids": [recorder.symbol], "channels": ["full"]}
+            )
+        )
+        buffer: asyncio.Queue[tuple[dict[str, object], int] | Exception] = asyncio.Queue(
+            queue_capacity
+        )
 
         async def receive() -> None:
             try:
@@ -254,8 +288,12 @@ async def capture_connection(
 
 
 async def collect(
-    recorder: FullChannelRecorder, duration_seconds: int, max_reconnects: int,
-    reconnect_seconds: float, queue_capacity: int, flush_seconds: float,
+    recorder: FullChannelRecorder,
+    duration_seconds: int,
+    max_reconnects: int,
+    reconnect_seconds: float,
+    queue_capacity: int,
+    flush_seconds: float,
     websocket_url: str = "wss://ws-feed.exchange.coinbase.com",
     rest_root: str = "https://api.exchange.coinbase.com",
 ) -> None:
@@ -263,11 +301,19 @@ async def collect(
     reconnects = 0
     while time.monotonic() < deadline:
         try:
-            await capture_connection(recorder, f"{rest_root}/products/{recorder.symbol}/book",
-                                     websocket_url, deadline, queue_capacity, flush_seconds)
+            await capture_connection(
+                recorder,
+                f"{rest_root}/products/{recorder.symbol}/book",
+                websocket_url,
+                deadline,
+                queue_capacity,
+                flush_seconds,
+            )
         except (ConnectionClosed, OSError, TimeoutError, httpx.HTTPError, SequenceGap) as exc:
             recorder.close("disconnect", time.time_ns())
-            structlog.get_logger("asaudit").warning("collector_reconnect", reason=str(exc), attempt=reconnects)
+            structlog.get_logger("asaudit").warning(
+                "collector_reconnect", reason=str(exc), attempt=reconnects
+            )
             reconnects += 1
             if reconnects > max_reconnects:
                 raise
