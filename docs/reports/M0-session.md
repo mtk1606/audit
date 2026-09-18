@@ -8,7 +8,7 @@ Typed canonical events, immutable dataclass contracts, four model protocols, exa
 
 ## Actual checks
 
-All 32 local tests pass. Tests include property-based timestamp and cancellation arithmetic, malformed source data, corruption of retained levels, improper interior boundary injection, explicit provenance, hidden sub-cent price preservation, CROSS and HALT decoding, snapshot overlap, late stale sequences, gap journaling, safe restart, failure manifests, and a real loopback HTTP/WebSocket forced disconnect. The exact local gate output is in docs/evidence/m0/gate.txt. CI is configured, not remotely executed.
+All 32 local tests pass. Tests include property-based timestamp and cancellation arithmetic, malformed source data, corruption of retained levels, improper interior boundary injection, explicit provenance, hidden sub-cent price preservation, CROSS and HALT decoding, snapshot overlap, late stale sequences, gap journaling, safe restart, failure manifests, and a real loopback HTTP/WebSocket forced disconnect. The exact local gate output is in docs/evidence/m0/gate.txt. A clean export of tracked commit 20652c0 was installed into a fresh virtual environment using the lockfile and passed the same gate (export-gate.txt). The initial offline setup lacked cached wheels; a normal pinned install succeeded. CI is configured, not remotely executed.
 
 The first test run failed at imports because no package existed. Additional regression tests were observed failing before fixes for stale sequence acceptance, missing boundary provenance, impossible boundary volume, and missing partial failure counters. No assertions were deleted, skipped, weakened, or xfailed.
 

@@ -10,6 +10,7 @@ Milestone: M0, in progress
 
 ## Gate status
 ruff: pass; format: pass; mypy: pass; pytest: 32 passed, 0 failed.
+A fresh tracked-file export also passes the full gate.
 Remote CI: not run.
 
 ## Open blockers
@@ -26,4 +27,4 @@ SUSPECT: Bounded snapshots lack full queue identity; reconnect snapshots do not 
 Resolve timestamp policy, rerun failed samples, and review collector evidence. Remain in M0.
 
 ## Last commit message
-Record M0 verification and timestamp policy blocker
+Verify exported M0 repository and finalize handoff
