@@ -1,0 +1,11 @@
+$ ruff check scripts
+All checks passed!
+
+$ ruff format --check scripts
+1 file already formatted
+
+$ mypy --strict scripts
+Success: no issues found in 1 source file
+
+Source feasibility diagnostic: exit 0; output byte-identical to the committed audit JSON.
+Production gate: not run; src/ and tests/ do not exist.

@@ -30,4 +30,4 @@ SUSPECT: A reconnect snapshot cannot by itself satisfy a gap-free event-history 
 Read the M0 PRD and decisions. Apply the user's reconstruction and schema decisions without changing statistical thresholds. Write failing adapter, boundary-provenance, and event-semantics tests before implementing. Preserve source hashes and the independent-versus-supplied distinction. M1 and all later milestones remain out of scope.
 
 ## Last commit message
-Record M0 source audit and reconstruction blockers
+Record reproducible source audit verification
