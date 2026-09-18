@@ -1,0 +1,112 @@
+[
+  {
+    "archive_sha256": "326839316d67d7819ca0541ffdf73cdb044d6ae4105cce0ef9c615e8848e9d43",
+    "event_count": 400391,
+    "event_type_counts": {
+      "1": 191015,
+      "2": 3260,
+      "3": 171126,
+      "4": 23658,
+      "5": 11332
+    },
+    "first_unseen_boundary": {
+      "event_price_raw": 5858200,
+      "event_type": "4",
+      "price_raw": 5873000,
+      "row_1based": 48,
+      "seen_in_prior_messages_or_snapshots": false,
+      "side": "ask",
+      "size_shares": 200
+    },
+    "symbol": "AAPL",
+    "url": "https://php.lobsterdata.com/info/sample/LOBSTER_SampleFile_AAPL_2012-06-21_10.zip"
+  },
+  {
+    "archive_sha256": "5cff62a609b27aef82285382ad646c4c2facc0a692a60bedda633de64c4aa54f",
+    "event_count": 269748,
+    "event_type_counts": {
+      "1": 131954,
+      "2": 2917,
+      "3": 123458,
+      "4": 8974,
+      "5": 2445
+    },
+    "first_unseen_boundary": {
+      "event_price_raw": 2240000,
+      "event_type": "4",
+      "price_raw": 2250000,
+      "row_1based": 133,
+      "seen_in_prior_messages_or_snapshots": false,
+      "side": "ask",
+      "size_shares": 3104
+    },
+    "symbol": "AMZN",
+    "url": "https://php.lobsterdata.com/info/sample/LOBSTER_SampleFile_AMZN_2012-06-21_10.zip"
+  },
+  {
+    "archive_sha256": "2fa66b61c7c4d4cd3f19180aaa7f5937a26355f81b2ac8e4a84e36550e8dde4a",
+    "event_count": 147916,
+    "event_type_counts": {
+      "1": 71258,
+      "2": 19,
+      "3": 64961,
+      "4": 7765,
+      "5": 3913
+    },
+    "first_unseen_boundary": {
+      "event_price_raw": 5794000,
+      "event_type": "4",
+      "price_raw": 5775100,
+      "row_1based": 65,
+      "seen_in_prior_messages_or_snapshots": false,
+      "side": "bid",
+      "size_shares": 110
+    },
+    "symbol": "GOOG",
+    "url": "https://php.lobsterdata.com/info/sample/LOBSTER_SampleFile_GOOG_2012-06-21_10.zip"
+  },
+  {
+    "archive_sha256": "327121717467df0050654ba8a76e490d4dfe5a454a166294ace59b7e0877dff6",
+    "event_count": 624040,
+    "event_type_counts": {
+      "1": 304790,
+      "2": 8028,
+      "3": 278739,
+      "4": 28924,
+      "5": 3559
+    },
+    "first_unseen_boundary": {
+      "event_price_raw": 275000,
+      "event_type": "3",
+      "price_raw": 274100,
+      "row_1based": 5,
+      "seen_in_prior_messages_or_snapshots": false,
+      "side": "bid",
+      "size_shares": 3300
+    },
+    "symbol": "INTC",
+    "url": "https://php.lobsterdata.com/info/sample/LOBSTER_SampleFile_INTC_2012-06-21_10.zip"
+  },
+  {
+    "archive_sha256": "0825e00ec83cb8ac8b53fd1efb7f2138b7848659e625c49621ebd9b55757be4c",
+    "event_count": 668765,
+    "event_type_counts": {
+      "1": 329566,
+      "2": 5602,
+      "3": 300183,
+      "4": 29798,
+      "5": 3616
+    },
+    "first_unseen_boundary": {
+      "event_price_raw": 311400,
+      "event_type": "3",
+      "price_raw": 311500,
+      "row_1based": 8,
+      "seen_in_prior_messages_or_snapshots": false,
+      "side": "ask",
+      "size_shares": 100
+    },
+    "symbol": "MSFT",
+    "url": "https://php.lobsterdata.com/info/sample/LOBSTER_SampleFile_MSFT_2012-06-21_10.zip"
+  }
+]
