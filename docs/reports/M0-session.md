@@ -1,5 +1,7 @@
 # M0 implementation and verification report
 
+Historical session record from September 18, 2026. See [the current M0 report](M0.md) for subsequent verification.
+
 M0 infrastructure is implemented and the local engineering gate passes. M0 acceptance remains incomplete: only AAPL and GOOG finish strict timestamp validation, and the collector has not run live for one hour. No market-making strategy or research performance result exists.
 
 ## Implemented scope

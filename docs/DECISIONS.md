@@ -50,3 +50,6 @@ Decision: Add the nearest_ns policy using Decimal and ROUND_HALF_EVEN. Preserve 
 Configuration: The sample config opts into nearest_ns. The decoder and CLI defaults remain strict. Every run records the resolved policy and adjustment provenance.
 Status: Approved and implemented. Supersedes the timestamp policy blocker above. Real sample verification follows this commit.
 Presentation: Use a concise README, a compact evidence table, and separate operating instructions. Preserve original supplied specifications as source documents.
+
+## 2026-09-19 Timestamp policy verified
+All five clean-commit validation runs pass. Ten adjustments were recorded, each 0.004 ns in magnitude, with zero newly merged timestamps. Evidence is preserved in docs/evidence/m0-normalization. The timestamp blocker is resolved under the approved policy. The live collector acceptance item remains open.

@@ -1,0 +1,64 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "data_root": "/workspace/scratch/542cfe7f0673/as-audit/data/raw/lobster",
+    "date": "2012-06-21",
+    "depth": 10,
+    "price_unit": "0.0001",
+    "quality": {
+      "fail_on_crossed_book": true,
+      "max_gap_pct": "0.001"
+    },
+    "reconstruction": "snapshot_assisted",
+    "source": "lobster",
+    "symbol": "GOOG",
+    "timestamp_policy": "nearest_ns",
+    "timezone": "America/New_York"
+  },
+  "config_hash": "ee6e9be28cdf514b4fb6cf8cde1fcfa41037fe59058c962c7d938d27a10b5524",
+  "data_checksums": {
+    "data/raw/lobster/GOOG_2012-06-21_34200000_57600000_message_10.csv": "6767177b0fd926ef9674185af9356828c30e2d4fb45b3cfed637d1c64e8eba19",
+    "data/raw/lobster/GOOG_2012-06-21_34200000_57600000_orderbook_10.csv": "9ebe00b4f1aee57aa73dcb979e1074d16554296ca32b87440ce756c60974bb53"
+  },
+  "data_quality": {
+    "clock_reversals": 0,
+    "cross_trades": 0,
+    "crossed_books": 0,
+    "halts": 0,
+    "independently_checked_levels": 2913849,
+    "new_timestamp_collisions": 0,
+    "normalized_timestamps": 0,
+    "order_identity_complete": false,
+    "rows": 147916,
+    "sequence_check": "unavailable_in_lobster_message_format",
+    "sequence_gaps": null,
+    "snapshot_assisted": true,
+    "supplied_boundary_levels": 44451,
+    "supplied_initial_levels": 20,
+    "timestamp_adjustments": [],
+    "zero_size_levels": 0
+  },
+  "elapsed_seconds": 10.36556242000006,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.12.14",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "finished_utc": "2026-09-19T00:29:54.985288+00:00",
+  "git_dirty": false,
+  "git_sha": "5b7cd8c8e048b30db3206751adff9e1a9b010f42",
+  "n_events": 147916,
+  "n_fills": 0,
+  "run_id": "20260919T002944648193Z_5b7cd8c8e0_ee6e9be28c_e0881211",
+  "seed": null,
+  "seed_reason": "M0 ingestion/validation has no random number generation",
+  "session_id": "GOOG/2012-06-21",
+  "started_utc": "2026-09-19T00:29:44.648193+00:00",
+  "status": "passed"
+}

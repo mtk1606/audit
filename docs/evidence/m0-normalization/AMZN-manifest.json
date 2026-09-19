@@ -1,0 +1,77 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "data_root": "/workspace/scratch/542cfe7f0673/as-audit/data/raw/lobster",
+    "date": "2012-06-21",
+    "depth": 10,
+    "price_unit": "0.0001",
+    "quality": {
+      "fail_on_crossed_book": true,
+      "max_gap_pct": "0.001"
+    },
+    "reconstruction": "snapshot_assisted",
+    "source": "lobster",
+    "symbol": "AMZN",
+    "timestamp_policy": "nearest_ns",
+    "timezone": "America/New_York"
+  },
+  "config_hash": "cde6971e1b2316a82bab67d4dda47533fb76393b6a53fd38fe48bf32295be0f6",
+  "data_checksums": {
+    "data/raw/lobster/AMZN_2012-06-21_34200000_57600000_message_10.csv": "c85a75b51f3616a683f825c2e03f984535e9329a8be5ab12325130d32223a2c5",
+    "data/raw/lobster/AMZN_2012-06-21_34200000_57600000_orderbook_10.csv": "decfe952b3fa06c9922dc8fba763a37a0fb032d4231767997e4abf2aa0d29b50"
+  },
+  "data_quality": {
+    "clock_reversals": 0,
+    "cross_trades": 0,
+    "crossed_books": 0,
+    "halts": 0,
+    "independently_checked_levels": 5342751,
+    "new_timestamp_collisions": 0,
+    "normalized_timestamps": 2,
+    "order_identity_complete": false,
+    "rows": 269748,
+    "sequence_check": "unavailable_in_lobster_message_format",
+    "sequence_gaps": null,
+    "snapshot_assisted": true,
+    "supplied_boundary_levels": 52189,
+    "supplied_initial_levels": 20,
+    "timestamp_adjustments": [
+      {
+        "adjustment_ns": "-0.004",
+        "event_index": 29331,
+        "raw_seconds": "36754.716797047004",
+        "ts_ns": 1340287954716797047
+      },
+      {
+        "adjustment_ns": "-0.004",
+        "event_index": 108275,
+        "raw_seconds": "43002.632812672004",
+        "ts_ns": 1340294202632812672
+      }
+    ],
+    "zero_size_levels": 0
+  },
+  "elapsed_seconds": 19.429980891000014,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.12.14",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "finished_utc": "2026-09-19T00:30:03.960007+00:00",
+  "git_dirty": false,
+  "git_sha": "5b7cd8c8e048b30db3206751adff9e1a9b010f42",
+  "n_events": 269748,
+  "n_fills": 0,
+  "run_id": "20260919T002944560908Z_5b7cd8c8e0_cde6971e1b_dc896e8c",
+  "seed": null,
+  "seed_reason": "M0 ingestion/validation has no random number generation",
+  "session_id": "AMZN/2012-06-21",
+  "started_utc": "2026-09-19T00:29:44.560908+00:00",
+  "status": "passed"
+}

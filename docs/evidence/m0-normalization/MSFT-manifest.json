@@ -1,0 +1,83 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "data_root": "/workspace/scratch/542cfe7f0673/as-audit/data/raw/lobster",
+    "date": "2012-06-21",
+    "depth": 10,
+    "price_unit": "0.0001",
+    "quality": {
+      "fail_on_crossed_book": true,
+      "max_gap_pct": "0.001"
+    },
+    "reconstruction": "snapshot_assisted",
+    "source": "lobster",
+    "symbol": "MSFT",
+    "timestamp_policy": "nearest_ns",
+    "timezone": "America/New_York"
+  },
+  "config_hash": "16ee7fd9917c64a70864a28393a4397e19ccb69f46c7e01f8fafeb6f04128e0e",
+  "data_checksums": {
+    "data/raw/lobster/MSFT_2012-06-21_34200000_57600000_message_10.csv": "669e5c35b1eab0f7336fa9ed919002e65b08d2aabd96bb4ae88d647184e7a18d",
+    "data/raw/lobster/MSFT_2012-06-21_34200000_57600000_orderbook_10.csv": "ec2f53467cf7bfb00b5702381bea7b4a061bb4c1730454df3679b272b3561c0e"
+  },
+  "data_quality": {
+    "clock_reversals": 0,
+    "cross_trades": 0,
+    "crossed_books": 0,
+    "halts": 0,
+    "independently_checked_levels": 13373238,
+    "new_timestamp_collisions": 0,
+    "normalized_timestamps": 3,
+    "order_identity_complete": false,
+    "rows": 668765,
+    "sequence_check": "unavailable_in_lobster_message_format",
+    "sequence_gaps": null,
+    "snapshot_assisted": true,
+    "supplied_boundary_levels": 2042,
+    "supplied_initial_levels": 20,
+    "timestamp_adjustments": [
+      {
+        "adjustment_ns": "0.004",
+        "event_index": 7814,
+        "raw_seconds": "34397.878728270996",
+        "ts_ns": 1340285597878728271
+      },
+      {
+        "adjustment_ns": "0.004",
+        "event_index": 273510,
+        "raw_seconds": "42734.846057878996",
+        "ts_ns": 1340293934846057879
+      },
+      {
+        "adjustment_ns": "-0.004",
+        "event_index": 458262,
+        "raw_seconds": "51027.166903456004",
+        "ts_ns": 1340302227166903456
+      }
+    ],
+    "zero_size_levels": 0
+  },
+  "elapsed_seconds": 45.53371713600018,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.12.14",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "finished_utc": "2026-09-19T00:30:30.165797+00:00",
+  "git_dirty": false,
+  "git_sha": "5b7cd8c8e048b30db3206751adff9e1a9b010f42",
+  "n_events": 668765,
+  "n_fills": 0,
+  "run_id": "20260919T002944667974Z_5b7cd8c8e0_16ee7fd991_41dd71fe",
+  "seed": null,
+  "seed_reason": "M0 ingestion/validation has no random number generation",
+  "session_id": "MSFT/2012-06-21",
+  "started_utc": "2026-09-19T00:29:44.667974+00:00",
+  "status": "passed"
+}
