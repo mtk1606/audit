@@ -53,7 +53,12 @@ def validate(
         if source != "lobster":
             raise ValueError("only lobster is supported by paired snapshot validation")
         metadata = SessionMetadata(
-            symbol, Date.fromisoformat(date), cfg.depth, cfg.price_unit, cfg.timezone
+            symbol,
+            Date.fromisoformat(date),
+            cfg.depth,
+            cfg.price_unit,
+            cfg.timezone,
+            cfg.timestamp_policy,
         )
         messages, books = source_paths(data_root, symbol, date, cfg.depth)
         run.document["data_checksums"] = {str(p): file_hash(p) for p in (messages, books)}

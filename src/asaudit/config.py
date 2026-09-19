@@ -4,6 +4,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from asaudit.data.lobster import TimestampPolicy
 from asaudit.data.quality import QualityPolicy
 
 
@@ -13,6 +14,7 @@ class ValidationConfig(BaseModel):
     price_unit: Literal["0.0001"] = "0.0001"
     timezone: Literal["America/New_York"] = "America/New_York"
     reconstruction: Literal["snapshot_assisted"] = "snapshot_assisted"
+    timestamp_policy: TimestampPolicy = "strict"
     quality: QualityPolicy = Field(default_factory=QualityPolicy)
 
 

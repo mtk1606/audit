@@ -1,10 +1,10 @@
 # Data provenance and source constraints
 
 Sources accessed during this session:
-- https://php.lobsterdata.com/info/DataStructure.php — primary output schema.
-- https://php.lobsterdata.com/info/DataSamples.php — primary sample catalog.
-- https://docs.cdp.coinbase.com/exchange/websocket-feed/channels — full-channel buffering and snapshot initialization; non-resting done/change messages must not mutate the book.
-- https://github.com/rhuang10/lobsterdata/blob/main/README.md — client linked by the provider; identifies its legacy host.
+- https://php.lobsterdata.com/info/DataStructure.php: primary output schema.
+- https://php.lobsterdata.com/info/DataSamples.php: primary sample catalog.
+- https://docs.cdp.coinbase.com/exchange/websocket-feed/channels: full-channel buffering and snapshot initialization; non-resting done/change messages must not mutate the book.
+- https://github.com/rhuang10/lobsterdata/blob/main/README.md: client linked by the provider; identifies its legacy host.
 
 The sample catalog confirms AMZN, AAPL, GOOG, INTC, and MSFT on 2012-06-21 at levels 1, 5, and 10. Level-10 archives were downloaded and inspected; URLs and SHA-256 hashes appear in source_audit.json. Samples were used only for structural feasibility checks, before any scientific split is defined. No holdout directory was accessed.
 

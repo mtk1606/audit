@@ -1,17 +1,54 @@
-"""Exact source decoding; no rounding, sorting, repair, or forward filling."""
+"""Source decoding with explicit timestamp policy and lossless provenance."""
 
 import csv
 import re
 from collections.abc import Iterator, Sequence
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
+from decimal import ROUND_HALF_EVEN, Decimal, localcontext
 from pathlib import Path
+from typing import Literal
 from zoneinfo import ZoneInfo
 
 import numpy as np
 from numpy.typing import NDArray
 
 from asaudit.types import BookSnapshot, EventType, HaltStatus, LOBEvent, Side
+
+TimestampPolicy = Literal["strict", "nearest_ns"]
+
+
+@dataclass(frozen=True, slots=True)
+class NormalizedTimestamp:
+    ns: int
+    raw_seconds: str
+    adjustment_ns: str
+
+
+def normalize_timestamp(value: str, policy: TimestampPolicy) -> NormalizedTimestamp:
+    if policy == "strict":
+        return NormalizedTimestamp(seconds_to_ns(value), value, "0")
+    if policy != "nearest_ns":
+        raise ValueError(f"unknown timestamp policy: {policy}")
+    match = re.fullmatch(r"(\d+)(?:\.(\d+))?", value)
+    if match is None:
+        raise ValueError(f"invalid source timestamp: {value!r}")
+    if len(match[2] or "") <= 9:
+        return NormalizedTimestamp(seconds_to_ns(value), value, "0")
+    # Source precision controls this local context, not the process-wide Decimal
+    # settings. Keep all input digits through scaling and delta calculation.
+    with localcontext() as ctx:
+        ctx.prec = max(28, len(value) + 20)
+        seconds = Decimal(value)
+        if not 0 <= seconds < 86400:
+            raise ValueError("timestamp outside session date")
+        exact_ns = seconds * Decimal(1000000000)
+        nearest = exact_ns.to_integral_value(rounding=ROUND_HALF_EVEN)
+        if nearest >= 86400 * 10**9:
+            raise ValueError("normalized timestamp falls outside session date")
+        delta = nearest - exact_ns
+        adjustment = format(delta.normalize(), "f") if delta else "0"
+    return NormalizedTimestamp(int(nearest), value, adjustment)
 
 
 @dataclass(frozen=True, slots=True)
@@ -21,6 +58,7 @@ class SessionMetadata:
     depth: int = 10
     price_unit: str = "0.0001"
     timezone: str = "America/New_York"
+    timestamp_policy: TimestampPolicy = "strict"
 
 
 def seconds_to_ns(value: str) -> int:
@@ -49,7 +87,8 @@ def parse_event(
         if midnight_ns is None
         else midnight_ns
     )
-    ts += seconds_to_ns(row[0])
+    source_time = normalize_timestamp(row[0], metadata.timestamp_policy)
+    ts += source_time.ns
     event_type = EventType(int(row[1]))
     order_id, size, price, side = int(row[2]), int(row[3]), int(row[4]), Side(int(row[5]))
     if metadata.price_unit != "0.0001":
@@ -59,10 +98,29 @@ def parse_event(
     if event_type is EventType.HALT:
         if size != 0 or order_id != 0 or side is not Side.ASK:
             raise ValueError("invalid halt fields")
-        return LOBEvent(ts, event_type, order_id, side, None, 0, HaltStatus(price))
+        return LOBEvent(
+            ts,
+            event_type,
+            order_id,
+            side,
+            None,
+            0,
+            HaltStatus(price),
+            source_time.raw_seconds,
+            source_time.adjustment_ns,
+        )
     if price <= 0 or size <= 0:
         raise ValueError("nonpositive executable price or size")
-    return LOBEvent(ts, event_type, order_id, side, price, size)
+    return LOBEvent(
+        ts,
+        event_type,
+        order_id,
+        side,
+        price,
+        size,
+        source_time_seconds=source_time.raw_seconds,
+        timestamp_adjustment_ns=source_time.adjustment_ns,
+    )
 
 
 def _readonly(values: list[int]) -> NDArray[np.int64]:

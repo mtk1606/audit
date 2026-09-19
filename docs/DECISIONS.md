@@ -43,3 +43,10 @@ Options:
 3. Adopt an exact finer-resolution or rational timestamp schema throughout the project. This preserves literal precision but changes the PRD's core types and downstream interfaces.
 Recommendation: Option 1, subject to user approval; do not infer a scientific tolerance threshold from these ten records. No rounding policy has been implemented or activated.
 Blocked on: Approval of the exact timestamp-normalization policy or provision of corrected inputs. The general instruction to continue was used to finish verification and packaging, not to silently relax this data contract.
+
+## 2026-09-19 Timestamp normalization approved
+Context: The user approved explicit nearest-nanosecond normalization and requested concise professional writing without em dashes.
+Decision: Add the nearest_ns policy using Decimal and ROUND_HALF_EVEN. Preserve each original timestamp and signed adjustment. Count adjusted records and newly merged timestamps; preserve source row order and reject source clock reversals even when rounded timestamps tie. Strict mode and its original rejection tests remain unchanged.
+Configuration: The sample config opts into nearest_ns. The decoder and CLI defaults remain strict. Every run records the resolved policy and adjustment provenance.
+Status: Approved and implemented. Supersedes the timestamp policy blocker above. Real sample verification follows this commit.
+Presentation: Use a concise README, a compact evidence table, and separate operating instructions. Preserve original supplied specifications as source documents.

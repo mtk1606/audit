@@ -28,3 +28,6 @@ Resolve timestamp policy, rerun failed samples, and review collector evidence. R
 
 ## Last commit message
 Verify exported M0 repository and finalize handoff
+
+## Current session update
+2026-09-19: Timestamp policy approved and implemented. New tests pass; all-five sample verification is pending.

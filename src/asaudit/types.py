@@ -42,6 +42,8 @@ class LOBEvent:
     price_ticks: int | None
     size: int
     halt_status: HaltStatus | None = None
+    source_time_seconds: str | None = None
+    timestamp_adjustment_ns: str = "0"
 
 
 @dataclass(frozen=True, slots=True)

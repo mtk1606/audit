@@ -33,6 +33,14 @@ class DataQualityError(ValueError):
 
 
 @dataclass(frozen=True, slots=True)
+class TimestampAdjustment:
+    event_index: int
+    raw_seconds: str
+    ts_ns: int
+    adjustment_ns: str
+
+
+@dataclass(frozen=True, slots=True)
 class DataQualityReport:
     rows: int
     sequence_gaps: int | None
@@ -44,6 +52,9 @@ class DataQualityReport:
     supplied_initial_levels: int
     supplied_boundary_levels: int
     independently_checked_levels: int
+    normalized_timestamps: int = 0
+    new_timestamp_collisions: int = 0
+    timestamp_adjustments: tuple[TimestampAdjustment, ...] = ()
     snapshot_assisted: bool = True
     order_identity_complete: bool = False
     sequence_check: str = "unavailable_in_lobster_message_format"
@@ -53,14 +64,29 @@ def validate_pair(
     messages: Path, snapshots: Path, metadata: SessionMetadata, policy: QualityPolicy
 ) -> DataQualityReport:
     rows = crossed = zero = halts = crosses = supplied = initial = checked = reversals = 0
+    collisions = 0
+    adjustments: list[TimestampAdjustment] = []
 
     def report() -> DataQualityReport:
         return DataQualityReport(
-            rows, None, crossed, zero, halts, reversals, crosses, initial, supplied, checked
+            rows,
+            None,
+            crossed,
+            zero,
+            halts,
+            reversals,
+            crosses,
+            initial,
+            supplied,
+            checked,
+            len(adjustments),
+            collisions,
+            tuple(adjustments),
         )
 
     book: BoundedBook | None = None
     previous_ts: int | None = None
+    previous_raw_time: str | None = None
     history: deque[str] = deque(maxlen=10)
     midnight = session_midnight_ns(metadata.date, metadata.timezone)
     with messages.open(newline="") as mf, snapshots.open(newline="") as sf:
@@ -71,10 +97,28 @@ def validate_pair(
                     raise ValueError("message/snapshot row count mismatch")
                 event = parse_event(event_row, metadata, midnight_ns=midnight)
                 observed = parse_snapshot(book_row, event.ts_ns, metadata.depth)
+                if event.timestamp_adjustment_ns != "0":
+                    adjustments.append(
+                        TimestampAdjustment(
+                            index, event_row[0], event.ts_ns, event.timestamp_adjustment_ns
+                        )
+                    )
                 if previous_ts is not None and event.ts_ns < previous_ts:
                     reversals += 1
                     raise ValueError("clock reversal")
+                if (
+                    event.ts_ns == previous_ts
+                    and previous_raw_time is not None
+                    and event_row[0] != previous_raw_time
+                ):
+                    current_exact = Decimal(event_row[0])
+                    previous_exact = Decimal(previous_raw_time)
+                    if current_exact < previous_exact:
+                        reversals += 1
+                        raise ValueError("source clock reversal hidden by normalization")
+                    collisions += current_exact > previous_exact
                 previous_ts = event.ts_ns
+                previous_raw_time = event_row[0]
                 zero += 2 * metadata.depth - len(observed.bid_sz) - len(observed.ask_sz)
                 halts += event.event_type is EventType.HALT
                 crosses += event.event_type is EventType.CROSS
