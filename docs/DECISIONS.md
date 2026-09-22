@@ -53,3 +53,33 @@ Presentation: Use a concise README, a compact evidence table, and separate opera
 
 ## 2026-09-19 Timestamp policy verified
 All five clean-commit validation runs pass. Ten adjustments were recorded, each 0.004 ns in magnitude, with zero newly merged timestamps. Evidence is preserved in docs/evidence/m0-normalization. The timestamp blocker is resolved under the approved policy. The live collector acceptance item remains open.
+
+## 2026-09-22 M0 accepted; implementation authority expanded
+Context: The user explicitly accepted M0 and directed the move to M1, then
+explicitly overrode the build instructions for the derivation and remaining work.
+Decision: Record M0 as user-accepted with the live collector evidence still absent.
+Author the derivation and choose explicit implementation and statistical conventions
+without another approval pause. Do not represent missing evidence as a passing test.
+The supplied golden table is copied byte-for-byte and its human-verification flag
+remains false. No holdout data is accessed.
+
+## 2026-09-22 Working-paper experiment protocol
+Context: The attached source is dated October 5, 2006, not the 2008 publication.
+Decision made before the first full run: seed 20260922, 1000 paths per strategy
+and case, 2000 pathwise percentile bootstrap resamples, pointwise 95% intervals,
+sample standard deviations with ddof=1. Independent SeedSequence children for
+each strategy/case simulation, bootstrap and variance-ratio bootstrap. No seed
+search and no tuning against target values. The ratio is symmetric profit
+variance divided by inventory-strategy profit variance; the PRD's 10% tolerance
+is retained. The default comparison treats source point estimates as targets,
+without claiming to know uncertainty from the paper's unavailable raw paths.
+Primary case: equation 3.18 spread and strict Bernoulli probability validity.
+Diagnostic cases: equation spread with explicit probability saturation, and
+constant liquidity spread with explicit saturation. Diagnostics cannot satisfy
+primary acceptance. Profit is terminal cash plus marked inventory, less initial
+marked wealth. Fills use old quotes before the independent binary mid move.
+Continuous model prices and time use floating-point arithmetic in M1 only;
+integer market-data and future execution interfaces remain unchanged.
+Source ambiguities: table spreads omit the risk term; side dependence and seeds
+are unspecified; lambda*dt can exceed one. Any failed replication remains a
+reported failure. The 2008 published-version claim is withheld.

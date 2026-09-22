@@ -135,3 +135,19 @@ def collect_command(
     typer.echo(json.dumps(quality, indent=2))
     if not quality["gap_free_run"]:
         raise typer.Exit(1)
+
+
+@app.command("replicate")
+def replicate(
+    config: Annotated[Path, typer.Option()] = Path("configs/replication/working_paper.toml"),
+    reference: Annotated[Path, typer.Option()] = Path("tests/golden/as2008_table.json"),
+    output: Annotated[Path, typer.Option()] = Path("results"),
+    allow_dirty: Annotated[bool, typer.Option()] = False,
+) -> None:
+    """Run the 2006 working-paper audit; exit 1 when replication criteria fail."""
+    from asaudit.eval.replication import run_replication
+
+    directory, accepted = run_replication(config, reference, output, allow_dirty)
+    typer.echo(str(directory))
+    if not accepted:
+        raise typer.Exit(1)

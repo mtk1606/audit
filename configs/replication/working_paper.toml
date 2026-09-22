@@ -1,0 +1,4 @@
+# Fixed before the first research run. No seed selection against targets.
+seed = 20260922
+n_paths = 1000
+bootstrap_repeats = 2000

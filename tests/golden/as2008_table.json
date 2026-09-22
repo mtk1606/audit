@@ -1,0 +1,56 @@
+{
+  "source": {
+    "authors": "Marco Avellaneda, Sasha Stoikov",
+    "title": "High-frequency trading in a limit order book",
+    "version": "Working paper dated October 5, 2006 (NOT the Quantitative Finance 8(3) 2008 published version)",
+    "sections": "3.3 Numerical simulations, pages 10-12, Tables 1-3",
+    "transcribed_by": "model-assisted transcription from uploaded PDF; every value must be checked by hand against the page",
+    "verified_by_human": false
+  },
+  "simulation_params": {
+    "s0": 100,
+    "T": 1,
+    "sigma": 2,
+    "dt": 0.005,
+    "q0": 0,
+    "k": 1.5,
+    "A": 140,
+    "n_simulations": 1000,
+    "mid_update": "binary increment +/- sigma*sqrt(dt) per step (page 10), not Gaussian",
+    "fill_rule": "ask filled with probability lambda(delta_a)*dt: q -= 1, wealth += s + delta_a; bid filled with probability lambda(delta_b)*dt: q += 1, wealth -= s - delta_b (page 10)",
+    "quote_timing": "quotes computed at t from current state; state updated at t + dt (page 10)"
+  },
+  "tables": [
+    {
+      "table": 1,
+      "page": 11,
+      "gamma": 0.1,
+      "inventory": { "spread": 1.29, "profit_mean": 62.94, "profit_std": 5.89, "final_q_mean": 0.10, "final_q_std": 2.80 },
+      "symmetric": { "spread": 1.29, "profit_mean": 67.21, "profit_std": 13.43, "final_q_mean": -0.018, "final_q_std": 8.66 }
+    },
+    {
+      "table": 2,
+      "page": 12,
+      "gamma": 0.01,
+      "inventory": { "spread": 1.33, "profit_mean": 66.78, "profit_std": 8.76, "final_q_mean": -0.02, "final_q_std": 4.70 },
+      "symmetric": { "spread": 1.33, "profit_mean": 67.36, "profit_std": 13.40, "final_q_mean": -0.31, "final_q_std": 8.65 }
+    },
+    {
+      "table": 3,
+      "page": 12,
+      "gamma": 0.5,
+      "inventory": { "spread": 1.15, "profit_mean": 33.92, "profit_std": 4.72, "final_q_mean": -0.02, "final_q_std": 1.88 },
+      "symmetric": { "spread": 1.15, "profit_mean": 66.20, "profit_std": 14.53, "final_q_mean": 0.25, "final_q_std": 9.06 }
+    }
+  ],
+  "formulas_as_printed": {
+    "reservation_price_eq_3_17": "r(s,t) = s - q*gamma*sigma^2*(T - t)",
+    "spread_eq_3_18": "delta_a + delta_b = gamma*sigma^2*(T - t) + (2/gamma)*ln(1 + gamma/k)",
+    "intensity_eq_3_8": "lambda(delta) = A*exp(-k*delta)"
+  },
+  "transcription_notes": [
+    "The 'Spread' column equals (2/gamma)*ln(1 + gamma/k) only (1.2908, 1.3289, 1.1507), not the full eq. 3.18 spread at t=0 (1.6908, 1.3689, 3.1507). See open question 1.",
+    "Paper text states the symmetric strategy 'uses the same bid/ask spread as the inventory strategy' centred on the mid-price (page 11).",
+    "'Profit' is not defined explicitly in section 3.3. Presumed terminal wealth plus inventory marked at the terminal mid. See open question 3."
+  ]
+}
