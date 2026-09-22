@@ -32,3 +32,22 @@ def test_research_cli_preserves_failed_acceptance_and_provenance(tmp_path):
     assert report["source_version"] == "2006-10-05 working paper"
     assert len(report["experiments"]) == 9
     assert report["acceptance_eligible"] is False
+
+    repeat = CliRunner().invoke(
+        app,
+        [
+            "replicate",
+            "--config",
+            str(config),
+            "--output",
+            str(tmp_path / "repeat"),
+            "--allow-dirty",
+        ],
+    )
+    assert repeat.exit_code == 1
+    repeated_run = next((tmp_path / "repeat").iterdir())
+    assert (runs[0] / "comparison.json").read_bytes() == (
+        repeated_run / "comparison.json"
+    ).read_bytes()
+    for path in runs[0].glob("*.parquet"):
+        assert path.read_bytes() == (repeated_run / path.name).read_bytes()

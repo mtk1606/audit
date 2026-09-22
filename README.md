@@ -1,40 +1,41 @@
 # as-audit
 
-Research infrastructure for auditing the Avellaneda-Stoikov market-making model against observed order-book data.
+A reproducible audit of the Avellaneda-Stoikov market-making model.
 
-The project asks how queue position, adverse selection, and competing liquidity affect model performance. The current build covers data ingestion, validation, and reproducible capture. Strategy replication and performance results come later.
+The project tests where a theoretical quoting model agrees with its source experiment,
+and eventually how queue position, adverse selection and competing liquidity change
+its performance. Every reported experiment retains its inputs, code revision and results.
 
-## Run
+## Current result
+
+**The supplied 2006 working-paper tables are not reproduced under the declared protocol.**
+The implementation exposes invalid Bernoulli probabilities and differences between the
+paper's quoted formula and table spreads. Diagnostic alternatives remain separate from
+primary acceptance. This is not yet a verified replication of the 2008 publication.
+
+Read the [M1 audit](docs/reports/M1.md) for comparisons and confidence intervals, or the
+[derivation](docs/DERIVATION.md) for the model and its assumptions.
+
+## Reproduce
 
 ```bash
 uv sync --locked
-uv run python scripts/fetch_lobster_sample.py
-uv run asaudit data validate --symbol AAPL --date 2012-06-21 --config configs/data/lobster.toml
+uv run asaudit replicate --config configs/replication/working_paper.toml
 ```
 
-Run from a clean Git checkout with Python 3.11 or newer. Each run records its configuration, source checksums, code revision, and validation results.
+Use Python 3.11+ and a clean Git checkout. The command currently exits 1 because
+research acceptance fails. Its output directory contains the comparison, manifest and
+path-level Parquet samples. An unsuccessful replication is retained as evidence.
 
-## Engineering
+## Implementation
 
-- Integer source prices and nanosecond timestamps, with explicit normalization provenance.
-- Snapshot-assisted reconstruction that identifies supplied boundary levels separately from independent checks.
-- Restartable Coinbase L3 capture with sequence checks and atomic Parquet output.
-- Property tests, corruption tests, strict typing, and a pinned environment.
+- Analytical AS quotes, symmetric benchmark and a deterministic Monte Carlo experiment.
+- Independent random streams, bootstrap intervals and accounting checks at every step.
+- Five validated LOBSTER samples covering 2,110,860 events, with explicit supplied-boundary and timestamp provenance.
+- Restartable L3 collection with sequence checks and atomic Parquet output.
+- 61 passing tests, strict typing, linting and a pinned environment.
 
-## Status
+M0 is user-accepted; the live collector evidence remains outstanding. M1 is in progress.
+No market backtest, strategy-performance claim or M2 ablation has been completed.
 
-**48 tests pass. All five sample sessions validate.**
-
-| Sample | Events | Result |
-|---|---:|---|
-| AAPL | 400,391 | Pass |
-| AMZN | 269,748 | Pass |
-| GOOG | 147,916 | Pass |
-| INTC | 624,040 | Pass |
-| MSFT | 668,765 | Pass |
-
-Validation uses the approved snapshot-assisted boundary and timestamp policies. The live one-hour collector test remains pending. No strategy returns or research findings are claimed.
-
-The [M0 report](docs/reports/M0.md) links the results to their manifests and documents the limits of each check.
-
-[Operating instructions](docs/OPERATIONS.md) · [Data provenance](docs/DATA.md) · [Decisions](docs/DECISIONS.md) · [Project state](STATE.md)
+[Operations](docs/OPERATIONS.md) · [M0 evidence](docs/reports/M0.md) · [Decisions](docs/DECISIONS.md) · [State](STATE.md)

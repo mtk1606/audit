@@ -1,0 +1,13 @@
+uv run ruff check src tests
+All checks passed!
+uv run ruff format --check src tests
+35 files already formatted
+uv run mypy --strict src
+Success: no issues found in 28 source files
+uv run pytest -q
+61 passed in 2.62s
+
+Research command: uv run asaudit replicate --config configs/replication/working_paper.toml
+Exit code: 1
+Manifest status: not_reproduced
+Source commit: 2b75c0be72 (full SHA in run/manifest.json)

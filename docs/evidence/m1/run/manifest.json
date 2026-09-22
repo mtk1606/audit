@@ -1,0 +1,517 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "bootstrap": "pathwise percentile, 95% pointwise, ddof=1",
+    "bootstrap_repeats": 2000,
+    "mid_update": "binary",
+    "n_paths": 1000,
+    "probability_modes": [
+      "strict",
+      "saturate"
+    ],
+    "protocol": "working-paper-v1",
+    "reference": "tests/golden/as2008_table.json",
+    "seed": 20260922,
+    "spread_modes": [
+      "equation",
+      "constant"
+    ],
+    "timing": "old-state fills then mid move",
+    "variance_ratio": "symmetric profit variance / inventory profit variance"
+  },
+  "config_hash": "b28dc7ad163df42618cd9cf5c4283c712bb9f4dc65d4a2f2b12a190078d2f6ba",
+  "data_checksums": {
+    "configs/replication/working_paper.toml": "bf6b097a83faa9f1dbbeae2b55148bf311c93014f3c15f0fef17d6cd7e94527d",
+    "tests/golden/as2008_table.json": "2a8845d3103966d6f177ad6c0e31b2a704cc5e27514f159e8045da3ed9183efc"
+  },
+  "data_quality": {
+    "source": "synthetic working-paper experiment"
+  },
+  "elapsed_seconds": 1.495096247000106,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.12.14",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "finished_utc": "2026-09-22T00:09:44.313886+00:00",
+  "git_dirty": false,
+  "git_sha": "2b75c0be72bab5ec2fc9e0c841fd1ce9af8feb86",
+  "n_events": 0,
+  "n_fills": 1570584,
+  "output_checksums": {
+    "comparison.json": "e19777057688a5d3ea62bd225da50226ad01741ab7fbabda52fbec1734ffc239",
+    "table1-constant_saturated-inventory.parquet": "6a201c7f2ea7eedfcf6f2e981dca8036e6897e5ee20145473ae6a75a8f6c09e0",
+    "table1-constant_saturated-symmetric.parquet": "ce0312e01065ab2004032cb8f52fc04dae531ed7cd218cfae4dd20c33030577b",
+    "table1-equation_saturated-inventory.parquet": "5cd0791097308737eb41bea82b07fa977d68d44de52e47e188fa9b3bdd486a67",
+    "table1-equation_saturated-symmetric.parquet": "14e9fedce5aa2c66ff8004807bdab39b262f431176431e83ecae5eb094571c16",
+    "table1-equation_strict-symmetric.parquet": "f44357822c8513bd2f9768f4829648f10a91a3c9f54269ce4d16b737845514b8",
+    "table2-constant_saturated-inventory.parquet": "5c43de74349dfe1d8a93433a36c6f2a65a9226000602283da95401af7a7d8990",
+    "table2-constant_saturated-symmetric.parquet": "e213f93e9d300613afd4e37c85236457cb5005758552cd893b9c800c435bf1a1",
+    "table2-equation_saturated-inventory.parquet": "300e880fa9eeaa3692a20d6f76bc285d6d5d923535ccf085f0e0c8511700d712",
+    "table2-equation_saturated-symmetric.parquet": "d3e4e220048d6d4f1f2e45fd59bb16fbba9a64f16df1b3f971dec4480f76757b",
+    "table2-equation_strict-inventory.parquet": "fdc0076e53dea5fcdcd9de2a4fa990f32e85264d7846e0acd5c1b5922916d9bf",
+    "table2-equation_strict-symmetric.parquet": "81231e1952f5da1aba3f4360f93dd094e9706c1eac6fce4dd2abf23ed3003f94",
+    "table3-constant_saturated-inventory.parquet": "33f1ec912155dab9bc3faab8130636ff740dbaf7f8b9670a603857f4f5bd3528",
+    "table3-constant_saturated-symmetric.parquet": "2526a2917e4b56cb09506415f9acc82e3177ab7b7f630673631b9a117d7f3f04",
+    "table3-equation_saturated-inventory.parquet": "d13a7c05033fb60eb32c5e13d2ffcdebf294784acb42eeac211fb32f8ca0b45f",
+    "table3-equation_saturated-symmetric.parquet": "2157cdb94a4e2a3517591aa5b1cbc36f5dd7f4f0fae41fa6e4d0b1d71c1c8628",
+    "table3-equation_strict-symmetric.parquet": "cb2d4ff32ce254cc57372dda82970527154f4546ce2fab61e4132fab9f767e52"
+  },
+  "ratio_spawn_keys": [
+    [
+      4
+    ],
+    [
+      9
+    ],
+    [
+      14
+    ],
+    [
+      19
+    ],
+    [
+      24
+    ],
+    [
+      29
+    ],
+    [
+      34
+    ],
+    [
+      39
+    ],
+    [
+      44
+    ]
+  ],
+  "run_id": "20260922T000942822656Z_2b75c0be72_b28dc7ad16_fa7cfe3c",
+  "seed": 20260922,
+  "seed_reason": "fixed before first experiment",
+  "session_id": "AS-2006-replication",
+  "started_utc": "2026-09-22T00:09:42.822656+00:00",
+  "status": "not_reproduced",
+  "streams": [
+    {
+      "bootstrap_spawn_key": [
+        2
+      ],
+      "case": "1/equation_strict/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        0
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        3
+      ],
+      "case": "1/equation_strict/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        1
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        7
+      ],
+      "case": "1/equation_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        5
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        8
+      ],
+      "case": "1/equation_saturated/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        6
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        12
+      ],
+      "case": "1/constant_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "constant",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        10
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        13
+      ],
+      "case": "1/constant_saturated/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "constant",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        11
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        17
+      ],
+      "case": "2/equation_strict/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        15
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        18
+      ],
+      "case": "2/equation_strict/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        16
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        22
+      ],
+      "case": "2/equation_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        20
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        23
+      ],
+      "case": "2/equation_saturated/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        21
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        27
+      ],
+      "case": "2/constant_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "constant",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        25
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        28
+      ],
+      "case": "2/constant_saturated/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "constant",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        26
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        32
+      ],
+      "case": "3/equation_strict/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.5,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        30
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        33
+      ],
+      "case": "3/equation_strict/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.5,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        31
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        37
+      ],
+      "case": "3/equation_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.5,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        35
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        38
+      ],
+      "case": "3/equation_saturated/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.5,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        36
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        42
+      ],
+      "case": "3/constant_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.5,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "constant",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        40
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        43
+      ],
+      "case": "3/constant_saturated/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.5,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "constant",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        41
+      ]
+    }
+  ]
+}

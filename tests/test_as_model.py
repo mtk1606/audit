@@ -104,3 +104,12 @@ def test_bootstrap_and_acceptance_do_not_hide_mismatch():
     assert metrics["profit_mean"]["low"] < 49.5 < metrics["profit_mean"]["high"]
     assert assess(metrics, {"profit_mean": -100})["profit_mean"] is False
     assert assess(metrics, {"profit_mean": 49.5})["profit_mean"] is True
+
+
+def test_initial_inventory_pnl_and_readonly_results():
+    cfg = SimulationConfig(n_paths=20, A=0, q0=3)
+    result = simulate(cfg, np.random.SeedSequence(44))
+    np.testing.assert_allclose(result.profit, 3 * (result.mid - cfg.s0), atol=1e-10)
+    assert result.max_accounting_error < 1e-9
+    assert not result.profit.flags.writeable
+    assert not result.inventory.flags.writeable

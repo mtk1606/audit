@@ -83,3 +83,13 @@ integer market-data and future execution interfaces remain unchanged.
 Source ambiguities: table spreads omit the risk term; side dependence and seeds
 are unspecified; lambda*dt can exceed one. Any failed replication remains a
 reported failure. The 2008 published-version claim is withheld.
+
+## 2026-09-22 M1 experiment outcome
+The fixed protocol ran from clean commit 2b75c0b and exited 1 with status
+not_reproduced. Primary inventory runs at gamma 0.1 and 0.5 encounter invalid
+Bernoulli probabilities. The gamma 0.01 primary comparison also misses targets.
+Neither diagnostic interpretation satisfies all numerical checks. Preserve all
+results in docs/evidence/m1/run. M1 remains in progress; no M2 implementation or
+verified-replication publication follows from these results. A source-faithful
+resolution requires stronger evidence about the numerical procedure, not tuning
+the simulator to the target table.

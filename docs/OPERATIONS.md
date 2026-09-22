@@ -49,6 +49,33 @@ The collector subscribes and buffers before fetching each snapshot, discards onl
 
 Disconnects remain explicit. A snapshot restores current book state, not missing historical events. The collector returns nonzero for an interrupted/incomplete run even if later segments collect successfully. It does not assert that a forced-disconnect run has gap-free history. A real one-hour acceptance run and that stricter recovery claim remain unresolved; the local transport fixture is not a substitute.
 
+## Working-paper replication audit
+
+```bash
+uv run asaudit replicate --config configs/replication/working_paper.toml
+```
+
+The reference file keeps its supplied name `tests/golden/as2008_table.json`, but
+its contents identify the October 2006 working paper. Do not infer publication
+version from the filename. The user has authorized the build agent to write the
+derivation and make the remaining implementation decisions, superseding the
+original authorship restriction. The original supplied spec files are retained
+as historical inputs; dated amendments are recorded in `docs/DECISIONS.md`.
+
+The command records three cases per source table: strict equation-based primary
+simulation, equation spread with explicit probability saturation, and constant
+liquidity spread with saturation. The latter two are diagnostic interpretations.
+Each strategy and each bootstrap has an independent seed child. Config controls
+the root seed, path count and bootstrap count. A path count other than the source's
+1,000 is explicitly ineligible for acceptance.
+
+Exit 1 with manifest status `not_reproduced` is the expected current result.
+It is distinct from an unexpected run failure. The output includes the target
+comparisons, pointwise bootstrap intervals, variance ratios, raw probability
+exceedances, terminal paths and their checksums. See `docs/reports/M1.md`.
+
 ## Project boundaries
 
-Only M0 is implemented. No paper targets, derivation, preregistration, scientific split, calibration, statistical thresholds, strategies, P&L or ablations have been created. The human-owned files remain absent and untouched. Read `STATE.md`, `docs/DECISIONS.md`, and the original PRD before continuing.
+M1 includes theoretical strategy quotes, a derivation and synthetic experiments.
+Numerical replication remains unresolved. No holdout access, market calibration,
+M2 simulator or preregistration was added.
