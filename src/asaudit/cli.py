@@ -151,3 +151,17 @@ def replicate(
     typer.echo(str(directory))
     if not accepted:
         raise typer.Exit(1)
+
+
+@app.command("audit-moments")
+def moments_command(
+    source_manifest: Annotated[Path, typer.Option()] = Path(
+        "docs/evidence/m1-qf2008/run/manifest.json"
+    ),
+    output: Annotated[Path, typer.Option()] = Path("results"),
+    allow_dirty: Annotated[bool, typer.Option()] = False,
+) -> None:
+    """Independently calculate population moments of the declared discrete law."""
+    from asaudit.eval.moments import audit_moments
+
+    typer.echo(str(audit_moments(source_manifest, output, allow_dirty)))

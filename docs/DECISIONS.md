@@ -127,3 +127,18 @@ passes all eight metric intervals, but its variance ratio differs by 14.3%, abov
 the unchanged 10% threshold. Do not combine passing cases from different variants.
 The source-version and benchmark-definition blockers are resolved; probability
 handling remains unspecified. Overall M1 acceptance is incomplete.
+
+## 2026-09-22 Independent moment audit
+Continue within M1. Add a deterministic inventory-state probability and P&L-moment
+recurrence for the existing declared discrete law, with no inventory cutoff and no
+random seed. Independently check its symmetric case using closed-form moments and
+small exhaustive state paths. The analytical recurrence must not reuse simulation
+quotes or accounting. Do not use it to infer author intent or replace the original
+Monte Carlo acceptance contract. Its results are population moments, so Monte Carlo
+confidence intervals are not applicable to the deterministic calculation itself.
+
+The author-maintained NYU papers index and Cornell publication links were inspected.
+The relevant entries point to paper PDFs; no original simulation code or overflow
+clarification was located in these entries or the targeted searches. This is not
+proof that author code does not exist. Third-party replication code is not treated
+as the authors' procedure and was not copied.
