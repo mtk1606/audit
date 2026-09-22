@@ -8,19 +8,20 @@ its performance. Every reported experiment retains its inputs, code revision and
 
 ## Current result
 
-**The supplied 2006 working-paper tables are not reproduced under the declared protocol.**
-The implementation exposes invalid Bernoulli probabilities and differences between the
-paper's quoted formula and table spreads. Diagnostic alternatives remain separate from
-primary acceptance. This is not yet a verified replication of the 2008 publication.
+**The published 2008 benchmark is implemented; M1 verification remains incomplete.**
+Table 2 passes the strict numerical comparison. Tables 1 and 3 agree with the
+reference only under explicitly capped fill probabilities, a convention the paper
+does not specify. These diagnostics do not count as primary acceptance.
 
-Read the [M1 audit](docs/reports/M1.md) for comparisons and confidence intervals, or the
-[derivation](docs/DERIVATION.md) for the model and its assumptions.
+Read the [published comparison](docs/reports/M1-qf2008.md) for results and confidence
+intervals, the [earlier audit](docs/reports/M1.md) for the 2006 working paper, or the
+[derivation](docs/DERIVATION.md) for the equations and assumptions.
 
 ## Reproduce
 
 ```bash
 uv sync --locked
-uv run asaudit replicate --config configs/replication/working_paper.toml
+uv run asaudit replicate --config configs/replication/qf2008.toml --reference tests/golden/as2008_table_qf2008.json
 ```
 
 Use Python 3.11+ and a clean Git checkout. The command currently exits 1 because
@@ -33,7 +34,7 @@ path-level Parquet samples. An unsuccessful replication is retained as evidence.
 - Independent random streams, bootstrap intervals and accounting checks at every step.
 - Five validated LOBSTER samples covering 2,110,860 events, with explicit supplied-boundary and timestamp provenance.
 - Restartable L3 collection with sequence checks and atomic Parquet output.
-- 61 passing tests, strict typing, linting and a pinned environment.
+- 66 passing tests, strict typing, linting and a pinned environment.
 
 M0 is user-accepted; the live collector evidence remains outstanding. M1 is in progress.
 No market backtest, strategy-performance claim or M2 ablation has been completed.

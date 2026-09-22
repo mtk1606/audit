@@ -1,0 +1,396 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "bootstrap": "pathwise percentile, 95% pointwise, ddof=1",
+    "bootstrap_repeats": 2000,
+    "mid_update": "binary",
+    "n_paths": 1000,
+    "probability_modes": [
+      "strict",
+      "saturate"
+    ],
+    "protocol": "qf2008-v1",
+    "reference": "tests/golden/as2008_table_qf2008.json",
+    "seed": 20260922,
+    "spread_modes": [
+      "equation",
+      "average"
+    ],
+    "symmetric_spread": "continuous time average",
+    "timing": "old-state fills then mid move",
+    "variance_ratio": "symmetric profit variance / inventory profit variance"
+  },
+  "config_hash": "efbd9adba0a2e0fb5ae65f8439b593be6eb1776d02eb9b32d14164cae0a82ed7",
+  "data_checksums": {
+    "configs/replication/qf2008.toml": "df29f614388e6aa9b351e63bb50460daebf3052a579f82e8f56f7bce65ac5d79",
+    "tests/golden/as2008_table_qf2008.json": "a62f5f313d474cec8b98879b091504b770a5bc29ac12ec8bdc848ea5e4a38491"
+  },
+  "data_quality": {
+    "source": "synthetic experiment",
+    "source_version": "QF 2008 published article"
+  },
+  "elapsed_seconds": 0.8874142810000194,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.12.14",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "finished_utc": "2026-09-22T01:28:10.476878+00:00",
+  "git_dirty": false,
+  "git_sha": "60542eb0005e5e1f7ec8cd971bacc7b554008b8c",
+  "n_events": 0,
+  "n_fills": 801044,
+  "output_checksums": {
+    "comparison.json": "61a08e79efc1957cb3b909dc85ae76c3d874ae4af851a264d894a509460e1ea2",
+    "table1-published_saturated-inventory.parquet": "3a6e41f54cd397d5d72d319a350573789d1098fed809b1d24929f76ed186ef27",
+    "table1-published_saturated-symmetric.parquet": "f2bbe458939bf4c84fdbf40e1655724f1890cbeb77c74962b3beb2d35cefd321",
+    "table1-published_strict-symmetric.parquet": "865b9bff3a32813c432e1d45a43cdde13c89047d3b78dfdf9571afb3785f9da3",
+    "table2-published_saturated-inventory.parquet": "192454e5794872f0101f8c8096f6a60f1127daa674ce204864a46536440d0509",
+    "table2-published_saturated-symmetric.parquet": "91b8799f881e28c0b3a82346a5456ae1e1185ccb7353f3b2ba2d8d525418018f",
+    "table2-published_strict-inventory.parquet": "9b49c3c60b76adad43a119cd569f277122ebeaf934f677da56cd85ad1414886b",
+    "table2-published_strict-symmetric.parquet": "c1b0f11d38979eb5f60852a460a22345f74ba077f77cba39e076d37850889113",
+    "table3-published_saturated-inventory.parquet": "d8639a4c197d753b5882692fe677d8ee99596759dca767fa6531ab51a1c7588d",
+    "table3-published_saturated-symmetric.parquet": "65a119c9354f905ecee4d44945106a8df6902d7960bccab42963180dfcd9f36b",
+    "table3-published_strict-symmetric.parquet": "4050465d3fc9af301e74df7918a27e456ccaf8a5ef93297e4e99712e978e4fe2"
+  },
+  "ratio_spawn_keys": [
+    [
+      2008,
+      4
+    ],
+    [
+      2008,
+      9
+    ],
+    [
+      2008,
+      14
+    ],
+    [
+      2008,
+      19
+    ],
+    [
+      2008,
+      24
+    ],
+    [
+      2008,
+      29
+    ]
+  ],
+  "run_id": "20260922T012809593338Z_60542eb000_efbd9adba0_d0077491",
+  "seed": 20260922,
+  "seed_reason": "fixed before first experiment",
+  "session_id": "AS-2008-replication",
+  "started_utc": "2026-09-22T01:28:09.593338+00:00",
+  "status": "not_reproduced",
+  "streams": [
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        2
+      ],
+      "case": "1/published_strict/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        2008,
+        0
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        3
+      ],
+      "case": "1/published_strict/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "average",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        2008,
+        1
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        7
+      ],
+      "case": "1/published_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        2008,
+        5
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        8
+      ],
+      "case": "1/published_saturated/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "average",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        2008,
+        6
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        12
+      ],
+      "case": "2/published_strict/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        2008,
+        10
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        13
+      ],
+      "case": "2/published_strict/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "average",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        2008,
+        11
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        17
+      ],
+      "case": "2/published_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        2008,
+        15
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        18
+      ],
+      "case": "2/published_saturated/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "average",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        2008,
+        16
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        22
+      ],
+      "case": "3/published_strict/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 1.0,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        2008,
+        20
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        23
+      ],
+      "case": "3/published_strict/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 1.0,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "strict",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "average",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        2008,
+        21
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        27
+      ],
+      "case": "3/published_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 1.0,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "simulation_spawn_key": [
+        2008,
+        25
+      ]
+    },
+    {
+      "bootstrap_spawn_key": [
+        2008,
+        28
+      ],
+      "case": "3/published_saturated/symmetric",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 1.0,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "average",
+        "symmetric": true
+      },
+      "simulation_spawn_key": [
+        2008,
+        26
+      ]
+    }
+  ]
+}

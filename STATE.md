@@ -1,34 +1,34 @@
 # as-audit state
-Updated: 2026-09-22T00:12:11.655381+00:00
+Updated: 2026-09-22T01:30:16.089993+00:00
 Milestone: M1, in progress
 
 ## Acceptance criteria
-- [x] M0 accepted by user; live collector evidence remains outstanding.
-- [x] User-supplied golden table retained unchanged and visually checked against the supplied 2006 PDF.
-- [x] HJB and frozen-inventory derivation written, algebra reviewed, tested and committed.
-- [x] Analytical AS and symmetric quotes; source-specific Monte Carlo harness with manifests.
-- [x] Deterministic path outputs, accounting checks, bootstrap intervals and explicit diagnostics.
-- [ ] Primary means and standard deviations within source-target confidence intervals: not reproduced.
-- [ ] Primary variance-ratio acceptance: unresolved because two inventory runs have invalid probabilities.
-- [ ] Published 2008 replication: supplied source is the 2006 working paper.
+- [x] M0 user-accepted; live collector evidence still outstanding.
+- [x] Both source tables retained unchanged and agent-checked against the supplied PDFs.
+- [x] Published 2008 source identified; average-spread benchmark and gamma=1 Table 3 implemented.
+- [x] Derivation, accounting checks, deterministic experiments and bootstrap intervals.
+- [x] Published Table 2 strict comparison passes all numerical criteria.
+- [ ] Published Tables 1 and 3 strict acceptance: invalid Bernoulli probabilities.
+- [ ] Overall M1 acceptance: incomplete. Capped cases are diagnostics only.
 
 ## Gate status
-ruff: pass; format: pass; mypy: pass, 28 source files; pytest: 61 passed, 0 failed.
-Research command: exit 1, status not_reproduced. Remote CI: not run.
+ruff: pass; format: pass; mypy: pass, 28 source files; pytest: 66 passed, 0 failed.
+Published research command: exit 1, status not_reproduced. Remote CI: not run.
 
 ## Open blockers
-Source interpretation and primary numerical replication. Full evidence in docs/reports/M1.md.
+Probability-overflow convention is unspecified by the published paper.
+Tables 1 and 3 match numerically under explicit capping, but strict runs fail.
+The separate capped Table 2 realization misses the 10% variance-ratio tolerance.
 
 ## Awaiting user decision
-None for implementation authority. User explicitly authorized authorship and remaining decisions.
-Do not equate this authority with successful empirical acceptance.
+None for implementation authority. Do not mix passing cases across independent variants.
 
 ## Self-audit findings outstanding
-BLOCKER: M1 replication criteria fail under the recorded protocol.
-SUSPECT: source spread conventions and invalid Bernoulli probabilities; capped cases are diagnostics only.
-SUSPECT: M0 bounded snapshots lack queue identity; live collector evidence is absent.
+BLOCKER: primary replication incomplete. SUSPECT: unspecified overflow and side dependence.
+SUSPECT: pointwise Monte Carlo acceptance can reject some correct realizations; no seed search.
+M0 limitations remain: bounded queue identity and absent live collector acceptance evidence.
 
 ## Next session should
-Resolve the numerical source ambiguities using stronger source evidence. Preserve the current
-fixed-seed results and implement any new interpretation as a separate documented experiment.
-Remain in M1; do not claim a published-version replication or begin M2 on these results.
+Seek original code or author clarification for the probability and update conventions.
+Preserve both source versions and all fixed-seed outcomes. Report qualified numerical
+agreement separately from faithful source-procedure verification. Remain in M1.

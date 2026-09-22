@@ -1,0 +1,9 @@
+uv run ruff check src tests
+All checks passed!
+uv run ruff format --check src tests
+36 files already formatted
+uv run mypy --strict src
+Success: no issues found in 28 source files
+uv run pytest -q
+66 passed in 2.72s
+Research command exit: 1, not_reproduced

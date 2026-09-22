@@ -150,3 +150,26 @@ Algebra checked through the HJB transformation and direct finite differences;
 sign, boundary and risk-neutral behavior covered by automated tests. Source
 tables checked visually against PDF pages 11-12 by the build agent. This is
 not a human review or a verification of the published 2008 article.
+
+## Published 2008 source update
+
+The subsequently supplied published article, Quantitative Finance 8(3), 217-224,
+DOI 10.1080/14697680701381228, uses the same final reservation and spread formulas
+as equations 29 and 30. Its section 3.3 explicitly defines the symmetric benchmark
+by the average spread over the time period. Thus the earlier working-paper
+spread ambiguity is resolved for the published experiment:
+
+$$
+\bar w=\frac{1}{T}\int_0^T w(t)\,dt
+=\frac{\gamma\sigma^2 T}{2}+\frac{2}{\gamma}\log(1+\gamma/k).
+$$
+
+The symmetric quotes are s minus/plus half this constant average. Inventory quotes
+continue using r(t) and w(t). The published Table 3 uses gamma=1. A left-endpoint
+discrete average would add gamma*sigma^2*dt/2; the experiment explicitly uses the
+continuous average, consistent with the rounded table entries. The earlier
+constant-liquidity-spread diagnostic is not used for the published source.
+
+The published text does not resolve lambda*dt > 1. Strict and saturated runs remain
+separate, with counts and failure outcomes preserved. The source change improves
+numerical agreement but does not justify inferring the authors' overflow convention.

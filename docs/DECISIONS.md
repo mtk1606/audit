@@ -117,3 +117,13 @@ acceptance tolerances. Run strict and explicitly saturated cases only; constant
 liquidity-spread diagnostics are unnecessary now that the source clarifies the
 benchmark. Saturated cases remain diagnostic and cannot satisfy primary acceptance.
 The published text still does not specify overflow handling or bid/ask dependence.
+
+## 2026-09-22 Published run outcome
+Clean source commit 60542eb produced the published comparison. Strict Table 2
+passes all metrics and the ratio criterion. Strict Tables 1 and 3 fail on invalid
+probabilities. Their capped diagnostic realizations pass all numerical checks.
+The independent capped Table 2 realization has no probability exceedances and
+passes all eight metric intervals, but its variance ratio differs by 14.3%, above
+the unchanged 10% threshold. Do not combine passing cases from different variants.
+The source-version and benchmark-definition blockers are resolved; probability
+handling remains unspecified. Overall M1 acceptance is incomplete.

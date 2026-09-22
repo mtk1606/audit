@@ -1,0 +1,515 @@
+{
+  "acceptance_eligible": true,
+  "accepted": false,
+  "experiments": [
+    {
+      "all_checks_pass": false,
+      "gamma": 0.1,
+      "inventory": {
+        "error": "invalid fill probability at step 4: 1.1563254236682827",
+        "status": "invalid_probability"
+      },
+      "primary": true,
+      "symmetric": {
+        "max_accounting_error": 2.5153212845907547e-12,
+        "max_raw_probability": 0.22883529706126332,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": 0.54,
+            "high": 1.0580749999999997,
+            "low": 0.017975
+          },
+          "final_q_std": {
+            "estimate": 8.29995718599134,
+            "high": 8.627805133233784,
+            "low": 7.947184514977481
+          },
+          "profit_mean": {
+            "estimate": 68.12180816863324,
+            "high": 68.95398465912726,
+            "low": 67.27079210201036
+          },
+          "profit_std": {
+            "estimate": 13.297264554997012,
+            "high": 14.034583661534924,
+            "low": 12.488133469429386
+          }
+        },
+        "paths": "table1-published_strict-symmetric.parquet",
+        "probability_exceedances": 0,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.26,
+          "final_q_std": 8.4,
+          "profit_mean": 68.4,
+          "profit_std": 12.7,
+          "spread": 1.49
+        }
+      },
+      "table": 1,
+      "variant": "published_strict"
+    },
+    {
+      "all_checks_pass": true,
+      "gamma": 0.1,
+      "inventory": {
+        "max_accounting_error": 3.694822225952521e-13,
+        "max_raw_probability": 1.3822978719639647,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": 0.029,
+            "high": 0.21402499999999985,
+            "low": -0.15305
+          },
+          "final_q_std": {
+            "estimate": 2.9797714741298598,
+            "high": 3.1171313306416937,
+            "low": 2.8463661257432964
+          },
+          "profit_mean": {
+            "estimate": 64.77645265265241,
+            "high": 65.17065303820831,
+            "low": 64.35899384314608
+          },
+          "profit_std": {
+            "estimate": 6.563822941590692,
+            "high": 6.862688533293505,
+            "low": 6.269256514978392
+          }
+        },
+        "paths": "table1-published_saturated-inventory.parquet",
+        "probability_exceedances": 42,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.08,
+          "final_q_std": 2.9,
+          "profit_mean": 65.0,
+          "profit_std": 6.6,
+          "spread": 1.49
+        }
+      },
+      "primary": false,
+      "ratio_relative_error": 0.04921832459166131,
+      "ratio_within_ten_percent": true,
+      "symmetric": {
+        "max_accounting_error": 1.4495071809506044e-12,
+        "max_raw_probability": 0.22883529706126332,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": -0.213,
+            "high": 0.295,
+            "low": -0.727
+          },
+          "final_q_std": {
+            "estimate": 8.16433017995275,
+            "high": 8.513188613015505,
+            "low": 7.8251776575622936
+          },
+          "profit_mean": {
+            "estimate": 67.64810828839742,
+            "high": 68.42296185152689,
+            "low": 66.82416346725479
+          },
+          "profit_std": {
+            "estimate": 12.937476572610011,
+            "high": 13.711520052954997,
+            "low": 12.186970194714123
+          }
+        },
+        "paths": "table1-published_saturated-symmetric.parquet",
+        "probability_exceedances": 0,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.26,
+          "final_q_std": 8.4,
+          "profit_mean": 68.4,
+          "profit_std": 12.7,
+          "spread": 1.49
+        }
+      },
+      "table": 1,
+      "target_variance_ratio": 3.702708907254362,
+      "variance_ratio": {
+        "estimate": 3.8849500361200433,
+        "high": 4.493162151531149,
+        "low": 3.349993578352432
+      },
+      "variant": "published_saturated"
+    },
+    {
+      "all_checks_pass": true,
+      "gamma": 0.01,
+      "inventory": {
+        "max_accounting_error": 8.952838470577262e-13,
+        "max_raw_probability": 0.39959395828097444,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": 0.144,
+            "high": 0.466,
+            "low": -0.183025
+          },
+          "final_q_std": {
+            "estimate": 5.18499258901574,
+            "high": 5.402661285190133,
+            "low": 4.971821877675007
+          },
+          "profit_mean": {
+            "estimate": 68.19543846646266,
+            "high": 68.76458780875917,
+            "low": 67.62378354124992
+          },
+          "profit_std": {
+            "estimate": 8.960161319115494,
+            "high": 9.384035037106814,
+            "low": 8.516268105997288
+          }
+        },
+        "paths": "table2-published_strict-inventory.parquet",
+        "probability_exceedances": 0,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.12,
+          "final_q_std": 5.1,
+          "profit_mean": 68.6,
+          "profit_std": 8.7,
+          "spread": 1.35
+        }
+      },
+      "primary": true,
+      "ratio_relative_error": 0.00212785548526373,
+      "ratio_within_ten_percent": true,
+      "symmetric": {
+        "max_accounting_error": 2.6147972675971687e-12,
+        "max_raw_probability": 0.25452496544819525,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": -0.023,
+            "high": 0.5060249999999998,
+            "low": -0.5610250000000001
+          },
+          "final_q_std": {
+            "estimate": 8.73468750246772,
+            "high": 9.124043465141531,
+            "low": 8.349417072158767
+          },
+          "profit_mean": {
+            "estimate": 68.3695257482524,
+            "high": 69.21375650129855,
+            "low": 67.53413677515883
+          },
+          "profit_std": {
+            "estimate": 13.196784136117014,
+            "high": 14.01277121122053,
+            "low": 12.457998689471472
+          }
+        },
+        "paths": "table2-published_strict-symmetric.parquet",
+        "probability_exceedances": 0,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.09,
+          "final_q_std": 8.7,
+          "profit_mean": 68.8,
+          "profit_std": 12.8,
+          "spread": 1.35
+        }
+      },
+      "table": 2,
+      "target_variance_ratio": 2.1646188400052853,
+      "variance_ratio": {
+        "estimate": 2.169224836077496,
+        "high": 2.5463296977907843,
+        "low": 1.8655255201429115
+      },
+      "variant": "published_strict"
+    },
+    {
+      "all_checks_pass": false,
+      "gamma": 0.01,
+      "inventory": {
+        "max_accounting_error": 8.952838470577262e-13,
+        "max_raw_probability": 0.40266257455382337,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": -0.009,
+            "high": 0.3000499999999997,
+            "low": -0.332
+          },
+          "final_q_std": {
+            "estimate": 5.10656401076066,
+            "high": 5.3190945555846,
+            "low": 4.881639027674071
+          },
+          "profit_mean": {
+            "estimate": 68.2891412541825,
+            "high": 68.81883781849643,
+            "low": 67.7793690349649
+          },
+          "profit_std": {
+            "estimate": 8.602756996125901,
+            "high": 9.083674957935973,
+            "low": 8.165798967532647
+          }
+        },
+        "paths": "table2-published_saturated-inventory.parquet",
+        "probability_exceedances": 0,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.12,
+          "final_q_std": 5.1,
+          "profit_mean": 68.6,
+          "profit_std": 8.7,
+          "spread": 1.35
+        }
+      },
+      "primary": false,
+      "ratio_relative_error": 0.1430225350365779,
+      "ratio_within_ten_percent": false,
+      "symmetric": {
+        "max_accounting_error": 2.2168933355715126e-12,
+        "max_raw_probability": 0.25452496544819525,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": -0.232,
+            "high": 0.27804999999999974,
+            "low": -0.735
+          },
+          "final_q_std": {
+            "estimate": 8.521901125852072,
+            "high": 8.87218505558014,
+            "low": 8.15200042513643
+          },
+          "profit_mean": {
+            "estimate": 68.22446915216165,
+            "high": 69.0559530164299,
+            "low": 67.37944003884154
+          },
+          "profit_std": {
+            "estimate": 13.531806187034402,
+            "high": 14.413861959409797,
+            "low": 12.634002823979003
+          }
+        },
+        "paths": "table2-published_saturated-symmetric.parquet",
+        "probability_exceedances": 0,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.09,
+          "final_q_std": 8.7,
+          "profit_mean": 68.8,
+          "profit_std": 12.8,
+          "spread": 1.35
+        }
+      },
+      "table": 2,
+      "target_variance_ratio": 2.1646188400052853,
+      "variance_ratio": {
+        "estimate": 2.4742081138907777,
+        "high": 2.926874018751134,
+        "low": 2.0960537627805653
+      },
+      "variant": "published_saturated"
+    },
+    {
+      "all_checks_pass": false,
+      "gamma": 1.0,
+      "inventory": {
+        "error": "invalid fill probability at step 1: 6.43715466585732",
+        "status": "invalid_probability"
+      },
+      "primary": true,
+      "symmetric": {
+        "max_accounting_error": 9.521272659185342e-13,
+        "max_raw_probability": 0.0725910691204823,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": -0.289,
+            "high": 0.02507499999999959,
+            "low": -0.598025
+          },
+          "final_q_std": {
+            "estimate": 5.258814898257413,
+            "high": 5.494914581661619,
+            "low": 5.01719108973403
+          },
+          "profit_mean": {
+            "estimate": 43.44789411304762,
+            "high": 44.15245337090143,
+            "low": 42.77363266186669
+          },
+          "profit_std": {
+            "estimate": 10.955130358156406,
+            "high": 11.54257076852437,
+            "low": 10.393686485756268
+          }
+        },
+        "paths": "table3-published_strict-symmetric.parquet",
+        "probability_exceedances": 0,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.0,
+          "final_q_std": 5.1,
+          "profit_mean": 44.0,
+          "profit_std": 11.0,
+          "spread": 3.02
+        }
+      },
+      "table": 3,
+      "variant": "published_strict"
+    },
+    {
+      "all_checks_pass": true,
+      "gamma": 1.0,
+      "inventory": {
+        "max_accounting_error": 9.947598300641403e-14,
+        "max_raw_probability": 7.591935916993037,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": -0.022,
+            "high": 0.07302499999999985,
+            "low": -0.127025
+          },
+          "final_q_std": {
+            "estimate": 1.630390804124635,
+            "high": 1.7024880625706653,
+            "low": 1.5576815047574633
+          },
+          "profit_mean": {
+            "estimate": 31.416000222024945,
+            "high": 31.729404569530317,
+            "low": 31.09345925966423
+          },
+          "profit_std": {
+            "estimate": 5.050723023826391,
+            "high": 5.277557155416319,
+            "low": 4.814819974739045
+          }
+        },
+        "paths": "table3-published_saturated-inventory.parquet",
+        "probability_exceedances": 10259,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.02,
+          "final_q_std": 1.7,
+          "profit_mean": 31.4,
+          "profit_std": 5.0,
+          "spread": 3.02
+        }
+      },
+      "primary": false,
+      "ratio_relative_error": 0.0046975050464688195,
+      "ratio_within_ten_percent": true,
+      "symmetric": {
+        "max_accounting_error": 5.968558980384842e-13,
+        "max_raw_probability": 0.0725910691204823,
+        "metrics": {
+          "final_q_mean": {
+            "estimate": -0.061,
+            "high": 0.26,
+            "low": -0.388025
+          },
+          "final_q_std": {
+            "estimate": 5.324624928634001,
+            "high": 5.558923046430172,
+            "low": 5.085526998305444
+          },
+          "profit_mean": {
+            "estimate": 44.08450986220299,
+            "high": 44.75764962436693,
+            "low": 43.386957608228045
+          },
+          "profit_std": {
+            "estimate": 11.08546155432242,
+            "high": 11.629861817374016,
+            "low": 10.473304178077031
+          }
+        },
+        "paths": "table3-published_saturated-symmetric.parquet",
+        "probability_exceedances": 0,
+        "status": "completed",
+        "target_inside_ci": {
+          "final_q_mean": true,
+          "final_q_std": true,
+          "profit_mean": true,
+          "profit_std": true
+        },
+        "targets": {
+          "final_q_mean": 0.0,
+          "final_q_std": 5.1,
+          "profit_mean": 44.0,
+          "profit_std": 11.0,
+          "spread": 3.02
+        }
+      },
+      "table": 3,
+      "target_variance_ratio": 4.840000000000001,
+      "variance_ratio": {
+        "estimate": 4.817264075575092,
+        "high": 5.523659002972642,
+        "low": 4.173499258612615
+      },
+      "variant": "published_saturated"
+    }
+  ],
+  "interpretation": "Diagnostic variants cannot satisfy primary acceptance.",
+  "limitations": [
+    "Source table transcription is agent-checked, not human-verified.",
+    "Pointwise intervals do not account for paper Monte Carlo uncertainty.",
+    "Paper does not specify seeds, side dependence or probability overflow."
+  ],
+  "source_version": "QF 2008 published article"
+}

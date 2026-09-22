@@ -79,3 +79,17 @@ exceedances, terminal paths and their checksums. See `docs/reports/M1.md`.
 M1 includes theoretical strategy quotes, a derivation and synthetic experiments.
 Numerical replication remains unresolved. No holdout access, market calibration,
 M2 simulator or preregistration was added.
+
+## Published 2008 comparison
+
+For the current M1 source, supply both arguments:
+
+```bash
+uv run asaudit replicate --config configs/replication/qf2008.toml --reference tests/golden/as2008_table_qf2008.json
+```
+
+The legacy defaults remain the 2006 working-paper audit. Published runs instead
+use the constant continuous time-average spread for the symmetric benchmark,
+the source's gamma=1 third table, and independent random streams under namespace
+(2008,). Both input tables are preserved byte-for-byte. The published run currently
+exits 1 because strict acceptance remains incomplete; see `docs/reports/M1-qf2008.md`.
