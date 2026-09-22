@@ -1,0 +1,4 @@
+# Published-version protocol. Root seed retained; child namespace (2008,) isolates streams.
+seed = 20260922
+n_paths = 1000
+bootstrap_repeats = 2000

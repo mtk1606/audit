@@ -27,7 +27,7 @@ class SimulationConfig(BaseModel):
     A: float = Field(default=140, ge=0)
     n_paths: int = Field(default=1000, ge=2)
     symmetric: bool = False
-    spread: Literal["equation", "constant"] = "equation"
+    spread: Literal["equation", "constant", "average"] = "equation"
     probability: Literal["strict", "saturate"] = "strict"
 
     @model_validator(mode="after")
@@ -83,6 +83,8 @@ def simulate(cfg: SimulationConfig, seed: np.random.SeedSequence) -> SimulationR
         spread = liquidity_spread(cfg.gamma, cfg.k)
         if cfg.spread == "equation":
             spread += risk
+        elif cfg.spread == "average":
+            spread += cfg.gamma * cfg.sigma**2 * cfg.horizon / 2
         center = mid if cfg.symmetric else mid - q * risk
         bid, ask = center - spread / 2, center + spread / 2
         with np.errstate(over="raise", invalid="raise"):

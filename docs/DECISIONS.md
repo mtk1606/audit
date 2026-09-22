@@ -93,3 +93,27 @@ results in docs/evidence/m1/run. M1 remains in progress; no M2 implementation or
 verified-replication publication follows from these results. A source-faithful
 resolution requires stronger evidence about the numerical procedure, not tuning
 the simulator to the target table.
+
+## 2026-09-22 Published paper supplied and benchmark clarified
+The user supplied HighFrequencyTrading.pdf and as2008_table_qf2008.json. The PDF
+is the published Quantitative Finance 8(3) article, pages 217-224, DOI
+10.1080/14697680701381228. The agent visually checked all entries against printed
+pages 222-223; the JSON matches. Preserve both source tables unchanged and retain
+verified_by_human=false. The published source supersedes the working-paper
+interpretation for current M1 acceptance, without erasing earlier evidence.
+
+The published symmetric benchmark uses the average spread over the horizon,
+not the inventory strategy's instantaneous spread. Implement its continuous
+average gamma*sigma^2*T/2 + 2*log1p(gamma/k)/gamma. This matches the tables' rounded
+average spreads. A discrete left-endpoint average differs by gamma*sigma^2*dt/2;
+we use the continuous average as an explicit integration convention, not fitted
+rounded table values. Inventory quotes retain the full time-dependent formula.
+Table 3 uses gamma=1, not the working paper's gamma=0.5. All profit and inventory
+targets now come directly from the separately preserved published JSON.
+
+Before the published run: retain root seed 20260922, allocate independent streams
+under namespace (2008,), 1000 paths, 2000 bootstrap repetitions and unchanged
+acceptance tolerances. Run strict and explicitly saturated cases only; constant
+liquidity-spread diagnostics are unnecessary now that the source clarifies the
+benchmark. Saturated cases remain diagnostic and cannot satisfy primary acceptance.
+The published text still does not specify overflow handling or bid/ask dependence.

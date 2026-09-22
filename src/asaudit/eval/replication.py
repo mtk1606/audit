@@ -7,7 +7,7 @@ from pathlib import Path
 
 import numpy as np
 import polars as pl
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field, model_validator
 
 from asaudit.logging import RunManifest, file_hash
 from asaudit.sim.replication import SimulationConfig, SimulationResult, assess, bootstrap, simulate
@@ -22,7 +22,7 @@ class ExperimentPlan(BaseModel):
 
 class Targets(BaseModel):
     model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
-    spread: float
+    spread: float = Field(validation_alias=AliasChoices("spread", "average_spread"))
     profit_mean: float
     profit_std: float = Field(gt=0)
     final_q_mean: float
@@ -42,9 +42,15 @@ class Reference(BaseModel):
     model_config = ConfigDict(extra="forbid")
     source: dict[str, str | bool]
     simulation_params: dict[str, str | float]
-    tables: list[Table]
+    tables: list[Table] = Field(min_length=3, max_length=3)
     formulas_as_printed: dict[str, str]
     transcription_notes: list[str]
+
+    @model_validator(mode="after")
+    def complete_tables(self) -> "Reference":
+        if [table.table for table in self.tables] != [1, 2, 3]:
+            raise ValueError("reference must contain ordered unique tables 1, 2, 3")
+        return self
 
 
 def variance_ratio(
@@ -81,20 +87,31 @@ def run_replication(
 ) -> tuple[Path, bool]:
     plan = ExperimentPlan.model_validate(tomllib.loads(config.read_text()))
     golden = Reference.model_validate_json(reference.read_text())
-    if "October 5, 2006" not in str(golden.source.get("version")):
-        raise ValueError("this protocol is specific to the uploaded 2006 working paper")
+    version = str(golden.source.get("version"))
+    published = "10.1080/14697680701381228" in version
+    if not published and "October 5, 2006" not in version:
+        raise ValueError("unrecognized source version")
+    source_version = "QF 2008 published article" if published else "2006-10-05 working paper"
+    variants = (
+        ("published_strict", "published_saturated")
+        if published
+        else ("equation_strict", "equation_saturated", "constant_saturated")
+    )
     resolved: dict[str, object] = plan.model_dump(mode="json")
     resolved.update(
         reference=str(reference),
-        protocol="working-paper-v1",
+        protocol="qf2008-v1" if published else "working-paper-v1",
         probability_modes=["strict", "saturate"],
-        spread_modes=["equation", "constant"],
+        spread_modes=["equation", "average"] if published else ["equation", "constant"],
+        symmetric_spread="continuous time average" if published else "same as inventory",
         mid_update="binary",
         timing="old-state fills then mid move",
         bootstrap="pathwise percentile, 95% pointwise, ddof=1",
         variance_ratio="symmetric profit variance / inventory profit variance",
     )
-    run = RunManifest(output, resolved, allow_dirty, "AS-2006-replication")
+    run = RunManifest(
+        output, resolved, allow_dirty, "AS-2008-replication" if published else "AS-2006-replication"
+    )
     run.document.update(
         seed=plan.seed,
         seed_reason="fixed before first experiment",
@@ -103,17 +120,15 @@ def run_replication(
     run.write()
     experiments: list[dict[str, object]] = []
     streams: list[dict[str, object]] = []
-    root = np.random.SeedSequence(plan.seed)
+    root = np.random.SeedSequence(plan.seed, spawn_key=(2008,) if published else ())
     # Fixed allocation independent of successes: 2 simulations, 2 bootstraps, 1 ratio per case.
-    children = root.spawn(len(golden.tables) * 3 * 5)
+    children = root.spawn(len(golden.tables) * len(variants) * 5)
     total_fills = 0
     primary_passes: list[bool] = []
     try:
         for table_index, table in enumerate(golden.tables):
-            for variant_index, variant in enumerate(
-                ("equation_strict", "equation_saturated", "constant_saturated")
-            ):
-                offset = (table_index * 3 + variant_index) * 5
+            for variant_index, variant in enumerate(variants):
+                offset = (table_index * len(variants) + variant_index) * 5
                 case: dict[str, object] = {
                     "table": table.table,
                     "gamma": table.gamma,
@@ -135,7 +150,13 @@ def run_replication(
                         A=float(params["A"]),
                         n_paths=plan.n_paths,
                         symmetric=side_index == 1,
-                        spread="constant" if variant_index == 2 else "equation",
+                        spread=(
+                            "average"
+                            if published and side_index == 1
+                            else "constant"
+                            if variant_index == 2
+                            else "equation"
+                        ),
                         probability="strict" if variant_index == 0 else "saturate",
                     )
                     child = children[offset + side_index]
@@ -211,13 +232,13 @@ def run_replication(
         eligible = plan.n_paths == int(golden.simulation_params["n_simulations"])
         accepted = eligible and all(primary_passes)
         report: dict[str, object] = {
-            "source_version": "2006-10-05 working paper",
+            "source_version": source_version,
             "accepted": accepted,
             "acceptance_eligible": eligible,
             "experiments": experiments,
             "interpretation": "Diagnostic variants cannot satisfy primary acceptance.",
             "limitations": [
-                "Published 2008 version not supplied or verified.",
+                "Source table transcription is agent-checked, not human-verified.",
                 "Pointwise intervals do not account for paper Monte Carlo uncertainty.",
                 "Paper does not specify seeds, side dependence or probability overflow.",
             ],
@@ -232,7 +253,7 @@ def run_replication(
             n_events=0,
             output_checksums={p.name: file_hash(p) for p in sorted(run.directory.glob("*.parquet"))}
             | {"comparison.json": file_hash(target_path)},
-            data_quality={"source": "synthetic working-paper experiment"},
+            data_quality={"source": "synthetic experiment", "source_version": source_version},
         )
         return run.directory, accepted
     except Exception as exc:

@@ -1,0 +1,56 @@
+{
+  "source": {
+    "authors": "Marco Avellaneda, Sasha Stoikov",
+    "title": "High-frequency trading in a limit order book",
+    "version": "Published: Quantitative Finance 8(3), April 2008, 217-224. DOI 10.1080/14697680701381228",
+    "sections": "3.3 Numerical simulations, pages 222-223, Tables 1-3",
+    "transcribed_by": "model-assisted transcription from uploaded PDF; every value must be checked by hand against the page",
+    "verified_by_human": false
+  },
+  "simulation_params": {
+    "s0": 100,
+    "T": 1,
+    "sigma": 2,
+    "dt": 0.005,
+    "q0": 0,
+    "k": 1.5,
+    "A": 140,
+    "n_simulations": 1000,
+    "mid_update": "random increment +/- sigma*sqrt(dt) per step (page 222)",
+    "fill_rule": "ask filled with probability lambda(delta_a)*dt: q -= 1, wealth += s + delta_a; bid filled with probability lambda(delta_b)*dt: q += 1, wealth -= s - delta_b (page 222)",
+    "quote_timing": "quotes computed from current state; state updated at t + dt (page 222; text says 'at time T', read as a typo for t)",
+    "symmetric_strategy_definition": "uses the average bid/ask spread of the inventory strategy over the time period, centred on the mid-price (page 222)"
+  },
+  "tables": [
+    {
+      "table": 1,
+      "page": 222,
+      "gamma": 0.1,
+      "inventory": { "average_spread": 1.49, "profit_mean": 65.0, "profit_std": 6.6, "final_q_mean": 0.08, "final_q_std": 2.9 },
+      "symmetric": { "average_spread": 1.49, "profit_mean": 68.4, "profit_std": 12.7, "final_q_mean": 0.26, "final_q_std": 8.4 }
+    },
+    {
+      "table": 2,
+      "page": 222,
+      "gamma": 0.01,
+      "inventory": { "average_spread": 1.35, "profit_mean": 68.6, "profit_std": 8.7, "final_q_mean": 0.12, "final_q_std": 5.1 },
+      "symmetric": { "average_spread": 1.35, "profit_mean": 68.8, "profit_std": 12.8, "final_q_mean": 0.09, "final_q_std": 8.7 }
+    },
+    {
+      "table": 3,
+      "page": 223,
+      "gamma": 1.0,
+      "inventory": { "average_spread": 3.02, "profit_mean": 31.4, "profit_std": 5.0, "final_q_mean": 0.02, "final_q_std": 1.7 },
+      "symmetric": { "average_spread": 3.02, "profit_mean": 44.0, "profit_std": 11.0, "final_q_mean": 0.00, "final_q_std": 5.1 }
+    }
+  ],
+  "formulas_as_printed": {
+    "reservation_price_eq_29": "r(s,t) = s - q*gamma*sigma^2*(T - t)",
+    "spread_eq_30": "delta_a + delta_b = gamma*sigma^2*(T - t) + (2/gamma)*ln(1 + gamma/k)",
+    "intensity_eq_20": "lambda(delta) = A*exp(-k*delta)"
+  },
+  "transcription_notes": [
+    "average_spread equals the time average of eq. 30 over [0, T]: gamma*sigma^2*T/2 + (2/gamma)*ln(1 + gamma/k) = 1.4908, 1.3489, 3.0217. This matches all three tables and independently confirms Table 3 uses gamma = 1.",
+    "Profit is not defined explicitly in section 3.3. Presumed terminal wealth plus inventory marked at the terminal mid."
+  ]
+}
