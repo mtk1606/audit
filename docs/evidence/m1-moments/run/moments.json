@@ -1,0 +1,193 @@
+{
+  "confidence_intervals": "not applicable to deterministic population moments",
+  "method": "population moments, float64 arithmetic, no inventory truncation",
+  "rows": [
+    {
+      "case": "1/published_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "final_q_std": 2.92679126262024,
+      "moments": {
+        "expected_probability_exceedances": 0.033814640891048936,
+        "inventory_mean": 0.0,
+        "inventory_variance": 8.566107094950178,
+        "profit_mean": 64.89254308561924,
+        "profit_variance": 42.81284387865344,
+        "terminal_mass": 0.9999999999999991
+      },
+      "profit_std": 6.54315244195437
+    },
+    {
+      "case": "1/published_saturated/symmetric",
+      "closed_form_absolute_errors": {
+        "expected_probability_exceedances": 0.0,
+        "inventory_mean": 0.0,
+        "inventory_variance": 6.679101716144942e-13,
+        "profit_mean": 6.394884621840902e-13,
+        "profit_variance": 3.9676706364843994e-11,
+        "terminal_mass": 9.547918011776346e-15
+      },
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.1,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "average",
+        "symmetric": true
+      },
+      "final_q_std": 8.401659452278393,
+      "moments": {
+        "expected_probability_exceedances": 0.0,
+        "inventory_mean": 0.0,
+        "inventory_variance": 70.58788155205886,
+        "profit_mean": 68.22817850809336,
+        "profit_variance": 181.10020632230135,
+        "terminal_mass": 1.0000000000000095
+      },
+      "profit_std": 13.457347670410442
+    },
+    {
+      "case": "2/published_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "final_q_std": 5.21253844078933,
+      "moments": {
+        "expected_probability_exceedances": 2.6476279603780695e-33,
+        "inventory_mean": 0.0,
+        "inventory_variance": 27.170556996706456,
+        "profit_mean": 68.39962764494616,
+        "profit_variance": 80.29164731419132,
+        "terminal_mass": 1.0000000000000004
+      },
+      "profit_std": 8.960560658473963
+    },
+    {
+      "case": "2/published_saturated/symmetric",
+      "closed_form_absolute_errors": {
+        "expected_probability_exceedances": 0.0,
+        "inventory_mean": 0.0,
+        "inventory_variance": 1.0658141036401503e-12,
+        "profit_mean": 9.379164112033322e-13,
+        "profit_variance": 6.110667527536862e-11,
+        "terminal_mass": 1.3988810110276972e-14
+      },
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 0.01,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "average",
+        "symmetric": true
+      },
+      "final_q_std": 8.711877120616169,
+      "moments": {
+        "expected_probability_exceedances": 0.0,
+        "inventory_mean": 0.0,
+        "inventory_variance": 75.89680296471548,
+        "profit_mean": 68.66618009731955,
+        "profit_variance": 187.07716173566405,
+        "terminal_mass": 0.999999999999986
+      },
+      "profit_std": 13.677615352672557
+    },
+    {
+      "case": "3/published_saturated/inventory",
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 1.0,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "equation",
+        "symmetric": false
+      },
+      "final_q_std": 1.641392874112495,
+      "moments": {
+        "expected_probability_exceedances": 10.349703163635292,
+        "inventory_mean": 0.0,
+        "inventory_variance": 2.694170567187277,
+        "profit_mean": 31.454501789176604,
+        "profit_variance": 23.405463083697896,
+        "terminal_mass": 1.0000000000000004
+      },
+      "profit_std": 4.837919292805316
+    },
+    {
+      "case": "3/published_saturated/symmetric",
+      "closed_form_absolute_errors": {
+        "expected_probability_exceedances": 0.0,
+        "inventory_mean": 0.0,
+        "inventory_variance": 1.3855583347321954e-13,
+        "profit_mean": 2.3447910280083306e-13,
+        "profit_variance": 1.014655026665423e-11,
+        "terminal_mass": 5.10702591327572e-15
+      },
+      "config": {
+        "A": 140.0,
+        "dt": 0.005,
+        "gamma": 1.0,
+        "horizon": 1.0,
+        "k": 1.5,
+        "n_paths": 1000,
+        "probability": "saturate",
+        "q0": 0,
+        "s0": 100.0,
+        "sigma": 2.0,
+        "spread": "average",
+        "symmetric": true
+      },
+      "final_q_std": 5.1892814841528025,
+      "moments": {
+        "expected_probability_exceedances": 0.0,
+        "inventory_mean": 0.0,
+        "inventory_variance": 26.92864232177111,
+        "profit_mean": 43.86897891351722,
+        "profit_variance": 115.59373022047589,
+        "terminal_mass": 0.9999999999999949
+      },
+      "profit_std": 10.751452470270047
+    }
+  ],
+  "scope": "declared capped-Bernoulli law, not proof of author implementation"
+}

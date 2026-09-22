@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-22",
+  "sources": [
+    "https://math.nyu.edu/inmemoriam/avellaneda/Papers.html",
+    "https://people.orie.cornell.edu/sfs33/publications.html"
+  ],
+  "finding": "Relevant entries link papers; original code or overflow clarification not located. Limited search, not proof of absence.",
+  "third_party_code_used": false,
+  "messages_sent": false
+}

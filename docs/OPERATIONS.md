@@ -93,3 +93,16 @@ use the constant continuous time-average spread for the symmetric benchmark,
 the source's gamma=1 third table, and independent random streams under namespace
 (2008,). Both input tables are preserved byte-for-byte. The published run currently
 exits 1 because strict acceptance remains incomplete; see `docs/reports/M1-qf2008.md`.
+
+## Independent model verification
+
+```bash
+uv run asaudit audit-moments
+```
+
+This deterministic calculation reads configurations from the committed published
+run manifest. It evaluates first and second moments over reachable inventory states
+and independently checks the constant symmetric case in closed form. No Monte Carlo
+seed, inventory cutoff or new market data is used. Output contains a manifest and
+`moments.json`. Completion validates the declared numerical law; it does not replace
+paper-replication acceptance. See `docs/reports/M1-moments.md`.
