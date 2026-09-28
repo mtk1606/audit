@@ -18,7 +18,7 @@ Milestone: M1 awaiting user confirmation (amended criterion); M2-M5 built ahead 
 - [ ] M5 clean-container reproduction and remote CI: not run here.
 
 ## Gate status
-ruff: pass; format: pass; mypy --strict: pass (61 files); pytest: 141 passed, 0 failed. Remote CI: not run.
+ruff: pass; format: pass; mypy --strict: pass (61 files); pytest: 143 passed, 0 failed. Remote CI: not run.
 
 ## Open blockers
 - Market data access from this environment (LOBSTER host denied). Run locally, or allow the host in the environment's network settings.
@@ -35,7 +35,7 @@ ruff: pass; format: pass; mypy --strict: pass (61 files); pytest: 141 passed, 0 
 - SUSPECT: the A2 charge values fills at a fixed 1 s horizon, not holding-period exposure.
 - SUSPECT: cross-machine byte identity of golden fills is unverified (libm differences in the generator are possible).
 - NIT: `ReactiveAgents` (optional) not implemented. No Coinbase-to-ReplaySession adapter yet.
-- Resolved this session: seeds must use explicit keys (SeedSequence.spawn mutates); the synthetic symbol collision invalidated the first fixture run (discarded, recorded in DECISIONS).
+- Resolved this session: seeds must use explicit keys (SeedSequence.spawn mutates; regression test tests/integration/test_common_random_numbers.py); the synthetic symbol collision invalidated the first fixture run (discarded, recorded in DECISIONS).
 
 ## Next session should
 Fetch the LOBSTER sample on a machine with network access and run

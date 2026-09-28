@@ -7,3 +7,5 @@ __pycache__/
 results/
 .hypothesis/
 dist/
+site/node_modules/
+site/dist/
