@@ -84,8 +84,15 @@ class RegimeTag:
 
 @dataclass(frozen=True, slots=True)
 class MarketState:
+    """Decision state. ``mid`` is explicit because the M1 source has no book.
+
+    Prices and ``mid`` are in source price quanta; ``book`` is None only for the
+    book-free M1 reduction source.
+    """
+
     ts_ns: int
-    book: BookSnapshot
+    mid: float
+    book: BookSnapshot | None
     sigma_hat: float
     imbalance: float
     time_remaining: float

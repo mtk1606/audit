@@ -3,6 +3,8 @@
 import math
 from dataclasses import dataclass
 
+from asaudit.types import EpisodeContext, Fill, MarketState, Quote
+
 
 @dataclass(frozen=True, slots=True)
 class ASParameters:
@@ -42,3 +44,47 @@ def quote(
     reservation = mid if symmetric else mid - inventory * risk
     spread = risk + liquidity_spread(params.gamma, params.k)
     return AnalyticalQuote(reservation - spread / 2, reservation + spread / 2, reservation, spread)
+
+
+class ASQuoter:
+    """Engine quoter. Units: prices in source quanta, time in seconds.
+
+    ``sigma`` is quanta per sqrt(second), ``k`` per quanta, ``gamma`` per quanta.
+    ``horizon_s`` is the episode length T. Continuous quotes are rounded
+    passively to the venue grid: bid down, ask up.
+    """
+
+    def __init__(
+        self,
+        gamma: float,
+        sigma: float,
+        k: float,
+        horizon_s: float,
+        tick: int,
+        *,
+        symmetric: bool = False,
+        average_spread: bool = False,
+        name: str = "avellaneda_stoikov",
+    ) -> None:
+        self.params = ASParameters(gamma, sigma, k, horizon_s)
+        self.tick, self.symmetric, self.average_spread = tick, symmetric, average_spread
+        self.name = name
+
+    def reset(self, ctx: EpisodeContext) -> None:
+        return None
+
+    def on_market_update(self, s: MarketState) -> Quote:
+        t = self.params.horizon * (1 - s.time_remaining)
+        t = min(max(t, 0.0), self.params.horizon)
+        if self.average_spread:
+            from asaudit.strategy.symmetric import average_spread_quote
+
+            q = average_spread_quote(s.mid, self.params)
+        else:
+            q = quote(s.mid, s.inventory, t, self.params, symmetric=self.symmetric)
+        bid = math.floor(q.bid / self.tick) * self.tick
+        ask = math.ceil(q.ask / self.tick) * self.tick
+        return Quote(s.ts_ns, int(bid), 1, int(ask), 1)
+
+    def on_fill(self, f: Fill, s: MarketState) -> None:
+        return None

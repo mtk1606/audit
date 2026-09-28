@@ -174,3 +174,45 @@ Protocol, fixed now and not changed after results are seen:
 Recommendation: adopt the amendment only if exactly the rules the data cannot
 distinguish are reported together, and describe M1 as a replication of the
 declared discrete law, not of the authors' unpublished code.
+
+## 2026-09-28 Proceeding past the M1 gate (user instruction)
+The build protocol makes M2 wait for user sign-off on M1. The user instructed
+this session to complete and build the project. This breaks the verification
+chain once, stated here and in chat. M1 is reported as "complete, qualified,
+pending user adoption of the amended criterion" (docs/reports/M1-sensitivity.md);
+nothing downstream depends on the M1 printed numbers except through the
+(off, off, off) reduction test, which uses the exact population law.
+
+## 2026-09-28 M2 implementation decisions
+- Data access: php.lobsterdata.com is denied by this environment's network
+  policy (proxy 403). All M2/M3 code is exercised on a synthetic L3 generator
+  (src/asaudit/sim/synthetic.py) with known mechanisms, per PRD 9's synthetic
+  fixture allowance. Every number from it is labelled fixture output.
+- FillModel receives a row range over a columnar ReplaySession plus a
+  StepContext (mid, segment bounds, competition), not LOBEvent objects: same
+  semantics, no per-event object allocation. MarketState gains `mid` and an
+  optional `book` because the M1 reduction source has no book.
+- A2 as target minus embedded adverse selection: Poisson fills embed none, queue
+  fills on replayed flow embed the observed markout. A2 on + Poisson: charge the
+  calibrated conditional mean adverse move. A2 off + queue: credit it back.
+  Conditional mean, not a draw: same expectation, lower variance. Horizon is a
+  config value (default 1 s); valuing a fill at a fixed horizon is an
+  approximation to holding-period exposure.
+- A3 acts through the ahead share of cancellations at our level, scaled by
+  ((D+v)/D)^(e_cancel-1). Joins only arrive behind us, so e_join is reported
+  but has no fill channel. Under Poisson fills there is no queue, so A3 has no
+  channel; exact Shapley assigns any A1 x A3 interaction explicitly.
+- Hidden executions do not interact with the visible queue (conservative).
+- Resting orders at or through the opposite touch are suspended, not filled.
+- Quotes beyond visible depth are withheld and counted (withheld_quotes).
+- Seeds: one generator per (session, strategy), shared by all grid configs and
+  cancel policies: common random numbers, a paired design for Shapley
+  differences. Sessions use independent SeedSequence children.
+- Elasticity intervals default to 50 ms: 1 s intervals attenuate both
+  elasticities by about half on the fixture (stale depth regressor). Cancel
+  elasticity is biased low by about 0.35 against the generator's per-order
+  exponent, because order counts scale sub-linearly with depth; tests assert
+  comparative statics for it, and recovery within 0.2 only for joins.
+- Performance: 88.5k events, 36k 100 ms steps in 3.6 s single core on the
+  fixture. Projected LOBSTER session (400k messages, 234k steps) about 21 s
+  against the 30 s budget; not yet measured on real data. No numba.

@@ -20,7 +20,7 @@ packages = ["src/asaudit"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+pythonpath = ["src", "tests"]
 filterwarnings = ["error"]
 
 [tool.ruff]
