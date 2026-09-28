@@ -142,3 +142,35 @@ The relevant entries point to paper PDFs; no original simulation code or overflo
 clarification was located in these entries or the targeted searches. This is not
 proof that author code does not exist. Third-party replication code is not treated
 as the authors' procedure and was not copied.
+
+## 2026-09-28 M1 bounded sensitivity protocol (declared before computation)
+Context: PRD M1 acceptance; STATE.md next step; user instruction to complete the
+project. The published text leaves the probability rule for lambda*dt > 1 open.
+Problem: the existing contract compares paper point values against intervals
+from one seeded simulation. That test mixes our Monte Carlo noise with the
+paper's and can reject a correct law (recorded SUSPECT). The population law is
+already computable exactly (docs/reports/M1-moments.md).
+Protocol, fixed now and not changed after results are seen:
+- Probability rules: strict (lambda*dt, invalid above 1), saturate
+  (min(lambda*dt, 1)), poisson (1 - exp(-lambda*dt): probability of at least one
+  Poisson arrival in dt, one unit filled). Bid and ask independent; fills at old
+  quotes before the binary mid move. No other rule is added after results.
+- Time steps: dt in {0.005 (paper), 0.0025, 0.001}. dt != 0.005 is a
+  discretisation-sensitivity check only, never an acceptance candidate.
+- Statistic: for each table, strategy and metric (profit mean, profit SD,
+  final inventory mean, final inventory SD) z = (paper - population) / SE, where
+  SE is the paper's own sampling error at n=1000 under the declared law: SD/sqrt(n)
+  for means, SD*sqrt((kurtosis-1)/(4n)) for SDs (delta method, exact population
+  kurtosis from a fourth-moment recurrence), plus the variance of uniform
+  rounding to the printed decimal. Variance ratio: z on log ratio with
+  var = (kurt_sym - 1)/n + (kurt_inv - 1)/n + rounding term.
+- Family: 3 tables x 2 strategies x 4 metrics + 3 ratios = 27 tests. Decision
+  threshold: two-sided Bonferroni alpha 0.05, |z| <= Phi^-1(1 - 0.05/54) = 3.11.
+- A rule is "consistent with the published tables" at dt=0.005 when every one of
+  the 27 tests passes. All rules and all z-scores are reported, pass or fail.
+- This is proposed as an amended M1 acceptance test. The original criteria and
+  their failed outcomes are preserved unchanged; the user decides whether to
+  adopt the amendment.
+Recommendation: adopt the amendment only if exactly the rules the data cannot
+distinguish are reported together, and describe M1 as a replication of the
+declared discrete law, not of the authors' unpublished code.
