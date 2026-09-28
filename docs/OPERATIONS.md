@@ -106,3 +106,65 @@ and independently checks the constant symmetric case in closed form. No Monte Ca
 seed, inventory cutoff or new market data is used. Output contains a manifest and
 `moments.json`. Completion validates the declared numerical law; it does not replace
 paper-replication acceptance. See `docs/reports/M1-moments.md`.
+
+## M1 sensitivity study (2026-09-28)
+
+```bash
+uv run asaudit m1-sensitivity
+```
+
+Deterministic, about 5 minutes. Tests every printed value in Tables 1-3 against
+the exact sampling law of an n=1000 estimate under each declared probability
+rule and time step. See docs/reports/M1-sensitivity.md.
+
+## M2/M3 ablation and attribution
+
+```bash
+# Fixture (synthetic L3, no download, labelled FIXTURE OUTPUT), about 20 min on 4 cores:
+uv run asaudit ablate --config configs/ablation/fixture.toml --workers 4
+# Market data, after PREREGISTRATION.md is committed and tagged:
+uv run python scripts/fetch_lobster_sample.py
+uv run asaudit ablate --config configs/ablation/lobster.toml --workers 8
+```
+
+`--workers` controls parallelism only; outputs are identical for any worker
+count (tested). Each run writes `episodes.parquet` (every episode x cell x
+policy x strategy), `pco_folds.json` (walk-forward train/test values),
+`attribution.json` (A2 first; per-policy Shapley means with stationary
+bootstrap CIs; bound intervals with sign-flip flags; per-symbol and regime
+marginals), `attribution.png` and the manifest. Holdout episodes are never
+replayed; their count is recorded as `holdout_episodes_not_replayed`.
+
+Expected real-data runtime is untested here (LOBSTER was unreachable from
+this environment). Per session and cell, replay is projected at about 21 s.
+The PolicyClassOptimum walk-forward dominates: roughly
+`folds x 16 cells x budget x mean_train_episodes x per-episode replay`. With
+the lobster.toml budget of 2000, plan for hours on 8 cores. Lower `budget`
+first if needed, and record why.
+
+## M4 held-out evaluation (once)
+
+Only after M3 is signed off: set `holdout_authorized = true` in
+`configs/m4/holdout.toml`, commit, then run
+
+```bash
+uv run asaudit evaluate-holdout --config configs/m4/holdout.toml --i-authorize-holdout
+```
+
+Each run appends to `docs/evidence/holdout_ledger.json`, which should be
+committed. A second run on the same data is refused unless `--rerun-reason` is
+given, and that reason is recorded.
+
+## Benchmark a strategy
+
+```bash
+uv run asaudit benchmark --quoter benchmarks.example_quoter:make --config configs/ablation/fixture.toml
+```
+
+## One-command reproduction
+
+```bash
+uv run asaudit reproduce --paper --workers 8            # LOBSTER sample required
+uv run asaudit reproduce --paper --fixture              # synthetic, no download
+docker build -t as-audit . && docker run --rm as-audit  # fixture reproduction in a clean container
+```

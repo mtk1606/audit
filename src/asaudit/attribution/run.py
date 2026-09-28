@@ -200,6 +200,25 @@ def split_episodes(
     return cal_span, episodes[n_cal:], n_hold, episodes
 
 
+def holdout_episodes(
+    s: ReplaySession, cfg: DataSection, seed: np.random.SeedSequence
+) -> list[Episode]:
+    """The held-out tail. Only asaudit.eval.holdout may call this, behind its gate."""
+    width = int(cfg.episode_s * 1e9)
+    n = (s.end_ns - s.start_ns) // width
+    n_cal = max(1, round(n * cfg.calibration))
+    n_fit = max(2, round(n * cfg.policy_fit))
+    return [
+        Episode(
+            s.symbol,
+            i,
+            s.window(s.start_ns + i * width, s.start_ns + (i + 1) * width, f"{s.session_id}#{i}"),
+            child(seed, i),
+        )
+        for i in range(n_cal + n_fit, n)
+    ]
+
+
 class Runner:
     def __init__(self, cfg: AblationConfig, cal: Calibration, tick: int) -> None:
         self.cfg, self.cal, self.tick = cfg, cal, tick

@@ -192,3 +192,65 @@ def ablate_command(
 
     directory, _ = run_ablation(config, output, allow_dirty, workers)
     typer.echo(str(directory))
+
+
+@app.command("evaluate-holdout")
+def holdout_command(
+    config: Annotated[Path, typer.Option()],
+    i_authorize_holdout: Annotated[bool, typer.Option("--i-authorize-holdout")] = False,
+    rerun_reason: Annotated[str | None, typer.Option()] = None,
+    output: Annotated[Path, typer.Option()] = Path("results"),
+    allow_dirty: Annotated[bool, typer.Option()] = False,
+) -> None:
+    """M4: evaluate the corrected rule on held-out episodes. Touches the holdout once."""
+    from asaudit.eval.holdout import run_holdout
+
+    typer.echo(str(run_holdout(config, output, allow_dirty, i_authorize_holdout, rerun_reason)))
+
+
+@app.command("benchmark")
+def benchmark_command(
+    quoter: Annotated[str, typer.Option(help="package.module:factory(tick) -> Quoter")],
+    config: Annotated[Path, typer.Option()] = Path("configs/ablation/fixture.toml"),
+    output: Annotated[Path, typer.Option()] = Path("results"),
+    allow_dirty: Annotated[bool, typer.Option()] = False,
+) -> None:
+    """Score a third-party Quoter beside AS and the symmetric baseline."""
+    from asaudit.eval.benchmark import run_benchmark
+
+    typer.echo(str(run_benchmark(quoter, config, output, allow_dirty)))
+
+
+@app.command("reproduce")
+def reproduce_command(
+    paper: Annotated[bool, typer.Option("--paper")] = False,
+    fixture: Annotated[bool, typer.Option(help="synthetic data instead of LOBSTER")] = False,
+    output: Annotated[Path, typer.Option()] = Path("results"),
+    workers: Annotated[int, typer.Option()] = 1,
+    allow_dirty: Annotated[bool, typer.Option()] = False,
+) -> None:
+    """Regenerate every reported table and figure (M1 evidence, then M3 attribution).
+
+    The M4 holdout is deliberately excluded: it is run once, by hand, behind its gate.
+    """
+    if not paper:
+        raise typer.BadParameter("pass --paper to regenerate the paper's outputs")
+    from asaudit.attribution.run import run_ablation
+    from asaudit.eval.moments import audit_moments
+    from asaudit.eval.replication import run_replication
+    from asaudit.eval.sensitivity import run_sensitivity
+
+    reference = Path("tests/golden/as2008_table_qf2008.json")
+    rep, accepted = run_replication(
+        Path("configs/replication/qf2008.toml"), reference, output, allow_dirty
+    )
+    typer.echo(f"M1 published comparison (original contract, accepted={accepted}): {rep}")
+    moments = audit_moments(Path("docs/evidence/m1-qf2008/run/manifest.json"), output, allow_dirty)
+    typer.echo(f"M1 moments: {moments}")
+    sensitivity = run_sensitivity(
+        Path("configs/replication/m1_sensitivity.toml"), reference, output, allow_dirty
+    )
+    typer.echo(f"M1 sensitivity: {sensitivity}")
+    ablation = Path("configs/ablation/fixture.toml" if fixture else "configs/ablation/lobster.toml")
+    directory, _ = run_ablation(ablation, output, allow_dirty, workers)
+    typer.echo(f"M3 attribution: {directory}")

@@ -1,0 +1,6 @@
+# M4 held-out evaluation. Flip holdout_authorized only when M3 is signed off,
+# then run once with --i-authorize-holdout. Every run is recorded in the ledger.
+ablation_config = "configs/ablation/lobster.toml"
+holdout_authorized = false
+ledger = "docs/evidence/holdout_ledger.json"
+quote_sizes = [1, 10, 100]

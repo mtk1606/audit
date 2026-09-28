@@ -1,0 +1,38 @@
+# Real-data M3 configuration (PRD 7). Run only after PREREGISTRATION.md is
+# committed and tagged. Needs the LOBSTER sample: scripts/fetch_lobster_sample.py
+run_name = "ablation_lobster_v1"
+seed = 20260913
+cancel_attribution = ["pessimistic", "uniform", "optimistic"]
+
+[data]
+source = "lobster"
+symbols = ["AAPL", "AMZN", "GOOG", "INTC", "MSFT"]
+date = "2012-06-21"
+lobster_root = "data/raw/lobster"
+depth = 10
+session_start_s = 34200.0
+session_end_s = 57600.0
+episode_s = 300.0
+calibration = 0.4
+policy_fit = 0.3
+holdout = 0.3
+
+[sim]
+batch_ms = 100
+latency_ns = 100000
+max_inventory = 20
+markout_horizon_ns = 1000000000
+
+[strategies]
+as_gamma_per_tick = 0.01
+symmetric_half_spread_ticks = 0.5
+policy_classes = ["linear_skew", "tabular_binned"]
+reference_class = "linear_skew"
+budget = 2000
+sigma0 = 0.5
+delta0 = 0.5
+
+[eval]
+bootstrap_repeats = 10000
+min_train = 3
+allow_unconverged = false
