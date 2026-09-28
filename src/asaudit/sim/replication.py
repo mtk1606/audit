@@ -28,7 +28,7 @@ class SimulationConfig(BaseModel):
     n_paths: int = Field(default=1000, ge=2)
     symmetric: bool = False
     spread: Literal["equation", "constant", "average"] = "equation"
-    probability: Literal["strict", "saturate"] = "strict"
+    probability: Literal["strict", "saturate", "poisson"] = "strict"
 
     @model_validator(mode="after")
     def grid(self) -> "SimulationConfig":
@@ -67,7 +67,8 @@ def simulate(cfg: SimulationConfig, seed: np.random.SeedSequence) -> SimulationR
     """Both sides use pre-step inventory and quotes; fills precede the mid move.
 
     Strict mode rejects lambda*dt > 1. Saturation is a labelled diagnostic,
-    never an implicit repair. Bid/ask Bernoulli draws are independent.
+    never an implicit repair. Poisson mode uses 1 - exp(-lambda*dt), the
+    probability of at least one arrival in dt. Bid/ask draws are independent.
     """
     rng = np.random.default_rng(seed)
     mid = np.full(cfg.n_paths, cfg.s0, dtype=np.float64)
@@ -91,6 +92,9 @@ def simulate(cfg: SimulationConfig, seed: np.random.SeedSequence) -> SimulationR
             pa = cfg.A * np.exp(-cfg.k * (ask - mid)) * cfg.dt
             pb = cfg.A * np.exp(-cfg.k * (mid - bid)) * cfg.dt
         count = int(np.count_nonzero(pa > 1) + np.count_nonzero(pb > 1))
+        if cfg.probability == "poisson":
+            # Exceedances stay counted for diagnostics; this rule is always valid.
+            pa, pb = -np.expm1(-pa), -np.expm1(-pb)
         exceedances += count
         max_probability = max(max_probability, float(pa.max()), float(pb.max()))
         if count and cfg.probability == "strict":

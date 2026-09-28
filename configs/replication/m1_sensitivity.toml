@@ -1,0 +1,6 @@
+# Declared 2026-09-28 in docs/DECISIONS.md before computation. Do not edit after results.
+probability_rules = ["strict", "saturate", "poisson"]
+dts = [0.005, 0.0025, 0.001]
+acceptance_dt = 0.005
+paper_n = 1000
+family_alpha = 0.05

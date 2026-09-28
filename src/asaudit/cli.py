@@ -165,3 +165,16 @@ def moments_command(
     from asaudit.eval.moments import audit_moments
 
     typer.echo(str(audit_moments(source_manifest, output, allow_dirty)))
+
+
+@app.command("m1-sensitivity")
+def sensitivity_command(
+    config: Annotated[Path, typer.Option()] = Path("configs/replication/m1_sensitivity.toml"),
+    reference: Annotated[Path, typer.Option()] = Path("tests/golden/as2008_table_qf2008.json"),
+    output: Annotated[Path, typer.Option()] = Path("results"),
+    allow_dirty: Annotated[bool, typer.Option()] = False,
+) -> None:
+    """Test printed paper values against exact sampling laws of each declared rule."""
+    from asaudit.eval.sensitivity import run_sensitivity
+
+    typer.echo(str(run_sensitivity(config, reference, output, allow_dirty)))
