@@ -1,0 +1,146 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "cancel_attribution": [
+      "pessimistic",
+      "uniform",
+      "optimistic"
+    ],
+    "data": {
+      "calibration": 0.4,
+      "date": "2012-06-21",
+      "depth": 10,
+      "episode_s": 60.0,
+      "holdout": 0.2,
+      "lobster_root": "data/raw/lobster",
+      "policy_fit": 0.4,
+      "session_end_s": 57600.0,
+      "session_start_s": 34200.0,
+      "source": "synthetic",
+      "symbols": [
+        "SYNA",
+        "SYNB",
+        "SYNC",
+        "SYND",
+        "SYNE"
+      ],
+      "synthetic_duration_s": 1500.0
+    },
+    "eval": {
+      "allow_unconverged": true,
+      "bootstrap_repeats": 2000,
+      "min_train": 3
+    },
+    "run_name": "ablation_fixture",
+    "seed": 20260913,
+    "sim": {
+      "batch_ms": 100,
+      "latency_ns": 100000,
+      "markout_horizon_ns": 1000000000,
+      "max_inventory": 20
+    },
+    "strategies": {
+      "as_gamma_per_tick": 0.01,
+      "budget": 30,
+      "delta0": 0.5,
+      "policy_classes": [
+        "linear_skew"
+      ],
+      "reference_class": "linear_skew",
+      "sigma0": 0.5,
+      "symmetric_half_spread_ticks": 0.5
+    }
+  },
+  "config_hash": "304ffcf2313c47d7b91677363b714cec0dd25d145379405c03105155d28c8585",
+  "data_checksums": {
+    "configs/ablation/fixture.toml": "93bdf8481fd60647eba5a37c6d8acb9d4acb36d87eb55d9c9ac42eef21f0940c"
+  },
+  "data_quality": {
+    "calibration": {
+      "SYNA": {
+        "A": 2.8133944519131058,
+        "adverse_overall": 31.715063520871144,
+        "cancel_elasticity": 0.9355552378155362,
+        "cancel_se": 0.08539491297469268,
+        "intensity_r2": 0.9924602825760175,
+        "join_elasticity": -0.3069873443372713,
+        "join_se": 0.03142507266186286,
+        "k": 0.018688385240394116,
+        "sigma": 52.16862013751498
+      },
+      "SYNB": {
+        "A": 3.009641101016801,
+        "adverse_overall": 31.51197604790419,
+        "cancel_elasticity": 1.0736746342615076,
+        "cancel_se": 0.08957501066476088,
+        "intensity_r2": 0.9972542962326681,
+        "join_elasticity": -0.32817679823052504,
+        "join_se": 0.031140996144444308,
+        "k": 0.020390215469949825,
+        "sigma": 52.2486950178252
+      },
+      "SYNC": {
+        "A": 3.3701197107375096,
+        "adverse_overall": 30.174793008279668,
+        "cancel_elasticity": 1.1456375753695294,
+        "cancel_se": 0.09588424448926007,
+        "intensity_r2": 0.9940717607008874,
+        "join_elasticity": -0.34823134997634975,
+        "join_se": 0.033587859615646226,
+        "k": 0.021262942261822033,
+        "sigma": 54.31310832409647
+      },
+      "SYND": {
+        "A": 1.434811481821764,
+        "adverse_overall": 36.85828466031356,
+        "cancel_elasticity": 0.9573370929934455,
+        "cancel_se": 0.09059103138258028,
+        "intensity_r2": 0.9550227527625099,
+        "join_elasticity": -0.3575122500134155,
+        "join_se": 0.032297298947368915,
+        "k": 0.014843238801843265,
+        "sigma": 58.227427651527265
+      },
+      "SYNE": {
+        "A": 4.299493100966099,
+        "adverse_overall": 27.762215997510115,
+        "cancel_elasticity": 0.9668858540749073,
+        "cancel_se": 0.08994231096684796,
+        "intensity_r2": 0.9887054243823269,
+        "join_elasticity": -0.31036709832116305,
+        "join_se": 0.032918587062486786,
+        "k": 0.023695695804768265,
+        "sigma": 51.274100077238415
+      }
+    },
+    "holdout_episodes_not_replayed": 25
+  },
+  "elapsed_seconds": 1164.665771475,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-fc-v37-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.11.15",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "finished_utc": "2026-09-28T18:44:46.086510+00:00",
+  "git_dirty": false,
+  "git_sha": "256b7c81e00a40b16e01ae4a6cca8751f1eda154",
+  "n_events": 181362,
+  "n_fills": 85035,
+  "output_checksums": {
+    "attribution.json": "c818d9de2d63d9e5622a2d9438f8ff4e66a4bb2782345a576971203c27aee430",
+    "attribution.png": "34781cb0286007754520bd4eed03667740f2a17793d91e809841cc91088b67bc",
+    "episodes.parquet": "656c4a7666d36b7cf5e4d20cbcfd6519fca07714c3a463a216b0b347b0e178db"
+  },
+  "run_id": "20260928T182521427117Z_256b7c81e0_304ffcf231_0d298f2f",
+  "seed": 20260913,
+  "seed_reason": "config seed; SeedSequence tree per symbol/episode/strategy; shared across grid cells (common random numbers)",
+  "session_id": "ablation_fixture",
+  "started_utc": "2026-09-28T18:25:21.427117+00:00",
+  "status": "completed"
+}
