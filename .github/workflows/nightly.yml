@@ -21,7 +21,7 @@ jobs:
       - name: Market-data validation on every sample symbol
         run: |
           for s in AAPL AMZN GOOG INTC MSFT; do
-            uv run asaudit data validate --source lobster --symbol $s --date 2012-06-21
+            uv run asaudit data validate --source lobster --symbol $s --date 2012-06-21 --config configs/data/lobster.toml
           done
       # Market attribution is never computed before the pre-registration is
       # committed and tagged. The code enforces this too (require_preregistration).

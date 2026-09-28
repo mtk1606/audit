@@ -130,3 +130,17 @@ Every row carries its own source mark, except rows whose basis is the absence of
 - `docker run --network none as-audit:local reproduce --paper --fixture --workers 4`: **exit 0**, 24 min 20 s. The original seeded comparison, moments, sensitivity and synthetic attribution all completed.
 - Not checked: byte-identity of the container's outputs. That run wrote its results inside the container, which was discarded. Byte-identity was checked for the same command run natively (see above).
 - Build requirement in restricted networks: pass `--network host` and proxy build args. `ghcr.io` and plain-HTTP Debian mirrors are not needed by the Dockerfile.
+
+## Nightly run
+
+Not claimed on the page. Run 36478047488 (manual dispatch at `473fedd`, GitHub-hosted `ubuntu-latest`), conclusion **failure**:
+
+| Step | Outcome |
+|---|---|
+| Tests (`pytest -q`) | success |
+| Full reproduction on synthetic order flow | success (37.9 min) |
+| LOBSTER sample download (checksums verified) | success |
+| Market-data validation | **failure**. AAPL passed (400,391 rows, matching the committed M0 manifest). AMZN failed at event 29331 on a sub-nanosecond timestamp (`36754.716797047004`) under the strict default timestamp policy. |
+| Full reproduction on market data | skipped: no `PREREGISTRATION.md` (as designed) |
+
+Root cause: the workflow omitted `--config configs/data/lobster.toml`, which selects the `nearest_ns` timestamp policy documented in `docs/reports/M0.md`. The data and code are unchanged. The workflow is fixed, and the outcome of the re-run is recorded below when available.
