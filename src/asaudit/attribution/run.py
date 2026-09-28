@@ -148,6 +148,7 @@ def load_sessions(cfg: AblationConfig, root_seed: np.random.SeedSequence) -> lis
                 SyntheticConfig(duration_s=d.synthetic_duration_s),
                 np.random.default_rng(child_seed),
                 f"{symbol}/synthetic",
+                symbol=symbol,
             )
             out.append(s)
             continue
@@ -162,6 +163,9 @@ def load_sessions(cfg: AblationConfig, root_seed: np.random.SeedSequence) -> lis
         start = max(full.start_ns, _day_offset(full, d.session_start_s))
         end = min(full.end_ns, _day_offset(full, d.session_end_s))
         out.append(full.window(start, end, full.session_id))
+    if len({x.symbol for x in out}) != len(out):
+        # Episode keys are (symbol, index): duplicates would silently merge sessions.
+        raise ValueError("session symbols must be unique")
     return out
 
 

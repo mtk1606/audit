@@ -49,7 +49,11 @@ def _geometric(rng: np.random.Generator, mean: float) -> int:
 
 
 def generate_session(
-    cfg: SyntheticConfig, rng: np.random.Generator, session_id: str, start_ns: int = 0
+    cfg: SyntheticConfig,
+    rng: np.random.Generator,
+    session_id: str,
+    start_ns: int = 0,
+    symbol: str = "SYN",
 ) -> ReplaySession:
     tick, depth = cfg.tick, cfg.depth
     books: dict[int, dict[int, deque[list[int]]]] = {1: {}, -1: {}}
@@ -152,7 +156,7 @@ def generate_session(
     snap = [np.array([s[i] for s in snaps], dtype=np.int64) for i in range(4)]
     return ReplaySession(
         session_id=session_id,
-        symbol="SYN",
+        symbol=symbol,
         tick=tick,
         start_ns=start_ns,
         end_ns=start_ns + int(horizon * 1e9),

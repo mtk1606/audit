@@ -216,3 +216,11 @@ nothing downstream depends on the M1 printed numbers except through the
 - Performance: 88.5k events, 36k 100 ms steps in 3.6 s single core on the
   fixture. Projected LOBSTER session (400k messages, 234k steps) about 21 s
   against the 30 s budget; not yet measured on real data. No numba.
+
+## 2026-09-28 Invalidated fixture run (symbol collision)
+The first fixture ablation (run 20260928T180309..._afff7daf4f) is invalid: the
+synthetic generator stamped every session with symbol "SYN", so the five
+sessions collided on (symbol, episode) keys and overwrote each other in the
+attribution lookup. Fixed by passing the symbol through; load_sessions now
+rejects duplicate symbols, and the pipeline test asserts per-symbol separation.
+That run's output is discarded, not reported.

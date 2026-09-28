@@ -55,6 +55,15 @@ def test_outputs_and_labels(runs):
     assert manifest["status"] == "completed"
 
 
+def test_each_symbol_is_attributed_separately(runs):
+    (directory, report), _ = runs
+    frame = pl.read_parquet(directory / "episodes.parquet")
+    assert set(frame["symbol"].unique()) == {"SA", "SB"}
+    per_symbol = report["strategies"]["avellaneda_stoikov"]["by_cancel_policy"]["uniform"]
+    assert set(per_symbol["per_symbol"]) == {"SA", "SB"}
+    assert per_symbol["n_episodes"] == 6  # 3 out-of-sample episodes per symbol
+
+
 def test_shapley_sums_to_total_per_episode(runs):
     (_, report), _ = runs
     for strat in report["strategies"].values():
