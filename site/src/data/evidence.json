@@ -1,0 +1,2474 @@
+{
+  "generated_from_commit": "e77692c",
+  "m1": {
+    "source": "docs/evidence/m1-sensitivity/run/sensitivity.json",
+    "commit": "e77692c",
+    "threshold": 3.1130172634086897,
+    "family_size": 27,
+    "paper_n": 1000,
+    "consistent_at_paper_dt": [
+      "saturate"
+    ],
+    "runs": [
+      {
+        "rule": "strict",
+        "dt": 0.005,
+        "tests_run": 12,
+        "failures": 0,
+        "max_abs_z": 1.882981158930982,
+        "consistent": false,
+        "acceptance_candidate": true,
+        "invalid": [
+          "1/inventory",
+          "2/inventory",
+          "3/inventory"
+        ],
+        "tests": [
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "all",
+            "status": "undefined"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.26,
+            "population": 0,
+            "z": 0.9785491404276988,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.4,
+            "population": 8.401659452278393,
+            "z": -0.008732439231018806,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.4,
+            "population": 68.22817850809274,
+            "z": 0.40282934583644675,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.7,
+            "population": 13.457347670412004,
+            "z": -1.687997694235735,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "all",
+            "status": "undefined"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.09,
+            "population": 0,
+            "z": 0.3266682509428622,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.7,
+            "population": 8.711877120616169,
+            "z": -0.060338073943338226,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.8,
+            "population": 68.66618009732048,
+            "z": 0.30870608589098425,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.8,
+            "population": 13.677615352670006,
+            "z": -1.882981158930982,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "all",
+            "status": "undefined"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0,
+            "population": 0,
+            "z": 0,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.1892814841528025,
+            "z": -0.7428095753598858,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 44,
+            "population": 43.86897891351741,
+            "z": 0.38398496905651397,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 11,
+            "population": 10.751452470269445,
+            "z": 0.8504323577066973,
+            "status": "tested"
+          }
+        ]
+      },
+      {
+        "rule": "saturate",
+        "dt": 0.005,
+        "tests_run": 27,
+        "failures": 0,
+        "max_abs_z": 1.882981158930982,
+        "consistent": true,
+        "acceptance_candidate": true,
+        "invalid": [],
+        "tests": [
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.08,
+            "population": 0,
+            "z": 0.8639469848481689,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 2.9,
+            "population": 2.92679126262024,
+            "z": -0.37502476179524685,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 65,
+            "population": 64.89254308561917,
+            "z": 0.5143529794088515,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 6.6,
+            "population": 6.543152441953643,
+            "z": 0.37871212057363063,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.26,
+            "population": 0,
+            "z": 0.9785491404276988,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.4,
+            "population": 8.401659452278393,
+            "z": -0.008732439231018806,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.4,
+            "population": 68.22817850809274,
+            "z": 0.40282934583644675,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.7,
+            "population": 13.457347670412004,
+            "z": -1.687997694235735,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 3.702708907254362,
+            "population": 4.230043835342612,
+            "z": -1.6448888453761417,
+            "relative_deviation": 0.14241868353601683,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.12,
+            "population": 0,
+            "z": 0.7278893840626618,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.21253844078933,
+            "z": -0.9376023171798414,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.6,
+            "population": 68.39962764494612,
+            "z": 0.7034941648870979,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 8.7,
+            "population": 8.960560658474378,
+            "z": -1.1232426078508264,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.09,
+            "population": 0,
+            "z": 0.3266682509428622,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.7,
+            "population": 8.711877120616169,
+            "z": -0.060338073943338226,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.8,
+            "population": 68.66618009732048,
+            "z": 0.30870608589098425,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.8,
+            "population": 13.677615352670006,
+            "z": -1.882981158930982,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 2.1646188400052853,
+            "population": 2.329970401572661,
+            "z": -0.8597603702076959,
+            "relative_deviation": 0.076388303802702,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.02,
+            "population": 0,
+            "z": 0.38472183094843954,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 1.7,
+            "population": 1.641392874112495,
+            "z": 1.2613536500147422,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 31.4,
+            "population": 31.454501789176632,
+            "z": -0.35007027356631604,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 5,
+            "population": 4.8379192928056804,
+            "z": 1.4227351737473295,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0,
+            "population": 0,
+            "z": 0,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.1892814841528025,
+            "z": -0.7428095753598858,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 44,
+            "population": 43.86897891351741,
+            "z": 0.38398496905651397,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 11,
+            "population": 10.751452470269445,
+            "z": 0.8504323577066973,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 4.840000000000001,
+            "population": 4.938749975041408,
+            "z": -0.28108205772365297,
+            "relative_deviation": 0.020402887405249537,
+            "status": "tested"
+          }
+        ]
+      },
+      {
+        "rule": "poisson",
+        "dt": 0.005,
+        "tests_run": 27,
+        "failures": 7,
+        "max_abs_z": 38.518685207259765,
+        "consistent": false,
+        "acceptance_candidate": true,
+        "invalid": [],
+        "tests": [
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.08,
+            "population": 0,
+            "z": 0.8442258979601072,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 2.9,
+            "population": 2.9952267542311617,
+            "z": -1.3062857654868225,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 65,
+            "population": 57.171716940141735,
+            "z": 38.518685207259765,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 6.6,
+            "population": 6.361641171425537,
+            "z": 1.6251969907840587,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.26,
+            "population": 0,
+            "z": 1.0191001977097582,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.4,
+            "population": 8.06730839509672,
+            "z": 1.8209524673546778,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.4,
+            "population": 60.98457442773548,
+            "z": 18.10222561317605,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.7,
+            "population": 12.92180127674771,
+            "z": -0.5145127617541118,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 3.702708907254362,
+            "population": 4.125796255984227,
+            "z": -1.3345281617152303,
+            "relative_deviation": 0.11426427497472202,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.12,
+            "population": 0,
+            "z": 0.712843269088606,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.3225938509539175,
+            "z": -1.8178022312020137,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.6,
+            "population": 60.34201250917984,
+            "z": 28.751588081358456,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 8.7,
+            "population": 9.036654425669264,
+            "z": -1.3898998183200146,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.09,
+            "population": 0,
+            "z": 0.34090990420529593,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.7,
+            "population": 8.347893993379516,
+            "z": 1.8644391884815068,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.8,
+            "population": 60.62407828480974,
+            "z": 19.679326522637812,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.8,
+            "population": 13.106163168453223,
+            "z": -0.6851081447421173,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 2.1646188400052853,
+            "population": 2.103467430377644,
+            "z": 0.33028045208535933,
+            "relative_deviation": 0.028250428434546948,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.02,
+            "population": 0,
+            "z": 0.37118225211092204,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 1.7,
+            "population": 1.701447726363169,
+            "z": -0.030397222922991112,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 31.4,
+            "population": 28.239767079753886,
+            "z": 21.30111959646567,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 5,
+            "population": 4.6018843734435055,
+            "z": 3.6515860903999555,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0,
+            "population": 0,
+            "z": 0,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.103578996278242,
+            "z": -0.030238409733683393,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 44,
+            "population": 42.31456937415773,
+            "z": 5.021849174893522,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 11,
+            "population": 10.5738891163098,
+            "z": 1.4813893918106291,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 4.840000000000001,
+            "population": 5.279564485953952,
+            "z": -1.2079460863151459,
+            "relative_deviation": 0.09081910866817178,
+            "status": "tested"
+          }
+        ]
+      },
+      {
+        "rule": "strict",
+        "dt": 0.0025,
+        "tests_run": 12,
+        "failures": 3,
+        "max_abs_z": 3.926503029254432,
+        "consistent": false,
+        "acceptance_candidate": false,
+        "invalid": [
+          "1/inventory",
+          "2/inventory",
+          "3/inventory"
+        ],
+        "tests": [
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "all",
+            "status": "undefined"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.26,
+            "population": 0,
+            "z": 0.9131561463396828,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.4,
+            "population": 9.003388261553669,
+            "z": -2.9632790467740158,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.4,
+            "population": 68.22817850809275,
+            "z": 0.3763835648564622,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.7,
+            "population": 14.407106760497806,
+            "z": -3.543241344591617,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "all",
+            "status": "undefined"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.09,
+            "population": 0,
+            "z": 0.301915307268064,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.7,
+            "population": 9.426207857457765,
+            "z": -3.410387725766118,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.8,
+            "population": 68.66618009732039,
+            "z": 0.2856930293253889,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.8,
+            "population": 14.784094468543648,
+            "z": -3.926503029254432,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "all",
+            "status": "undefined"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0,
+            "population": 0,
+            "z": 0,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.289852075907489,
+            "z": -1.5489933046755113,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 44,
+            "population": 43.868978913517374,
+            "z": 0.37695352199155113,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 11,
+            "population": 10.953435576897217,
+            "z": 0.15593474176096592,
+            "status": "tested"
+          }
+        ]
+      },
+      {
+        "rule": "saturate",
+        "dt": 0.0025,
+        "tests_run": 27,
+        "failures": 6,
+        "max_abs_z": 4.243667577119449,
+        "consistent": false,
+        "acceptance_candidate": false,
+        "invalid": [],
+        "tests": [
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.08,
+            "population": 0,
+            "z": 0.7940877307133172,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 2.9,
+            "population": 3.184513810162796,
+            "z": -3.6952050393135645,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 65,
+            "population": 64.44404766528228,
+            "z": 2.513370920057903,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 6.6,
+            "population": 6.935068241895056,
+            "z": -2.106667158147889,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.26,
+            "population": 0,
+            "z": 0.9131561463396828,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.4,
+            "population": 9.003388261553669,
+            "z": -2.9632790467740158,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.4,
+            "population": 68.22817850809275,
+            "z": 0.3763835648564622,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.7,
+            "population": 14.407106760497806,
+            "z": -3.543241344591617,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 3.702708907254362,
+            "population": 4.315708181291827,
+            "z": -1.8872884919915744,
+            "relative_deviation": 0.1655542710463882,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.12,
+            "population": 0,
+            "z": 0.6714975877129927,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.650412042182202,
+            "z": -4.243667577119449,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.6,
+            "population": 68.35552456263753,
+            "z": 0.7951150327309657,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 8.7,
+            "population": 9.680163451092556,
+            "z": -3.904725528734867,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.09,
+            "population": 0,
+            "z": 0.301915307268064,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.7,
+            "population": 9.426207857457765,
+            "z": -3.410387725766118,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.8,
+            "population": 68.66618009732039,
+            "z": 0.2856930293253889,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.8,
+            "population": 14.784094468543648,
+            "z": -3.926503029254432,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 2.1646188400052853,
+            "population": 2.3325130216261734,
+            "z": -0.8697941370213688,
+            "relative_deviation": 0.07756293095022593,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.02,
+            "population": 0,
+            "z": 0.34450367603948834,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 1.7,
+            "population": 1.833574503164405,
+            "z": -2.6558418849825167,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 31.4,
+            "population": 31.180741135707596,
+            "z": 1.4021114329835633,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 5,
+            "population": 4.8601059808222615,
+            "z": 1.2287676960297222,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0,
+            "population": 0,
+            "z": 0,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.289852075907489,
+            "z": -1.5489933046755113,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 44,
+            "population": 43.868978913517374,
+            "z": 0.37695352199155113,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 11,
+            "population": 10.953435576897217,
+            "z": 0.15593474176096592,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 4.840000000000001,
+            "population": 5.079362836707676,
+            "z": -0.6719989161534828,
+            "relative_deviation": 0.04945513155117265,
+            "status": "tested"
+          }
+        ]
+      },
+      {
+        "rule": "poisson",
+        "dt": 0.0025,
+        "tests_run": 27,
+        "failures": 9,
+        "max_abs_z": 21.05819685590221,
+        "consistent": false,
+        "acceptance_candidate": false,
+        "invalid": [],
+        "tests": [
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.08,
+            "population": 0,
+            "z": 0.7899235819036412,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 2.9,
+            "population": 3.2013150020421364,
+            "z": -3.8949640800019956,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 65,
+            "population": 60.430922984062356,
+            "z": 21.05819685590221,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 6.6,
+            "population": 6.800315950478871,
+            "z": -1.2811264632263648,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.26,
+            "population": 0,
+            "z": 0.9360696584977852,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.4,
+            "population": 8.782976544470126,
+            "z": -1.926743825170077,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.4,
+            "population": 64.46962903853832,
+            "z": 8.82484000465201,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.7,
+            "population": 14.054406749453147,
+            "z": -2.880759706298535,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 3.702708907254362,
+            "population": 4.271366671799068,
+            "z": -1.7586998926506119,
+            "relative_deviation": 0.15357884694381174,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.12,
+            "population": 0,
+            "z": 0.6683826324243639,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.6767522900519785,
+            "z": -4.4268247362116915,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.6,
+            "population": 64.15757696024498,
+            "z": 14.47067217909776,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 8.7,
+            "population": 9.665017108622795,
+            "z": -3.784921398636935,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.09,
+            "population": 0,
+            "z": 0.31019254278593406,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.7,
+            "population": 9.174653259572665,
+            "z": -2.288644979941639,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.8,
+            "population": 64.47646569017591,
+            "z": 9.482423630036457,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.8,
+            "population": 14.389555434886901,
+            "z": -3.2308962967000037,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 2.1646188400052853,
+            "population": 2.2166110758875273,
+            "z": -0.27458005378295525,
+            "relative_deviation": 0.02401911824906544,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.02,
+            "population": 0,
+            "z": 0.34171733576091,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 1.7,
+            "population": 1.848562255134022,
+            "z": -2.935780373827777,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 31.4,
+            "population": 29.405248580895442,
+            "z": 13.190072796239587,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 5,
+            "population": 4.694418254296254,
+            "z": 2.7698761173957256,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0,
+            "population": 0,
+            "z": 0,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.243983280889036,
+            "z": -1.1842775906474377,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 44,
+            "population": 43.08240004074552,
+            "z": 2.6629064389316404,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 11,
+            "population": 10.858457327219334,
+            "z": 0.477970627353591,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 4.840000000000001,
+            "population": 5.350233003738138,
+            "z": -1.3944972276050616,
+            "relative_deviation": 0.1054200420946565,
+            "status": "tested"
+          }
+        ]
+      },
+      {
+        "rule": "strict",
+        "dt": 0.001,
+        "tests_run": 12,
+        "failures": 4,
+        "max_abs_z": 5.087642905565944,
+        "consistent": false,
+        "acceptance_candidate": false,
+        "invalid": [
+          "1/inventory",
+          "2/inventory",
+          "3/inventory"
+        ],
+        "tests": [
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "all",
+            "status": "undefined"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.26,
+            "population": 0,
+            "z": 0.8796986525266638,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.4,
+            "population": 9.345847814404847,
+            "z": -4.474194114764788,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.4,
+            "population": 68.2281785080927,
+            "z": 0.36285575684399884,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.7,
+            "population": 14.946342882810447,
+            "z": -4.485580241776188,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "all",
+            "status": "undefined"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.09,
+            "population": 0,
+            "z": 0.28951678637986195,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.7,
+            "population": 9.829921135816143,
+            "z": -5.087642905565944,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.8,
+            "population": 68.66618009732044,
+            "z": 0.27416817974526686,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.8,
+            "population": 15.40787558771929,
+            "z": -4.942407326726529,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "all",
+            "status": "undefined"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0,
+            "population": 0,
+            "z": 0,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.349286922843801,
+            "z": -2.0108160696245925,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 44,
+            "population": 43.86897891351738,
+            "z": 0.37292328917080514,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 11,
+            "population": 11.07262862569283,
+            "z": -0.2401772278853078,
+            "status": "tested"
+          }
+        ]
+      },
+      {
+        "rule": "saturate",
+        "dt": 0.001,
+        "tests_run": 27,
+        "failures": 11,
+        "max_abs_z": 5.904414065317685,
+        "consistent": false,
+        "acceptance_candidate": false,
+        "invalid": [],
+        "tests": [
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.08,
+            "population": 0,
+            "z": 0.7591442083229135,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 2.9,
+            "population": 3.331215261859325,
+            "z": -5.375032743700739,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 65,
+            "population": 64.17333235013163,
+            "z": 3.6267119496653186,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 6.6,
+            "population": 7.15001207850344,
+            "z": -3.354000387271387,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.26,
+            "population": 0,
+            "z": 0.8796986525266638,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.4,
+            "population": 9.345847814404847,
+            "z": -4.474194114764788,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.4,
+            "population": 68.2281785080927,
+            "z": 0.36285575684399884,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.7,
+            "population": 14.946342882810447,
+            "z": -4.485580241776188,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 3.702708907254362,
+            "population": 4.369747387466857,
+            "z": -2.037079229509316,
+            "relative_deviation": 0.18014877672550234,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.12,
+            "population": 0,
+            "z": 0.6432748590871865,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.8983788201778085,
+            "z": -5.904414065317685,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.6,
+            "population": 68.32913052177628,
+            "z": 0.8458618329056811,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 8.7,
+            "population": 10.085299749231808,
+            "z": -5.2910466387839294,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.09,
+            "population": 0,
+            "z": 0.28951678637986195,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.7,
+            "population": 9.829921135816143,
+            "z": -5.087642905565944,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.8,
+            "population": 68.66618009732044,
+            "z": 0.27416817974526686,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.8,
+            "population": 15.40787558771929,
+            "z": -4.942407326726529,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 2.1646188400052853,
+            "population": 2.3340379059511807,
+            "z": -0.8757277859282757,
+            "relative_deviation": 0.07826738953518575,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.02,
+            "population": 0,
+            "z": 0.32493808202240293,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 1.7,
+            "population": 1.9442459452307177,
+            "z": -4.638185594722465,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 31.4,
+            "population": 30.860453008033787,
+            "z": 3.4752038509812158,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 5,
+            "population": 4.8240189240329565,
+            "z": 1.5628136080482378,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0,
+            "population": 0,
+            "z": 0,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.349286922843801,
+            "z": -2.0108160696245925,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 44,
+            "population": 43.86897891351738,
+            "z": 0.37292328917080514,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 11,
+            "population": 11.07262862569283,
+            "z": -0.2401772278853078,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 4.840000000000001,
+            "population": 5.268457273583902,
+            "z": -1.1815921936405105,
+            "relative_deviation": 0.08852423007931831,
+            "status": "tested"
+          }
+        ]
+      },
+      {
+        "rule": "poisson",
+        "dt": 0.001,
+        "tests_run": 27,
+        "failures": 13,
+        "max_abs_z": 10.936778077674761,
+        "consistent": false,
+        "acceptance_candidate": false,
+        "invalid": [],
+        "tests": [
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.08,
+            "population": 0,
+            "z": 0.7585421779765402,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 2.9,
+            "population": 3.3338611241085516,
+            "z": -5.404167022377024,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 65,
+            "population": 62.52920960019906,
+            "z": 10.936778077674761,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 6.6,
+            "population": 7.085519871368554,
+            "z": -2.9845920245245257,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.26,
+            "population": 0,
+            "z": 0.8893014672353354,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.4,
+            "population": 9.244920224196795,
+            "z": -4.039329409948946,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.4,
+            "population": 66.69042563272265,
+            "z": 3.649575482170861,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.7,
+            "population": 14.78493447989815,
+            "z": -4.2081574600427505,
+            "status": "tested"
+          },
+          {
+            "table": 1,
+            "gamma": 0.1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 3.702708907254362,
+            "population": 4.3540696085852355,
+            "z": -1.9922684179329135,
+            "relative_deviation": 0.17591463915911,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.12,
+            "population": 0,
+            "z": 0.6428531729447149,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.902248848804097,
+            "z": -5.929277024254761,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.6,
+            "population": 66.607136790158,
+            "z": 6.234627824601628,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 8.7,
+            "population": 10.066734396224323,
+            "z": -5.194378502775059,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.09,
+            "population": 0,
+            "z": 0.2930120708837338,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 8.7,
+            "population": 9.712651727976908,
+            "z": -4.6134411198915775,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 68.8,
+            "population": 66.94773677464241,
+            "z": 3.840544564303607,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 12.8,
+            "population": 15.224062063555175,
+            "z": -4.648898233858571,
+            "status": "tested"
+          },
+          {
+            "table": 2,
+            "gamma": 0.01,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 2.1646188400052853,
+            "population": 2.2870932445609173,
+            "z": -0.6379860315249453,
+            "relative_deviation": 0.05658012500497911,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0.02,
+            "population": 0,
+            "z": 0.3245438179610984,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 1.7,
+            "population": 1.9466130682760292,
+            "z": -4.678757084230553,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 31.4,
+            "population": 30.12890347150832,
+            "z": 8.309879622581338,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "inventory",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 5,
+            "population": 4.750164910643509,
+            "z": 2.250511004944317,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_mean",
+            "label": "Final inventory mean",
+            "paper": 0,
+            "population": 0,
+            "z": 0,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "final_q_std",
+            "label": "Final inventory SD",
+            "paper": 5.1,
+            "population": 5.330213611631239,
+            "z": -1.863139697011256,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_mean",
+            "label": "Profit mean",
+            "paper": 44,
+            "population": 43.552064834636546,
+            "z": 1.2794821656917401,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "symmetric",
+            "metric": "profit_std",
+            "label": "Profit SD",
+            "paper": 11,
+            "population": 11.033148280973384,
+            "z": -0.10999521629055978,
+            "status": "tested"
+          },
+          {
+            "table": 3,
+            "gamma": 1,
+            "strategy": "both",
+            "metric": "variance_ratio",
+            "label": "Variance ratio",
+            "paper": 4.840000000000001,
+            "population": 5.394876851120413,
+            "z": -1.5117094087345544,
+            "relative_deviation": 0.1146439775042174,
+            "status": "tested"
+          }
+        ]
+      }
+    ],
+    "overflow": [
+      {
+        "table": 1,
+        "gamma": 0.1,
+        "max_raw_probability": 1.3822978719639647,
+        "exceedances": 42
+      },
+      {
+        "table": 2,
+        "gamma": 0.01,
+        "max_raw_probability": 0.40266257455382337,
+        "exceedances": 0
+      },
+      {
+        "table": 3,
+        "gamma": 1,
+        "max_raw_probability": 7.591935916993037,
+        "exceedances": 10259
+      }
+    ],
+    "strict_invalid_tables": [
+      1,
+      3
+    ],
+    "params": {
+      "s0": 100,
+      "T": 1,
+      "sigma": 2,
+      "dt": 0.005,
+      "k": 1.5,
+      "A": 140
+    },
+    "gammas": [
+      0.1,
+      0.01,
+      1
+    ]
+  },
+  "m0": {
+    "samples": [
+      {
+        "symbol": "AAPL",
+        "events": 400391,
+        "commit": "5b7cd8c"
+      },
+      {
+        "symbol": "AMZN",
+        "events": 269748,
+        "commit": "5b7cd8c"
+      },
+      {
+        "symbol": "GOOG",
+        "events": 147916,
+        "commit": "5b7cd8c"
+      },
+      {
+        "symbol": "INTC",
+        "events": 624040,
+        "commit": "5b7cd8c"
+      },
+      {
+        "symbol": "MSFT",
+        "events": 668765,
+        "commit": "5b7cd8c"
+      }
+    ],
+    "total_events": 2110860
+  },
+  "m3_fixture": {
+    "source": "docs/evidence/m3-fixture/run",
+    "commit": "256b7c8",
+    "folds": 560,
+    "converged": 0,
+    "symbols": 5,
+    "episodes": 35,
+    "a3_sign_flips": true,
+    "budget": 30
+  },
+  "gate": {
+    "tests_passed": 143
+  }
+}
