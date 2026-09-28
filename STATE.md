@@ -20,7 +20,7 @@ Milestone: M1 awaiting user confirmation (amended criterion); M2-M5 built ahead 
 
 ## Gate status
 ruff: pass; format: pass; mypy --strict: pass (61 files); pytest: 146 passed, 0 failed.
-Remote CI: the "verify" workflow (ruff, format, mypy, pytest on Python 3.12) passed on GitHub for all 8 pushes through 473fedd; the "site" release build passed at ebc0930 and 473fedd. Nightly: first manual run at 473fedd failed at market-data validation (workflow omitted --config configs/data/lobster.toml; AAPL passed, AMZN hit a sub-nanosecond timestamp under the strict policy). Tests, synthetic reproduction and LOBSTER download passed; market step skipped as designed. Workflow fixed; re-run recorded in site/ACCURACY_AUDIT.md.
+Remote CI: the "verify" workflow (ruff, format, mypy, pytest on Python 3.12) passed on GitHub for all 8 pushes through 473fedd; the "site" release build passed at ebc0930 and 473fedd. Nightly: first manual run at 473fedd failed at market-data validation (workflow omitted --config configs/data/lobster.toml; AAPL passed, AMZN hit a sub-nanosecond timestamp under the strict policy). Tests, synthetic reproduction and LOBSTER download passed; market step skipped as designed. Workflow fixed; re-run 36483785115 at 107a46b succeeded: tests, synthetic reproduction, LOBSTER download (checksums verified) and validation of all five symbols (2,110,860 rows, 10 timestamp adjustments, matching M0 exactly); market step skipped as designed.
 
 ## Container
 Image builds from python:3.12.7-bookworm with uv 0.8.22 from PyPI (ghcr.io and plain-HTTP Debian mirrors are unreachable from this environment). Run offline at 473fedd: 146 tests pass; synthetic reproduction exit 0. Output byte-identity inside the container not checked.

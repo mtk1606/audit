@@ -143,4 +143,16 @@ Not claimed on the page. Run 36478047488 (manual dispatch at `473fedd`, GitHub-h
 | Market-data validation | **failure**. AAPL passed (400,391 rows, matching the committed M0 manifest). AMZN failed at event 29331 on a sub-nanosecond timestamp (`36754.716797047004`) under the strict default timestamp policy. |
 | Full reproduction on market data | skipped: no `PREREGISTRATION.md` (as designed) |
 
-Root cause: the workflow omitted `--config configs/data/lobster.toml`, which selects the `nearest_ns` timestamp policy documented in `docs/reports/M0.md`. The data and code are unchanged. The workflow is fixed, and the outcome of the re-run is recorded below when available.
+Root cause: the workflow omitted `--config configs/data/lobster.toml`, which selects the `nearest_ns` timestamp policy documented in `docs/reports/M0.md`. The data and code are unchanged. The workflow is fixed; see the re-run below.
+
+Re-run 36483785115 (manual dispatch at `107a46b`, after the fix), conclusion **success**:
+
+| Step | Outcome |
+|---|---|
+| Tests (`pytest -q`) | success |
+| Full reproduction on synthetic order flow | success (36.9 min) |
+| LOBSTER sample download | success; all five archive SHA-256 checksums verified against `docs/evidence/source_audit.json` |
+| Market-data validation, `--config configs/data/lobster.toml` | success for all five: AAPL 400,391, AMZN 269,748, GOOG 147,916, INTC 624,040, MSFT 668,765 rows (total 2,110,860). Timestamp adjustments 0, 2, 0, 5, 3 (10 in total). Both match the committed M0 evidence exactly. |
+| Full reproduction on market data | skipped: no `PREREGISTRATION.md` (as designed) |
+
+This independently reproduces the M0 ingestion result on a GitHub-hosted runner. It is not a market-data attribution result, and nothing about it is claimed on the page beyond the existing M0 statement.
