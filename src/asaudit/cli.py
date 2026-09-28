@@ -178,3 +178,17 @@ def sensitivity_command(
     from asaudit.eval.sensitivity import run_sensitivity
 
     typer.echo(str(run_sensitivity(config, reference, output, allow_dirty)))
+
+
+@app.command("ablate")
+def ablate_command(
+    config: Annotated[Path, typer.Option()] = Path("configs/ablation/fixture.toml"),
+    output: Annotated[Path, typer.Option()] = Path("results"),
+    allow_dirty: Annotated[bool, typer.Option()] = False,
+    workers: Annotated[int, typer.Option(help="parallelism only; results are identical")] = 1,
+) -> None:
+    """Run the M3 ablation grid, walk-forward PolicyClassOptimum and attribution."""
+    from asaudit.attribution.run import run_ablation
+
+    directory, _ = run_ablation(config, output, allow_dirty, workers)
+    typer.echo(str(directory))

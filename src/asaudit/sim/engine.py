@@ -52,9 +52,12 @@ class MarketStep:
 
 
 class MarketSource(Protocol):
-    session: ReplaySession | None
-    start_ns: int
-    end_ns: int
+    @property
+    def session(self) -> ReplaySession | None: ...
+    @property
+    def start_ns(self) -> int: ...
+    @property
+    def end_ns(self) -> int: ...
 
     def steps(self) -> Iterator[MarketStep]: ...
 

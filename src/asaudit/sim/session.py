@@ -95,3 +95,28 @@ class ReplaySession:
         px, sz = (self.bid_px, self.bid_sz) if side == 1 else (self.ask_px, self.ask_sz)
         hit = np.nonzero((px[row] == price) & (sz[row] > 0))[0]
         return int(sz[row, hit[0]]) if len(hit) else 0
+
+    def window(self, start_ns: int, end_ns: int, session_id: str) -> "ReplaySession":
+        """Sub-session over [start_ns, end_ns); its first book row is the state at start."""
+        if not self.start_ns <= start_ns < end_ns <= self.end_ns:
+            raise ValueError("window outside session")
+        lo, hi = self.rows_before(start_ns), self.rows_before(end_ns)
+        ev = slice(lo, hi)
+        bk = slice(lo, hi + 1)
+        return ReplaySession(
+            session_id,
+            self.symbol,
+            self.tick,
+            start_ns,
+            end_ns,
+            self.ts_ns[ev].copy(),
+            self.event_type[ev].copy(),
+            self.order_id[ev].copy(),
+            self.side[ev].copy(),
+            self.price[ev].copy(),
+            self.size[ev].copy(),
+            self.bid_px[bk].copy(),
+            self.bid_sz[bk].copy(),
+            self.ask_px[bk].copy(),
+            self.ask_sz[bk].copy(),
+        )
