@@ -3,46 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Avellaneda-Stoikov Queue Audit</title>
+    <title>What Happens When Avellaneda-Stoikov Meets a Real Order Queue?</title>
     <meta
       name="description"
-      content="I reproduced the published Avellaneda-Stoikov market-making results, identified the unstated fill-probability rule behind them, and built a simulator that switches queue position, adverse selection and competition on and off. Real-market attribution is the remaining step."
+      content="An empirical audit of queue position, adverse selection, and optimal market making. I reproduced the published Avellaneda-Stoikov results, identified the unstated fill rule behind them, and built a tested simulator for the real-market experiment that comes next."
     />
     <meta name="author" content="Mohamed El Khoudimi" />
     <link rel="canonical" href="%VITE_SITE_URL%" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="What happens when a famous market-making model meets a real order queue?" />
+    <meta property="og:site_name" content="Mohamed El Khoudimi" />
+    <meta property="og:title" content="What Happens When Avellaneda-Stoikov Meets a Real Order Queue?" />
     <meta
       property="og:description"
-      content="An audit of Avellaneda-Stoikov (2008) by Mohamed El Khoudimi: a replication settled with exact moments, and a simulator that isolates queue position, adverse selection and competition."
+      content="An empirical audit of queue position, adverse selection, and optimal market making, by Mohamed El Khoudimi. Replication complete; real-market experiment next."
     />
     <meta property="og:url" content="%VITE_SITE_URL%" />
     <meta property="og:image" content="%VITE_SITE_URL%og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Project title with a chart of 27 published values, all within the plausibility band under capped fill probabilities." />
+    <meta property="og:image:alt" content="Project title beside a chart of 27 published values, all within the plausibility band under capped fill probabilities." />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="What happens when a famous market-making model meets a real order queue?" />
-    <meta name="twitter:description" content="Replicating Avellaneda-Stoikov (2008) exactly, then building the machinery to measure what its assumptions cost." />
+    <meta name="twitter:title" content="What Happens When Avellaneda-Stoikov Meets a Real Order Queue?" />
+    <meta name="twitter:description" content="An empirical audit of queue position, adverse selection, and optimal market making." />
     <meta name="twitter:image" content="%VITE_SITE_URL%og.png" />
     <meta name="theme-color" content="#f6f7f8" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#111317" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2315181d'/%3E%3Crect x='7' y='9' width='6' height='14' fill='%235b83dc'/%3E%3Crect x='19' y='13' width='6' height='10' fill='%23b98428'/%3E%3C/svg%3E" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap"
-    />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "What happens when a famous market-making model meets a real order queue?",
+        "headline": "What Happens When Avellaneda-Stoikov Meets a Real Order Queue?",
+        "alternativeHeadline": "An empirical audit of queue position, adverse selection, and optimal market making",
         "author": { "@type": "Person", "name": "Mohamed El Khoudimi" },
         "about": ["Market microstructure", "Avellaneda-Stoikov model", "Limit order books", "Reproducible research"],
-        "dateModified": "2026-09-28",
-        "proficiencyLevel": "Expert"
+        "dateModified": "2026-09-28"
       }
     </script>
   </head>
@@ -55,41 +50,62 @@
         <a href="#failed">What failed</a>
         <a href="#engineering">Engineering</a>
         <a href="#boundary">Evidence</a>
-        <a href="#reproduce">Reproduce</a>
+        <a href="#sources">Sources</a>
       </nav>
     </header>
 
     <main id="main" class="frame">
       <!-- HERO -->
       <section class="hero" aria-labelledby="title">
-        <p class="eyebrow">Market microstructure · Avellaneda-Stoikov (2008) audit</p>
-        <h1 id="title">What happens when a famous market-making model meets a real order queue?</h1>
+        <p class="eyebrow">Research case study · Market microstructure</p>
+        <div class="title-block">
+          <h1 id="title">What Happens When Avellaneda-Stoikov Meets a Real Order Queue?</h1>
+          <p class="subtitle">An empirical audit of queue position, adverse selection, and optimal market making.</p>
+        </div>
+
+        <ol class="primer" aria-label="The idea in four steps">
+          <li>
+            <b>What a market maker does</b>
+            <span>It keeps offering to buy slightly below the market price and sell slightly above it, earning the difference. Its risk is being left holding shares when the price moves.</span>
+          </li>
+          <li>
+            <b>What Avellaneda-Stoikov solves</b>
+            <span>A well-known 2008 model (AS for short) that tells a market maker where to set those two prices, based on how many shares it already holds and how much risk it will take.</span>
+          </li>
+          <li>
+            <b>What the queue is</b>
+            <span>On a real exchange, orders at the same price wait in line. The order that arrived first is filled first.</span>
+          </li>
+          <li>
+            <b>Why it could break the model</b>
+            <span>AS assumes every order at a given price has the same chance of being filled. If your place in line matters more than your price, the model's advice can be wrong in ways it cannot see.</span>
+          </li>
+        </ol>
+
         <p class="lede">
-          The Avellaneda-Stoikov model tells a market maker where to place its buy and sell quotes. It assumes a
-          quote's chance of being filled depends only on how far it sits from the market price, as if nobody else
-          were waiting at that price. I wanted to measure what that assumption costs. I first reproduced the
-          paper's published results, which meant identifying a numerical rule the paper never states. Then I built
-          a simulator where queue position, adverse selection and competition can each be switched on and off.
+          I set out to measure that. First I reproduced the paper's published results, which meant identifying a
+          rule the paper never states. Then I built and tested a simulator that can switch the queue, and two other
+          missing effects, on and off one at a time.
         </p>
         <p class="standing">
-          <strong>Where it stands:</strong> the replication and the simulator are verified. The real-market
-          attribution experiment is the step that remains, and nothing on this page claims its result.
+          <strong>Where it stands:</strong> the replication is complete and the simulator is tested. The
+          real-market experiment has not run yet, and nothing on this page claims its result.
         </p>
         <div class="cta">
           <a class="button primary" href="#found">See the result</a>
-          <a class="button" href="#intuition">Explore the idea</a>
+          <a class="button" href="#intuition">Try the queue</a>
           <a class="button" href="https://github.com/mtk1606/audit" data-link="repository">View code</a>
-          <a class="button" href="#standard">Read the method</a>
+          <a class="button" href="#sources">Check the sources</a>
         </div>
         <dl class="meta">
           <div><dt>Area</dt><dd>Market microstructure, quantitative research</dd></div>
-          <div><dt>Implementation</dt><dd>Python 3.11+, <code>mypy --strict</code>, NumPy, Polars</dd></div>
+          <div><dt>Built with</dt><dd>Python, strict type checking, NumPy, Polars</dd></div>
           <div>
             <dt>Data</dt>
-            <dd><span data-ev="m0.symbols">5</span> LOBSTER Nasdaq samples, <span data-ev="m0.events">2,110,860</span> events validated at ingestion. Simulator tested on synthetic order flow.</dd>
+            <dd><span data-ev="m0.symbols">5</span> Nasdaq stocks from LOBSTER, <span data-ev="m0.events">2,110,860</span> exchange messages checked<sup><a class="src" href="#s1" aria-label="Source 1">1</a></sup>. Simulator tested on synthetic order flow.</dd>
           </div>
-          <div><dt>Validation</dt><dd>Exact moments, property tests, thresholds fixed before results</dd></div>
-          <div><dt>Status</dt><dd>Replication complete. Market attribution pending.</dd></div>
+          <div><dt>Validation</dt><dd>Exact calculation, automated tests, pass marks fixed before results</dd></div>
+          <div><dt>Status</dt><dd>Replication complete. Real-market experiment pending.</dd></div>
         </dl>
       </section>
 
@@ -105,14 +121,14 @@
               before they reach you.
             </p>
             <p>
-              Real exchanges work like that line. The Avellaneda-Stoikov model does not have one. It gives every
-              buyer at $100.00 the same chance of being filled, whether they are first or fortieth.
+              Real exchanges work like that line. The AS model does not have one. It gives every buyer at $100.00
+              the same chance of being filled, whether they are first or fortieth.
             </p>
           </div>
 
           <figure class="figure" id="fig-queue" aria-labelledby="fq-title">
             <div class="figure-head">
-              <p class="label-illustration">Interactive illustration · exact queue rule, example quantities</p>
+              <p class="label-illustration">Interactive illustration · real queue rule, example quantities</p>
               <h3 id="fq-title">One price level, first come first served</h3>
               <p class="takeaway">Move your place in line and the size of the incoming sell order. The queue decides whether you trade. The AS model would give the same answer in every position.</p>
             </div>
@@ -126,22 +142,22 @@
                 <input id="q-sell" type="range" min="0" max="60" step="1" value="30" />
               </div>
             </div>
-            <div class="chart-host" id="queue-svg"></div>
-            <p class="outcome" id="queue-outcome" aria-live="polite">The sell order fills the 24 shares ahead of you, then 6 of your 10.</p>
+            <div class="chart-host sized" id="queue-svg" style="--h: 138px"></div>
+            <p class="outcome" id="queue-outcome" aria-live="polite">The sell order clears the 24 shares ahead of you, then 6 of your 10.</p>
             <div class="split">
               <div class="prose">
                 <p><strong>Cancellations make this harder to measure.</strong> When shares at your price are cancelled, historical data does not say whether they were ahead of you or behind you. So I carry three answers through every queue result:</p>
-                <div class="segmented" role="group" aria-label="Cancellation attribution policy" id="q-policy">
+                <div class="segmented" role="group" aria-label="Where cancelled shares were in the line" id="q-policy">
                   <button type="button" aria-pressed="false" data-policy="pessimistic">All behind me</button>
                   <button type="button" aria-pressed="true" data-policy="uniform">Spread evenly</button>
                   <button type="button" aria-pressed="false" data-policy="optimistic">All ahead of me</button>
                 </div>
-                <p class="note" id="q-policy-note">If 8 shares cancel at your price, the queue ahead shrinks from 24 to 19.</p>
+                <p class="note" id="q-policy-note" aria-live="polite">If 8 shares cancel, spread in proportion to the queue, about 18.7 remain ahead of you on average.</p>
               </div>
-              <aside class="aside">
-                <h4>How the project uses this</h4>
-                <p>"All behind me" gives a lower bound on fills and "all ahead of me" an upper bound. "Spread evenly" is the headline. If a conclusion changes sign between the bounds, I do not report a headline for it.</p>
-              </aside>
+              <div class="aside" role="note">
+                <h3>How the project uses this</h3>
+                <p>"All behind me" gives the fewest fills and "all ahead of me" the most, so the true answer lies between them. "Spread evenly" is the main estimate. If a conclusion changes direction between the two extremes, I do not report it as a finding.</p>
+              </div>
             </div>
           </figure>
         </div>
@@ -152,30 +168,31 @@
         <div class="rail">02<b>The question</b></div>
         <div class="body">
           <div class="prose">
-            <h2 id="h-question">I wanted to know whether the model's quotes lose money for reasons it cannot see, and how much each reason costs</h2>
-            <p>The model leaves out three things that every market maker deals with:</p>
+            <h2 id="h-question">I wanted to know whether AS quotes lose money for reasons the model cannot see, and how much each reason costs</h2>
+            <p>The model leaves out three things every market maker deals with. I label them A1, A2 and A3 throughout.</p>
           </div>
           <div class="table-wrap">
             <table>
-              <thead><tr><th scope="col">Axis</th><th scope="col">The model assumes</th><th scope="col">In a real market</th></tr></thead>
+              <caption class="visually-hidden">The three effects the AS model leaves out</caption>
+              <thead><tr><th scope="col">Effect</th><th scope="col">The model assumes</th><th scope="col">In a real market</th></tr></thead>
               <tbody>
-                <tr><td><strong>A1</strong> Queue position</td><td>Fill chance depends only on distance from the mid-price</td><td>Fill chance depends on how much volume is ahead of you at that price</td></tr>
-                <tr><td><strong>A2</strong> Adverse selection</td><td>Being filled tells you nothing about the next price move</td><td>Fills tend to arrive just before the price moves against you</td></tr>
-                <tr><td><strong>A3</strong> Competition</td><td>You quote alone and nobody reacts</td><td>Other participants join or cancel when your order changes the depth</td></tr>
+                <tr><th scope="row"><strong>A1</strong> Queue position</th><td>Your chance of a fill depends only on how far your price is from the market price</td><td>It depends on how many shares are ahead of you at that price</td></tr>
+                <tr><th scope="row"><strong>A2</strong> Adverse selection</th><td>Being filled tells you nothing about where the price goes next</td><td>Fills tend to arrive just before the price moves against you</td></tr>
+                <tr><th scope="row"><strong>A3</strong> Competition</th><td>You quote alone and nobody reacts</td><td>Other traders join or cancel when your order changes the line</td></tr>
               </tbody>
             </table>
           </div>
           <div class="split">
             <div class="prose">
-              <p><strong>My hypothesis.</strong> The AS reservation price is systematically biased once queue position and adverse selection are present. The bias can be measured and split by assumption, and a corrected rule can recover part of it.</p>
-              <p><strong>What would count as success.</strong> An attribution in basis points for each axis, with bootstrap confidence intervals and cancellation bounds, stable across five symbols.</p>
-              <p><strong>What would count against it.</strong> Small attributions, or bounds that straddle zero. I decided in advance to publish that outcome with the same prominence as a positive one.</p>
+              <p><strong>My hypothesis.</strong> Once queue position and adverse selection are present, AS systematically misprices its quotes. The cost can be measured, split between the three effects, and partly recovered with a corrected rule.</p>
+              <p><strong>What would count as success.</strong> A cost for each effect, in basis points (hundredths of a percent of the value traded), with confidence intervals, holding up across five stocks.</p>
+              <p><strong>What would count against it.</strong> Small costs, or results whose direction depends on the cancellation assumption. I decided in advance to publish that outcome as prominently as a positive one.</p>
             </div>
-            <aside class="aside">
-              <h4>Designed so it can fail</h4>
-              <p>The replication test, its three candidate rules and its pass threshold were committed before any number was computed (commit <code>6adb9a3</code>).</p>
-              <p>For the market experiment, a pre-registration is drafted. It must be committed and tagged before any market-data attribution is computed. It is not yet in force.</p>
-            </aside>
+            <div class="aside" role="note">
+              <h3>Designed so it can fail</h3>
+              <p>The replication test, its three candidate rules and its pass mark were committed before any number was computed<sup><a class="src" href="#s5" aria-label="Source 5">5</a></sup>.</p>
+              <p>For the real-market experiment, a pre-registration is drafted. It must be committed and tagged before any real-market result is computed. It is not yet in force.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -187,34 +204,34 @@
           <div class="prose">
             <h2 id="h-standard">How Avellaneda-Stoikov sets its quotes</h2>
             <p>
-              The model does two things. When you already hold inventory, it shifts both quotes so you are more
-              likely to sell when long and buy when short. It also widens the quotes when you are more risk averse
-              or have more time left, and narrows them when fills fall off quickly with distance.
+              The model does two things. When you already hold shares, it lowers both prices so you are more likely
+              to sell, and when you are short it raises them. It also sets how far apart the two prices are, wider
+              when you are more cautious or have more time left.
             </p>
             <p>
-              Try it with the paper's own parameters. At high risk aversion and a large position, the model asks
-              for a per-step fill probability above one. The paper does not say what its simulation did then, and
-              that gap is where my replication work started.
+              Try it with the paper's own settings. At the highest risk setting and a large position, the model asks
+              for a chance of being filled that is above 100%, which is impossible. The paper does not say what its
+              simulation did then, and that gap is where my replication work started.
             </p>
           </div>
 
           <figure class="figure" id="fig-quotes" aria-labelledby="fqt-title">
             <div class="figure-head">
-              <p class="label-illustration">Interactive · the paper's formulas and parameters</p>
-              <h3 id="fqt-title">Where the model quotes, and the fill probability it implies</h3>
+              <p class="label-illustration">Interactive · the paper's formulas and settings</p>
+              <h3 id="fqt-title">Where the model quotes, and the fill chance it implies</h3>
               <p class="takeaway" id="quotes-takeaway">With no inventory, the quotes sit symmetrically around the mid-price.</p>
             </div>
             <div class="controls">
               <div class="control">
-                <label for="as-q">Inventory held <output id="as-q-out" for="as-q">0</output></label>
+                <label for="as-q">Shares held (negative = short) <output id="as-q-out" for="as-q">0</output></label>
                 <input id="as-q" type="range" min="-6" max="6" step="1" value="0" />
               </div>
               <div class="control">
-                <label for="as-tau">Time remaining, fraction of the day <output id="as-tau-out" for="as-tau">1.00</output></label>
+                <label for="as-tau">Time left in the trading period <output id="as-tau-out" for="as-tau">1.00</output></label>
                 <input id="as-tau" type="range" min="0" max="1" step="0.05" value="1" />
               </div>
               <div class="control">
-                <span class="label" id="as-gamma-label">Risk aversion γ (the paper's three tables)</span>
+                <span class="label" id="as-gamma-label">Risk aversion γ (the paper's three settings)</span>
                 <div class="segmented" role="group" aria-labelledby="as-gamma-label" id="as-gamma">
                   <button type="button" aria-pressed="false" data-gamma="0.01">0.01</button>
                   <button type="button" aria-pressed="true" data-gamma="0.1">0.1</button>
@@ -222,25 +239,27 @@
                 </div>
               </div>
             </div>
-            <div class="chart-host" id="quotes-svg"></div>
+            <div class="chart-host sized" id="quotes-svg" style="--h: 110px"></div>
             <div class="readout" id="quotes-readout" aria-live="polite"></div>
             <figcaption>
-              Mid-price 100, σ = 2, k = 1.5, A = 140, dt = 0.005, from the published paper (section 3.3). Fill
-              probability per step is λ(δ)·dt with λ(δ) = A·exp(−kδ), where δ is the quote's distance from the mid.
+              The mid-price is the midpoint between the best buy and sell prices. Settings from the published
+              paper<sup><a class="src" href="#s2" aria-label="Source 2">2</a></sup>: mid-price 100, σ = 2, k = 1.5,
+              A = 140, dt = 0.005. The chance of a fill in one time step is λ(δ)·dt with λ(δ) = A·exp(−kδ), where δ is
+              the quote's distance from the mid-price.
             </figcaption>
           </figure>
 
           <details class="tech">
             <summary>Technical detail: the equations and the simulation rule</summary>
             <div class="tech-body">
-              <p>Reservation price and total spread (published equations 29 and 30), with inventory <code>q</code>, risk aversion <code>γ</code>, volatility <code>σ</code> and remaining time <code>T − t</code>:</p>
+              <p>Reservation price (the model's inventory-adjusted fair price) and total spread, published equations 29 and 30, with inventory <code>q</code>, risk aversion <code>γ</code>, volatility <code>σ</code> and remaining time <code>T − t</code>:</p>
               <div class="eq">r(s, q, t)   = s − q·γ·σ²·(T − t)
 δa + δb      = γ·σ²·(T − t) + (2/γ)·ln(1 + γ/k)
 bid, ask     = r ∓ (δa + δb)/2
 λ(δ)         = A·exp(−k·δ)</div>
-              <p>The numerical experiment runs 1,000 paths of 200 steps. Each step, the bid and ask fill independently with probability <code>λ(δ)·dt</code> at the current quotes, then the mid moves by <code>±σ√dt</code>. The symmetric benchmark quotes the time-averaged AS spread around the mid. Profit is terminal cash plus inventory marked at the terminal mid.</p>
-              <p>The unstated case: when <code>λ(δ)·dt &gt; 1</code>, a Bernoulli probability is undefined. In my first seeded runs this happened on the inventory strategy in Tables <span data-ev="m1.strict.invalid">1 and 3</span>, with raw values up to <span data-ev="m1.t3.maxraw">7.59</span>.</p>
-              <p>The full HJB derivation, including the exponential-utility transformation and the frozen-inventory approximation, is in <a href="https://github.com/mtk1606/audit/blob/claude/vibrant-pasteur-ppo9f4/docs/DERIVATION.md" data-report="docs/DERIVATION.md">docs/DERIVATION.md</a>.</p>
+              <p>The numerical experiment runs 1,000 paths of 200 steps<sup><a class="src" href="#s2" aria-label="Source 2">2</a></sup>. Each step, the bid and ask fill independently with probability <code>λ(δ)·dt</code> at the current quotes, then the mid moves by <code>±σ√dt</code>. The symmetric benchmark quotes the time-averaged AS spread around the mid. Profit is terminal cash plus inventory marked at the terminal mid.</p>
+              <p>The unstated case: when <code>λ(δ)·dt &gt; 1</code>, a Bernoulli probability is undefined. In my first seeded runs this happened for the inventory strategy in Tables <span data-ev="m1.strict.invalid">1 and 3</span>, with raw values up to <span data-ev="m1.t3.maxraw">7.59</span><sup><a class="src" href="#s3" aria-label="Source 3">3</a></sup>.</p>
+              <p>The full Hamilton-Jacobi-Bellman derivation, including the exponential-utility transformation and the frozen-inventory approximation, is in <a href="https://github.com/mtk1606/audit/blob/main/docs/DERIVATION.md" data-report="docs/DERIVATION.md">docs/DERIVATION.md</a>.</p>
             </div>
           </details>
         </div>
@@ -251,57 +270,58 @@ bid, ask     = r ∓ (δa + δb)/2
         <div class="rail">04<b>The experiment</b></div>
         <div class="body">
           <div class="prose">
-            <h2 id="h-experiment">Reproduce first, then isolate one assumption at a time</h2>
+            <h2 id="h-experiment">Reproduce first, then test one assumption at a time</h2>
             <p>
-              A model audit is only credible if it starts from the model as published. So the plan has a fixed
-              order, and each stage has to pass before the next one means anything. The label under each stage says
-              what kind of evidence it rests on today.
+              An audit is only credible if it starts from the model as published. So the plan has a fixed order, and
+              each step has to pass before the next one means anything. The label under each step says what kind of
+              evidence it rests on today.
             </p>
           </div>
-          <ol class="pipeline" aria-label="Experiment stages">
+          <ol class="pipeline" aria-label="Experiment steps">
             <li>
-              <span class="stage">M0</span>
-              <h3>Validate the data</h3>
-              <p>Check every exchange message against LOBSTER's order-book snapshot, and fail loudly on anything unexplained.</p>
-              <span class="data">Real LOBSTER data</span>
+              <span class="stage">Step 1</span>
+              <h3>Check the data</h3>
+              <p>Check every exchange message against LOBSTER's order-book snapshot, and stop on anything unexplained.</p>
+              <span class="data">Real market data</span>
               <span class="chip verified">Verified</span>
             </li>
             <li>
-              <span class="stage">M1</span>
+              <span class="stage">Step 2</span>
               <h3>Reproduce the paper</h3>
               <p>Match all three published tables, and identify the rule behind them.</p>
-              <span class="data">Exact computation</span>
+              <span class="data">Exact calculation</span>
               <span class="chip verified">Verified</span>
             </li>
             <li>
-              <span class="stage">M2</span>
-              <h3>Build the testbed</h3>
-              <p>A replay simulator with three independent switches, A1, A2 and A3.</p>
+              <span class="stage">Step 3</span>
+              <h3>Build the simulator</h3>
+              <p>Replay the order book with three independent switches: A1, A2 and A3.</p>
               <span class="data">Synthetic order flow</span>
               <span class="chip synthetic">Synthetic only</span>
             </li>
             <li>
-              <span class="stage">M3</span>
-              <h3>Attribute the shortfall</h3>
-              <p>Split the AS shortfall across A1, A2 and A3 against a fitted benchmark policy.</p>
-              <span class="data">Pipeline tested; market run not done</span>
+              <span class="stage">Step 4</span>
+              <h3>Measure each effect's cost</h3>
+              <p>Split AS's shortfall across A1, A2 and A3, against the best rule found within a fixed family.</p>
+              <span class="data">Pipeline tested; real run not done</span>
               <span class="chip pending">Real-data test pending</span>
             </li>
             <li>
-              <span class="stage">M4</span>
+              <span class="stage">Step 5</span>
               <h3>Derive a correction</h3>
-              <p>A quoting rule with queue and adverse-selection terms, tested once on held-out data.</p>
-              <span class="data">Derived; holdout untouched</span>
+              <p>A quoting rule with queue and adverse-selection terms, tested once on data held back for the purpose.</p>
+              <span class="data">Derived; held-back data untouched</span>
               <span class="chip pending">Not evaluated</span>
             </li>
             <li>
-              <span class="stage">M5</span>
-              <h3>Package it</h3>
-              <p>One-command reproduction, a benchmark for other strategies, Docker and CI.</p>
-              <span class="data">Built; remote CI not yet run</span>
+              <span class="stage">Step 6</span>
+              <h3>Make it reproducible</h3>
+              <p>One-command reproduction, a benchmark for other strategies, a container recipe and automated checks.</p>
+              <span class="data">Checks pass on GitHub; container not yet built</span>
               <span class="chip partial">Partially verified</span>
             </li>
           </ol>
+          <p class="note">In the repository these steps are the milestones M0 to M5.</p>
 
           <div class="split">
             <figure class="figure" aria-labelledby="fgrid-title">
@@ -310,16 +330,17 @@ bid, ask     = r ∓ (δa + δb)/2
                 <h3 id="fgrid-title">Eight worlds, one per combination of switches</h3>
                 <p class="takeaway">Running a strategy in all eight lets me split its loss exactly across A1, A2 and A3, including the part that only appears when two effects combine.</p>
               </div>
-              <div id="grid-svg" class="chart-host"></div>
+              <div id="grid-svg" class="chart-host sized" style="--h: 280px"></div>
+              <figcaption>The split uses Shapley values: each effect's average contribution over every order in which the switches can be turned on.</figcaption>
             </figure>
             <figure class="figure" aria-labelledby="fsplit-title">
               <div class="figure-head">
-                <p class="label-illustration">Diagram · planned market-data split</p>
-                <h3 id="fsplit-title">Each trading day is split in time before anything is fitted</h3>
-                <p class="takeaway">The last 30% of every day is locked. The attribution pipeline never replays it, and the one evaluation allowed to open it records every access.</p>
+                <p class="label-illustration">Diagram · planned split of each trading day</p>
+                <h3 id="fsplit-title">Each day is split in time before anything is fitted</h3>
+                <p class="takeaway">The last 30% of every day is locked. The measurement never replays it, and the one evaluation allowed to open it records every access.</p>
               </div>
-              <div id="split-svg" class="chart-host"></div>
-              <figcaption>Planned for the LOBSTER sample: 09:30 to 16:00 per symbol, cut into 300-second episodes. Synthetic fixtures use the same mechanics but are never mixed with market data.</figcaption>
+              <div id="split-svg" class="chart-host sized" style="--h: 130px"></div>
+              <figcaption>Planned for the LOBSTER sample<sup><a class="src" href="#s11" aria-label="Source 11">11</a></sup>: 09:30 to 16:00 per stock, cut into 300-second episodes. Synthetic test data uses the same mechanics and is never mixed with market data.</figcaption>
             </figure>
           </div>
         </div>
@@ -329,45 +350,58 @@ bid, ask     = r ∓ (δa + δb)/2
       <section class="step" id="found" aria-labelledby="h-found">
         <div class="rail">05<b>What I found</b></div>
         <div class="body">
+          <section class="status" aria-labelledby="h-status">
+            <h2 id="h-status" class="status-title">Research status</h2>
+            <ul>
+              <li><span class="chip verified">Complete</span><span><b>Original-paper replication.</b> All three published tables reproduced under one identified rule<sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup>.</span></li>
+              <li><span class="chip verified">Validated</span><span><b>Simulator correctness.</b> Reduces exactly to the paper's model; market-mechanics tests pass on synthetic order flow<sup><a class="src" href="#s6" aria-label="Source 6">6</a></sup>.</span></li>
+              <li><span class="chip synthetic">Synthetic only</span><span><b>End-to-end measurement pipeline.</b> Validated on synthetic test data. Its economic outputs are not findings<sup><a class="src" href="#s8" aria-label="Source 8">8</a></sup>.</span></li>
+              <li><span class="chip partial">Implemented</span><span><b>Corrected policy.</b> Derived and implemented; reduces to AS when both corrections are switched off<sup><a class="src" href="#s7" aria-label="Source 7">7</a></sup>.</span></li>
+              <li><span class="chip pending">Pending</span><span><b>Real-market attribution</b> (measuring each effect's cost on real data). Not run.</span></li>
+              <li><span class="chip pending">Pending</span><span><b>Held-out real-market economic result.</b> Not run; the held-back data is untouched.</span></li>
+            </ul>
+          </section>
+
           <div class="prose">
             <h2 id="h-found">The published results come from a capped fill rule and the paper's time step</h2>
           </div>
           <ul class="claims">
-            <li>I reproduced all three published tables, under one specific reading of the paper.<small>Every one of the <span data-ev="m1.tests">27</span> printed values is statistically plausible when fill probabilities are capped at one. The largest deviation is <span data-ev="m1.capped.max">1.88</span> standard errors, against a threshold of <span data-ev="m1.threshold">3.11</span>.</small></li>
-            <li>The natural alternative rule fails.<small>Treating fills as Poisson arrivals, 1 − exp(−λ·dt), puts <span data-ev="m1.poisson.fail">7</span> of 27 values outside the band, one of them <span data-ev="m1.poisson.max">38.5</span> standard errors away. It lowers expected profit by about <span data-ev="m1.poisson.t1drop">12</span>% in Table 1.</small></li>
-            <li>The numbers belong to the paper's time step, not to the continuous-time model.<small>With the same capped rule, halving the step puts <span data-ev="m1.dt0025.fail">6</span> values outside the band, and a five-times finer step puts <span data-ev="m1.dt001.fail">11</span> outside.</small></li>
+            <li>I reproduced all three published tables, under one specific reading of the paper.<small>When the chance of a fill is capped at 100%, all <span data-ev="m1.tests">27</span> printed values sit within the range chance alone would produce. The largest gap is <span data-ev="m1.capped.max">1.88</span> standard errors; I had fixed the cut-off at <span data-ev="m1.threshold">3.11</span> in advance<sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup>.</small></li>
+            <li>The natural alternative rule fails.<small>Treating fills as random arrivals, 1 − exp(−λ·dt), puts <span data-ev="m1.poisson.fail">7</span> of 27 values outside that range, one of them <span data-ev="m1.poisson.max">38.5</span> standard errors away. It lowers expected profit by about <span data-ev="m1.poisson.t1drop">12</span>% in Table 1<sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup>.</small></li>
+            <li>The numbers belong to the paper's time step, not to the continuous-time model.<small>With the same capped rule, halving the time step puts <span data-ev="m1.dt0025.fail">6</span> values outside the range, and a five-times finer step puts <span data-ev="m1.dt001.fail">11</span> outside<sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup>.</small></li>
             <li>The paper does not state the capping rule. The evidence supports it; it is my inference, not the authors' documented procedure.</li>
           </ul>
 
           <div class="prose">
             <p>
               <strong>How I tested it.</strong> Comparing the paper with one random simulation of my own would compare
-              noise with noise. Instead I computed each model's exact expected profit and inventory, including the
-              fourth moments needed for the spread of a standard deviation. Then I asked whether each printed number is a
-              plausible outcome of the paper's own <span data-ev="m1.paper_n">1,000</span>-path experiment. The test, the
-              three candidate rules and the threshold were committed before anything was computed.
+              noise with noise. Instead I calculated each candidate model's exact expected results, including how much
+              they vary. Then I asked whether each printed number is a plausible outcome of the paper's own
+              <span data-ev="m1.paper_n">1,000</span>-path experiment<sup><a class="src" href="#s2" aria-label="Source 2">2</a></sup>. The test, the three candidate rules and the cut-off were committed before
+              anything was computed<sup><a class="src" href="#s5" aria-label="Source 5">5</a></sup>.
             </p>
           </div>
 
           <figure class="figure" id="fig-z" aria-labelledby="fz-title">
             <div class="figure-head">
-              <p class="label-illustration">Result · exact computation, no market data</p>
+              <p class="label-illustration">Result · exact calculation, no market data</p>
               <h3 id="fz-title">How far each published number sits from the model's exact expectation</h3>
-              <p class="takeaway" id="z-takeaway">Capped fills at the paper's time step: all 27 values fall inside the band.</p>
+              <p class="takeaway" id="z-takeaway">Capped fills at dt 0.005: all 27 values fall inside the band.</p>
             </div>
             <div class="segmented" role="group" aria-label="Fill rule and time step" id="z-select">
               <button type="button" aria-pressed="true" data-rule="saturate" data-dt="0.005">Capped · dt 0.005</button>
-              <button type="button" aria-pressed="false" data-rule="poisson" data-dt="0.005">Poisson · dt 0.005</button>
+              <button type="button" aria-pressed="false" data-rule="poisson" data-dt="0.005">Random arrivals · dt 0.005</button>
               <button type="button" aria-pressed="false" data-rule="saturate" data-dt="0.0025">Capped · dt 0.0025</button>
               <button type="button" aria-pressed="false" data-rule="saturate" data-dt="0.001">Capped · dt 0.001</button>
             </div>
-            <div class="chart-host" id="z-svg"></div>
+            <div class="chart-host sized" id="z-svg" style="--h: 600px"></div>
             <figcaption>
-              Each mark is one printed value from Tables 1 to 3: profit mean and SD, final inventory mean and SD for
-              both strategies, and the variance ratio for each table. Zero means the printed value equals the exact
-              expectation. The shaded band is ±<span data-ev="m1.threshold">3.11</span> standard errors of a 1,000-path
-              estimate, a two-sided 5% threshold after Bonferroni correction for 27 tests. Marks beyond ±6 are pinned to
-              the edge and labelled with their value. Source: <a href="https://github.com/mtk1606/audit/blob/claude/vibrant-pasteur-ppo9f4/docs/evidence/m1-sensitivity/run/sensitivity.json" data-report="docs/evidence/m1-sensitivity/run/sensitivity.json">sensitivity.json</a>, clean commit <span data-ev="m1.commit">e77692c</span>.
+              Each mark is one printed value from Tables 1 to 3: profit mean and spread, final inventory mean and
+              spread for both strategies, and the variance ratio for each table. Zero means the printed value equals
+              the exact expectation. The shaded band is ±<span data-ev="m1.threshold">3.11</span> standard errors of a
+              1,000-path estimate: a two-sided 5% test, Bonferroni-corrected for 27 comparisons<sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup>.
+              Marks beyond ±6 are pinned to the edge and labelled. Data: <a href="https://github.com/mtk1606/audit/blob/main/docs/evidence/m1-sensitivity/run/sensitivity.json" data-report="docs/evidence/m1-sensitivity/run/sensitivity.json">sensitivity.json</a>,
+              clean commit <span data-ev="m1.commit">e77692c</span><sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup>.
             </figcaption>
             <details class="tech">
               <summary>Show the values as a table</summary>
@@ -379,19 +413,18 @@ bid, ask     = r ∓ (δa + δb)/2
             <div class="prose">
               <h3>The simulator reduces to this result</h3>
               <p>
-                With all three switches off, my event-driven simulator should behave exactly like the paper's model. It
-                does: across four configurations and 1,500 paths each, its profit and inventory statistics match the
-                exact capped-rule moments within 4.5 standard errors. That is the test that connects every later
-                experiment back to the paper.
+                With all three switches off, my simulator should behave exactly like the paper's model. It does:
+                across four configurations of 1,500 paths each, its profit and inventory statistics match the exact
+                capped-rule results within 4.5 standard errors<sup><a class="src" href="#s6" aria-label="Source 6">6</a></sup>. That test connects every later experiment back to the paper.
               </p>
             </div>
             <div class="prose">
               <h3>I derived a corrected rule, and it disagreed with my own spec</h3>
               <p>
-                Adding queue-dependent fill intensity and an expected adverse move to the model's optimisation gives a
-                rule that reduces exactly to AS when both terms are off. The derivation put the adverse-selection term
-                with the opposite sign to the formula my specification had guessed: the side with more adverse selection is
-                quoted further away. I kept the derivation. The rule has not been evaluated on market data.
+                Adding queue-dependent fills and an expected adverse price move to the model's optimisation gives a
+                rule that reduces to AS when both additions are off. The derivation put the adverse-selection term
+                with the opposite sign to the formula my specification had guessed: the side with more adverse
+                selection is quoted further away<sup><a class="src" href="#s7" aria-label="Source 7">7</a></sup>. I kept the derivation. The rule has not been evaluated on market data.
               </p>
             </div>
           </div>
@@ -404,38 +437,38 @@ bid, ask     = r ∓ (δa + δb)/2
         <div class="body">
           <div class="prose">
             <h2 id="h-failed">Where the evidence pushed back</h2>
-            <p>I kept every one of these results in the repository. None of the original criteria was loosened to make a test pass.</p>
+            <p>Every one of these results is kept in the repository. None of the original criteria was loosened to make a test pass.</p>
           </div>
           <div class="ledger">
             <article class="entry">
               <div><span class="chip negative">Negative result</span><h3>My first replication did not pass</h3></div>
               <dl class="kv">
-                <dt>What happened</dt><dd>The original contract compared the paper with one seeded simulation. Tables <span data-ev="m1.strict.invalid">1 and 3</span> could not even run under a strict reading, because the model asked for fill probabilities up to <span data-ev="m1.t3.maxraw">7.59</span>, with <span data-ev="m1.t3.exceed">10,259</span> such cases in the Table 3 run.</dd>
-                <dt>What I changed</dt><dd>I did not tune seeds. I built the exact-moment test above, fixed its rules and threshold first, and let the data choose between them.</dd>
-                <dt>Outcome</dt><dd>The original failure is preserved and still reported as "not reproduced" under its own contract.</dd>
+                <dt>What happened</dt><dd>My first test compared the paper with one seeded simulation. Tables <span data-ev="m1.strict.invalid">1 and 3</span> could not even run under a strict reading: the model asked for fill chances up to <span data-ev="m1.t3.maxraw">7.59</span> (759%), with <span data-ev="m1.t3.exceed">10,259</span> such cases in the Table 3 run<sup><a class="src" href="#s3" aria-label="Source 3">3</a></sup>.</dd>
+                <dt>What I changed</dt><dd>I did not search for a lucky random seed. I built the exact-calculation test above, fixed its rules and cut-off first, and let the data choose between them.</dd>
+                <dt>Outcome</dt><dd>The original failure is preserved and still reported as "not reproduced" under its own terms<sup><a class="src" href="#s3" aria-label="Source 3">3</a></sup>.</dd>
               </dl>
             </article>
             <article class="entry">
-              <div><span class="chip negative">Negative result</span><h3>A criterion from my own spec was too strict</h3></div>
+              <div><span class="chip negative">Negative result</span><h3>A pass mark from my own spec was too strict</h3></div>
               <dl class="kv">
-                <dt>What happened</dt><dd>My spec required the variance ratio within 10% of the paper. In Table 1 the printed ratio (<span data-ev="m1.t1.ratio.paper">3.70</span>) is <span data-ev="m1.t1.ratio.dev">14.2</span>% from the exact ratio (<span data-ev="m1.t1.ratio.pop">4.23</span>), yet only <span data-ev="m1.t1.ratio.z">1.64</span> standard errors away.</dd>
-                <dt>Why it matters</dt><dd>The paper's own sampling error on that ratio is about 8%. A ±10% band would reject the true model often.</dd>
+                <dt>What happened</dt><dd>My spec required one headline ratio to land within 10% of the paper. In Table 1 the printed ratio (<span data-ev="m1.t1.ratio.paper">3.70</span>) is <span data-ev="m1.t1.ratio.dev">14.2</span>% from the exact ratio (<span data-ev="m1.t1.ratio.pop">4.23</span>), yet only <span data-ev="m1.t1.ratio.z">1.64</span> standard errors away<sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup>.</dd>
+                <dt>Why it matters</dt><dd>The paper's own sampling error on that ratio is about <span data-ev="m1.t1.ratio.se">8</span>%<sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup>. A ±10% band would reject the true model often.</dd>
                 <dt>Outcome</dt><dd>I documented it as a proposed amendment, not a silent change.</dd>
               </dl>
             </article>
             <article class="entry">
-              <div><span class="chip synthetic">Synthetic only</span><h3>The attribution pipeline ran, and its numbers mean nothing yet</h3></div>
+              <div><span class="chip synthetic">Synthetic only</span><h3>The measurement pipeline ran, and its numbers mean nothing yet</h3></div>
               <dl class="kv">
-                <dt>What happened</dt><dd>I ran the full attribution on <span data-ev="fixture.symbols">5</span> synthetic symbols to test the machinery. The benchmark policy converged in <span data-ev="fixture.converged">0</span> of <span data-ev="fixture.folds">560</span> fits, because I gave it a deliberately tiny search budget of <span data-ev="fixture.budget">30</span> evaluations.</dd>
-                <dt>Why it matters</dt><dd>An under-fitted benchmark makes the AS shortfall meaningless. The competition axis also changed sign between cancellation bounds, so the pipeline withheld its headline, as designed.</dd>
-                <dt>Outcome</dt><dd>I do not report those economic values anywhere. The market-data configuration treats non-convergence as a hard failure.</dd>
+                <dt>What happened</dt><dd>I ran the full measurement on <span data-ev="fixture.symbols">5</span> synthetic stocks to test the machinery. The benchmark rule it compares against converged in <span data-ev="fixture.converged">0</span> of <span data-ev="fixture.folds">560</span> fits, because I gave its search a deliberately tiny budget of <span data-ev="fixture.budget">30</span> evaluations<sup><a class="src" href="#s8" aria-label="Source 8">8</a></sup>.</dd>
+                <dt>Why it matters</dt><dd>An under-fitted benchmark makes AS's measured shortfall meaningless. The competition effect also changed direction between the cancellation extremes, so the pipeline withheld it, as designed<sup><a class="src" href="#s8" aria-label="Source 8">8</a></sup>.</dd>
+                <dt>Outcome</dt><dd>None of those economic values appears on this page. The real-market configuration treats non-convergence as a hard failure.</dd>
               </dl>
             </article>
             <article class="entry">
-              <div><span class="chip blocked">Blocked</span><h3>The market-data run has not happened</h3></div>
+              <div><span class="chip blocked">Blocked</span><h3>The real-market run has not happened</h3></div>
               <dl class="kv">
-                <dt>What happened</dt><dd>The LOBSTER files were validated in an earlier environment. The environment where I built the simulator could not reach the data host.</dd>
-                <dt>Outcome</dt><dd>Every simulator and attribution result is on synthetic order flow. My starting hypothesis is still untested.</dd>
+                <dt>What happened</dt><dd>The LOBSTER files were checked in an earlier environment<sup><a class="src" href="#s1" aria-label="Source 1">1</a></sup>. The environment where I built the simulator could not reach the data host<sup><a class="src" href="#s15" aria-label="Source 15">15</a></sup>.</dd>
+                <dt>Outcome</dt><dd>Every simulator and measurement result is on synthetic order flow. My starting hypothesis is still untested.</dd>
               </dl>
             </article>
           </div>
@@ -448,7 +481,7 @@ bid, ask     = r ∓ (δa + δb)/2
         <div class="body">
           <div class="prose">
             <h2 id="h-engineering">A replay engine where fills have to be earned</h2>
-            <p>The simulator replays the order book in 100-millisecond batches. Each batch runs the same six steps, and any of the three models can be swapped without touching the loop.</p>
+            <p>The simulator replays the order book in 100-millisecond batches<sup><a class="src" href="#s12" aria-label="Source 12">12</a></sup>. Each batch runs the same six steps, and any of the three effect models can be swapped without touching the loop.</p>
           </div>
           <figure class="figure" aria-labelledby="floop-title">
             <div class="figure-head">
@@ -461,35 +494,35 @@ bid, ask     = r ∓ (δa + δb)/2
               <li><b>Wait out latency</b><span>A changed price is cancelled and re-queued at the back.</span></li>
               <li><b>Match fills</b><span>A1 decides how fills happen. A3 changes cancellations ahead of me.</span></li>
               <li><b>Value each fill</b><span>A2 decides how much price move the fill carries.</span></li>
-              <li><b>Mark and check</b><span>P&amp;L marked to the mid; the accounting identity is asserted.</span></li>
+              <li><b>Mark and check</b><span>Profit marked to the mid-price; the accounting identity is asserted.</span></li>
             </ol>
           </figure>
           <div class="checks">
-            <section>
-              <h3>Fill mechanics</h3>
+            <section aria-labelledby="h-fill">
+              <h3 id="h-fill">Fill mechanics</h3>
               <ul>
-                <li>Executions at my price use up the volume ahead of me first.</li>
-                <li>A sweep through my price fills me only up to its own volume.</li>
-                <li>A repriced order goes to the back of its new queue.</li>
-                <li>An order the market moves through is suspended, not filled at a crossed price.</li>
-                <li>Hidden executions never fill me. That can only lower fill counts.</li>
+                <li>Trades at my price use up the shares ahead of me first.</li>
+                <li>A large order that trades through my price fills me only up to its own size.</li>
+                <li>A repriced order goes to the back of its new line.</li>
+                <li>An order the market moves through is suspended, not filled at an impossible price.</li>
+                <li>Hidden-order trades never fill me. That can only lower fill counts.</li>
               </ul>
             </section>
-            <section>
-              <h3>Modelling decisions</h3>
+            <section aria-labelledby="h-model">
+              <h3 id="h-model">Modelling decisions</h3>
               <ul>
-                <li>A2 is booked as a target minus what the fill model already embeds, so all four A1 × A2 cells mean the same thing.</li>
-                <li>A3 acts through cancellations ahead of me, scaled by a fitted depth elasticity.</li>
-                <li>Prices are integer ticks and timestamps integer nanoseconds.</li>
-                <li>Every calibration fit that fails to converge raises an error.</li>
+                <li>Adverse selection is added only where the fill model does not already contain it, so every combination of A1 and A2 means the same thing.</li>
+                <li>Competition acts through cancellations ahead of me, scaled by how strongly other traders were measured to react to depth.</li>
+                <li>Prices are whole ticks and timestamps whole nanoseconds.</li>
+                <li>Every statistical fit that fails to converge raises an error.</li>
               </ul>
             </section>
-            <section>
-              <h3>Research plumbing</h3>
+            <section aria-labelledby="h-plumbing">
+              <h3 id="h-plumbing">Research plumbing</h3>
               <ul>
-                <li>Every run writes a manifest: git commit, config hash, input checksums, seeds, environment.</li>
-                <li>Runs refuse a dirty git tree unless the exception is recorded.</li>
-                <li>Seeds come from explicit keys per symbol, episode and strategy.</li>
+                <li>Every run writes a manifest: git commit, configuration fingerprint, input checksums, seeds, environment.</li>
+                <li>Runs refuse uncommitted code unless the exception is recorded.</li>
+                <li>Random seeds come from explicit keys per stock, episode and strategy.</li>
                 <li>Parallel workers change speed, never results.</li>
               </ul>
             </section>
@@ -499,6 +532,7 @@ bid, ask     = r ∓ (δa + δb)/2
             <div class="tech-body">
               <div class="table-wrap">
                 <table>
+                  <caption class="visually-hidden">Module responsibilities</caption>
                   <thead><tr><th scope="col">Module</th><th scope="col">Responsibility</th></tr></thead>
                   <tbody>
                     <tr><td><code>sim/moments.py</code></td><td>Exact finite-state recurrence for profit moments up to fourth order, per inventory state</td></tr>
@@ -506,11 +540,11 @@ bid, ask     = r ∓ (δa + δb)/2
                     <tr><td><code>sim/engine.py</code></td><td>The batch loop, latency, post-only quoting, cancel and replace</td></tr>
                     <tr><td><code>sim/fills/{poisson,queue}.py</code></td><td>A1 off and on; three cancellation-attribution policies</td></tr>
                     <tr><td><code>sim/flow/*</code>, <code>sim/competition/*</code></td><td>A2 and A3 off and on</td></tr>
-                    <tr><td><code>calibration/*</code></td><td>Fill intensity, queue-fill logistic, markouts, depth elasticities (IRLS GLMs)</td></tr>
-                    <tr><td><code>attribution/{grid,shapley,run}.py</code></td><td>The eight-world grid, exact Shapley values, walk-forward benchmark policy</td></tr>
+                    <tr><td><code>calibration/*</code></td><td>Fill intensity, queue-fill logistic, markouts, depth elasticities; generalized linear models fitted by iteratively reweighted least squares</td></tr>
+                    <tr><td><code>attribution/{grid,shapley,run}.py</code></td><td>The eight-world grid, exact Shapley values, walk-forward fitting of the benchmark policy</td></tr>
                     <tr><td><code>eval/bootstrap.py</code></td><td>Stationary block bootstrap with Politis-White block length</td></tr>
                     <tr><td><code>strategy/corrected.py</code></td><td>The derived correction</td></tr>
-                    <tr><td><code>eval/holdout.py</code></td><td>The one-time held-out evaluation and its ledger</td></tr>
+                    <tr><td><code>eval/holdout.py</code></td><td>The one-time held-out evaluation and its access ledger</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -525,51 +559,55 @@ bid, ask     = r ∓ (δa + δb)/2
         <div class="body">
           <div class="prose">
             <h2 id="h-validation">What the tests are there to catch</h2>
-            <p>The suite has <span data-ev="gate.tests">143</span> passing tests, with linting and strict type checking. The count matters less than what each group would catch.</p>
+            <p>The suite has <span data-ev="gate.tests">146</span> passing tests, plus linting and strict type checking<sup><a class="src" href="#s9" aria-label="Source 9">9</a></sup>. The count matters less than what each group would catch.</p>
           </div>
           <div class="checks">
-            <section>
-              <h3>Exact mathematics</h3>
+            <section aria-labelledby="h-v1">
+              <h3 id="h-v1">Exact mathematics</h3>
               <ul>
-                <li>The moment recurrence matches brute-force enumeration of every path.<span class="catches">Catches a wrong variance or kurtosis formula.</span></li>
-                <li>The symmetric strategy matches its closed form.<span class="catches">Catches probability mass leaking out of the state space.</span></li>
+                <li>The exact calculation matches brute-force enumeration of every path.<span class="catches">Catches a wrong formula for how much results vary.</span></li>
+                <li>The symmetric strategy matches its closed form.<span class="catches">Catches probability leaking out of the calculation.</span></li>
               </ul>
             </section>
-            <section>
-              <h3>Reduction to the paper</h3>
+            <section aria-labelledby="h-v2">
+              <h3 id="h-v2">Reduction to the paper</h3>
               <ul>
-                <li>With all switches off, the simulator matches the exact paper law.<span class="catches">Catches a simulator that drifts from the model it claims to test.</span></li>
-                <li>The corrected rule reduces to AS with both terms off.<span class="catches">Catches a correction that changes the baseline.</span></li>
+                <li>With all switches off, the simulator matches the paper's model exactly.<span class="catches">Catches a simulator that drifts from the model it claims to test.</span></li>
+                <li>The corrected rule reduces to AS with both corrections off.<span class="catches">Catches a correction that changes the baseline.</span></li>
               </ul>
             </section>
-            <section>
-              <h3>Market mechanics (property tests)</h3>
+            <section aria-labelledby="h-v3">
+              <h3 id="h-v3">Market mechanics (property tests)</h3>
               <ul>
-                <li>Cash plus inventory at mid equals the P&amp;L decomposition at every step.<span class="catches">Catches accounting drift.</span></li>
-                <li>No fill occurs through the opposite side of the book.<span class="catches">Catches impossible trades.</span></li>
-                <li>Queue position only improves until a reprice, which goes to the back.<span class="catches">Catches optimistic fills.</span></li>
-                <li>Pessimistic ≤ spread-evenly ≤ optimistic fill counts.<span class="catches">Catches bounds that do not bound.</span></li>
+                <li>Cash plus inventory at the mid-price equals the profit breakdown at every step.<span class="catches">Catches accounting drift.</span></li>
+                <li>No fill occurs through the other side of the book.<span class="catches">Catches impossible trades.</span></li>
+                <li>Queue position only improves until a reprice, which goes to the back.<span class="catches">Catches fills that were never earned.</span></li>
+                <li>Fill counts order as all-behind ≤ spread-evenly ≤ all-ahead.<span class="catches">Catches bounds that do not bound.</span></li>
               </ul>
             </section>
-            <section>
-              <h3>Determinism</h3>
+            <section aria-labelledby="h-v4">
+              <h3 id="h-v4">Determinism</h3>
               <ul>
-                <li>Fixed seeds give byte-identical fill sequences, checked against stored hashes.<span class="catches">Catches silent behaviour changes.</span></li>
-                <li>Grid worlds share random numbers.<span class="catches">Catches the seeding bug below.</span></li>
+                <li>Fixed seeds give byte-identical fill sequences, checked against stored fingerprints.<span class="catches">Catches silent behaviour changes.</span></li>
+                <li>All eight worlds share the same random numbers.<span class="catches">Catches the seeding bug below.</span></li>
                 <li>Worker count does not change any output.<span class="catches">Catches order-dependent parallel code.</span></li>
-                <li>A fresh one-command run from a clean checkout reproduced my committed synthetic attribution run byte for byte.<span class="catches">Catches hidden state between runs.</span></li>
+                <li>A fresh one-command run from a clean checkout reproduced my committed synthetic run byte for byte<sup><a class="src" href="#s14" aria-label="Source 14">14</a></sup>.<span class="catches">Catches hidden state between runs.</span></li>
               </ul>
             </section>
-            <section>
-              <h3>Research guards</h3>
+            <section aria-labelledby="h-v5">
+              <h3 id="h-v5">Research guards</h3>
               <ul>
-                <li>Shapley values sum to the total gap for every episode.<span class="catches">Catches a broken decomposition.</span></li>
-                <li>Holdout episodes are never replayed by the attribution run.<span class="catches">Catches data leakage.</span></li>
-                <li>The holdout evaluation refuses a second run unless a reason is recorded.<span class="catches">Catches quiet re-testing.</span></li>
+                <li>The three effects' contributions always sum to the total.<span class="catches">Catches a broken decomposition.</span></li>
+                <li>Held-back episodes are never replayed by the measurement.<span class="catches">Catches data leakage.</span></li>
+                <li>The held-back evaluation refuses a second run unless a reason is recorded.<span class="catches">Catches quiet re-testing.</span></li>
               </ul>
             </section>
           </div>
-          <p class="note">A nightly CI workflow runs the gate and the full reproduction. It is configured but has not yet run on GitHub.</p>
+          <p class="note">
+            GitHub Actions runs linting, strict type checking and the full test suite on every push. All 7 runs up to
+            commit <code>ebc0930</code> passed<sup><a class="src" href="#s9" aria-label="Source 9">9</a></sup>. The
+            nightly full reproduction is configured but has not run.
+          </p>
         </div>
       </section>
 
@@ -585,20 +623,20 @@ bid, ask     = r ∓ (δa + δb)/2
               <div><h3>Different random numbers in every world</h3></div>
               <dl class="kv">
                 <dt>Symptom</dt><dd>None visible. Every run completed normally.</dd>
-                <dt>Root cause</dt><dd>NumPy's <code>SeedSequence.spawn()</code> advances an internal counter. Calling it once per run gave each of the eight worlds a different random stream.</dd>
-                <dt>Risk</dt><dd>The attribution compares worlds pairwise. With different streams, sampling noise would have been reported as an effect of queue position or adverse selection.</dd>
-                <dt>Fix</dt><dd>Seeds now come from explicit keys per symbol, episode and strategy, identical in every world.</dd>
-                <dt>Protection</dt><dd>A regression test checks that two worlds which differ only in an inactive switch produce identical fills. The old derivation fails it.</dd>
+                <dt>Why it invalidated the experiment</dt><dd>The measurement compares the eight worlds against each other. With different random streams, chance differences would have been reported as the cost of queue position or adverse selection.</dd>
+                <dt>Root cause</dt><dd>NumPy's <code>SeedSequence.spawn()</code> advances an internal counter. Calling it once per run gave each world a different random stream.</dd>
+                <dt>Fix</dt><dd>Seeds now come from explicit keys per stock, episode and strategy, identical in every world<sup><a class="src" href="#s13" aria-label="Source 13">13</a></sup>.</dd>
+                <dt>Regression protection</dt><dd>A test checks that two worlds which differ only in an inactive switch produce identical fills. The old code fails it<sup><a class="src" href="#s13" aria-label="Source 13">13</a></sup>.</dd>
               </dl>
             </article>
             <article class="entry">
-              <div><h3>Five symbols, one name</h3></div>
+              <div><h3>Five stocks, one name</h3></div>
               <dl class="kv">
-                <dt>Symptom</dt><dd>The log of my first full synthetic run listed every session as <code>SYN</code>.</dd>
-                <dt>Root cause</dt><dd>The synthetic generator hard-coded the symbol. Results are keyed by symbol and episode, so the five sessions overwrote each other.</dd>
-                <dt>Risk</dt><dd>A complete-looking attribution built from mixed records.</dd>
-                <dt>Fix</dt><dd>The symbol is passed through, and loading now rejects duplicate symbols. I discarded the run and recorded why in the decision log.</dd>
-                <dt>Protection</dt><dd>A pipeline test asserts that each symbol is attributed separately.</dd>
+                <dt>Symptom</dt><dd>The log of my first full synthetic run listed every session under the same name, <code>SYN</code>.</dd>
+                <dt>Why it invalidated the experiment</dt><dd>Results are filed by stock and episode, so the five sessions overwrote each other. The output looked complete but mixed records from different stocks.</dd>
+                <dt>Root cause</dt><dd>The synthetic data generator hard-coded the name.</dd>
+                <dt>Fix</dt><dd>The name is passed through, and loading now rejects duplicate names. I discarded the run and recorded why in the decision log<sup><a class="src" href="#s13" aria-label="Source 13">13</a></sup>.</dd>
+                <dt>Regression protection</dt><dd>A pipeline test asserts that each stock is measured separately<sup><a class="src" href="#s13" aria-label="Source 13">13</a></sup>.</dd>
               </dl>
             </article>
           </div>
@@ -614,17 +652,20 @@ bid, ask     = r ∓ (δa + δb)/2
           </div>
           <div class="table-wrap">
             <table>
+              <caption class="visually-hidden">Status of each claim and its basis</caption>
               <thead><tr><th scope="col">Claim</th><th scope="col">Status</th><th scope="col">Basis</th></tr></thead>
               <tbody>
-                <tr><td>LOBSTER samples pass message-by-message validation against exchange snapshots</td><td><span class="chip verified">Verified</span></td><td>Real data, <span data-ev="m0.events">2,110,860</span> events, earlier environment</td></tr>
-                <tr><td>Published tables are consistent with capped fills at dt 0.005</td><td><span class="chip verified">Verified</span></td><td>Exact computation, pre-declared test</td></tr>
+                <tr><td>LOBSTER samples pass message-by-message checks against exchange snapshots</td><td><span class="chip verified">Verified</span></td><td>Real data, <span data-ev="m0.events">2,110,860</span> messages, earlier environment<sup><a class="src" href="#s1" aria-label="Source 1">1</a></sup></td></tr>
+                <tr><td>Published tables are consistent with capped fills at dt 0.005</td><td><span class="chip verified">Verified</span></td><td>Exact calculation, pre-declared test<sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup></td></tr>
                 <tr><td>The authors used capped fills</td><td><span class="chip partial">Supported, not confirmed</span></td><td>Inference from the data; the paper is silent</td></tr>
-                <tr><td>Simulator reduces to the paper model</td><td><span class="chip verified">Verified</span></td><td>Integration test against exact moments</td></tr>
-                <tr><td>Simulator invariants hold on order-book flow</td><td><span class="chip synthetic">Synthetic only</span></td><td>Property tests on synthetic sessions</td></tr>
-                <tr><td>About 21 s to replay one trading day</td><td><span class="chip estimated">Estimated, not measured</span></td><td>Projected from a synthetic session</td></tr>
-                <tr><td>How much A1, A2 and A3 each cost AS</td><td><span class="chip pending">Real-data test pending</span></td><td>Pipeline works; no market run yet</td></tr>
-                <tr><td>Corrected rule improves on AS</td><td><span class="chip pending">Not evaluated</span></td><td>Holdout untouched</td></tr>
-                <tr><td>One-command reproduction</td><td><span class="chip partial">Partially verified</span></td><td>Synthetic path run end to end from a clean checkout; market path and remote CI not yet run</td></tr>
+                <tr><td>Simulator reduces to the paper's model</td><td><span class="chip verified">Verified</span></td><td>Integration test against exact results<sup><a class="src" href="#s6" aria-label="Source 6">6</a></sup></td></tr>
+                <tr><td>Simulator mechanics hold on order-book flow</td><td><span class="chip synthetic">Synthetic only</span></td><td>Property tests on synthetic sessions<sup><a class="src" href="#s6" aria-label="Source 6">6</a></sup></td></tr>
+                <tr><td>About 21 s to replay one trading day</td><td><span class="chip estimated">Estimated, not measured</span></td><td>Projected from a synthetic session<sup><a class="src" href="#s10" aria-label="Source 10">10</a></sup></td></tr>
+                <tr><td>How much A1, A2 and A3 each cost AS</td><td><span class="chip pending">Real-data test pending</span></td><td>Pipeline works on synthetic data; no real run yet<sup><a class="src" href="#s8" aria-label="Source 8">8</a></sup></td></tr>
+                <tr><td>Corrected rule improves on AS</td><td><span class="chip pending">Not evaluated</span></td><td>Held-back data untouched</td></tr>
+                <tr><td>Automated checks on GitHub</td><td><span class="chip verified">Verified</span></td><td>7 of 7 runs passed up to <code>ebc0930</code><sup><a class="src" href="#s9" aria-label="Source 9">9</a></sup></td></tr>
+                <tr><td>One-command reproduction</td><td><span class="chip partial">Partially verified</span></td><td>Synthetic path run end to end from a clean checkout<sup><a class="src" href="#s14" aria-label="Source 14">14</a></sup>; market path not run</td></tr>
+                <tr><td>Container image</td><td><span class="chip pending">Not yet executed</span></td><td>Recipe written; never built</td></tr>
                 <tr><td>Live crypto order-book capture</td><td><span class="chip pending">Pending</span></td><td>Collector built and tested locally; the one-hour live run is outstanding</td></tr>
               </tbody>
             </table>
@@ -638,58 +679,78 @@ bid, ask     = r ∓ (δa + δb)/2
         <div class="body">
           <div class="prose">
             <h2 id="h-reproduce">Check it yourself</h2>
-            <p>Python 3.11+, <a href="https://docs.astral.sh/uv/">uv</a> and a clean git checkout. Every command writes a manifest under <code>results/</code>.</p>
+            <p>You need Python 3.11+, <a href="https://docs.astral.sh/uv/">uv</a> and a clean git checkout. Every command writes a manifest under <code>results/</code>.</p>
           </div>
           <div class="commands" id="commands">
-            <div class="cmd"><span class="what">Install and run the tests</span><pre><code>uv sync --locked
+            <div class="cmd"><span class="what">Install and run the tests <span class="chip verified">Run</span></span><pre><code>uv sync --locked
 uv run pytest -q</code></pre></div>
-            <div class="cmd"><span class="what">The replication test (deterministic, about 5 minutes) <span class="chip verified">Run</span></span><pre><code>uv run asaudit m1-sensitivity</code></pre></div>
+            <div class="cmd"><span class="what">The replication test (deterministic, about 5 minutes<sup><a class="src" href="#s4" aria-label="Source 4">4</a></sup>) <span class="chip verified">Run</span></span><pre><code>uv run asaudit m1-sensitivity</code></pre></div>
             <div class="cmd"><span class="what">The original seeded comparison (exits 1: "not reproduced" is its recorded outcome) <span class="chip verified">Run</span></span><pre><code>uv run asaudit replicate --config configs/replication/qf2008.toml --reference tests/golden/as2008_table_qf2008.json</code></pre></div>
-            <div class="cmd" id="cmd-fixture"><span class="what">Everything, on synthetic order flow <span class="chip verified">Run</span></span><pre><code>uv run asaudit reproduce --paper --fixture --workers 4</code></pre></div>
-            <div class="cmd"><span class="what">Everything, on the LOBSTER sample (needs network access) <span class="chip pending">Not yet run</span></span><pre><code>uv run python scripts/fetch_lobster_sample.py
+            <div class="cmd"><span class="what">Everything, on synthetic order flow <span class="chip verified">Run</span></span><pre><code>uv run asaudit reproduce --paper --fixture --workers 4</code></pre></div>
+            <div class="cmd"><span class="what">Everything, on the LOBSTER sample (needs network access and a committed pre-registration) <span class="chip pending">Not yet run</span></span><pre><code>uv run python scripts/fetch_lobster_sample.py
 uv run asaudit reproduce --paper --workers 8</code></pre></div>
             <div class="cmd"><span class="what">Score your own strategy beside AS <span class="chip verified">Run</span></span><pre><code>uv run asaudit benchmark --quoter benchmarks.example_quoter:make --config configs/ablation/fixture.toml</code></pre></div>
           </div>
-          <p class="note">
-            Reports: <a href="https://github.com/mtk1606/audit/blob/claude/vibrant-pasteur-ppo9f4/docs/reports/M1-sensitivity.md" data-report="docs/reports/M1-sensitivity.md">replication</a> ·
-            <a href="https://github.com/mtk1606/audit/blob/claude/vibrant-pasteur-ppo9f4/docs/reports/M2.md" data-report="docs/reports/M2.md">simulator</a> ·
-            <a href="https://github.com/mtk1606/audit/blob/claude/vibrant-pasteur-ppo9f4/docs/reports/M3.md" data-report="docs/reports/M3.md">attribution pipeline</a> ·
-            <a href="https://github.com/mtk1606/audit/blob/claude/vibrant-pasteur-ppo9f4/docs/DECISIONS.md" data-report="docs/DECISIONS.md">decision log</a> ·
-            <a href="https://github.com/mtk1606/audit/blob/claude/vibrant-pasteur-ppo9f4/docs/PREREGISTRATION.draft.md" data-report="docs/PREREGISTRATION.draft.md">pre-registration draft</a> ·
-            <a href="https://github.com/mtk1606/audit/blob/claude/vibrant-pasteur-ppo9f4/STATE.md" data-report="STATE.md">project state</a>
-          </p>
         </div>
       </section>
 
-      <!-- 12. NEXT -->
+      <!-- 12. SOURCES -->
+      <section class="step" id="sources" aria-labelledby="h-sources">
+        <div class="rail">12<b>Sources</b></div>
+        <div class="body">
+          <div class="prose">
+            <h2 id="h-sources">Where every number comes from</h2>
+            <p>Each numbered mark on this page points here. Every quantitative value is read from these files at build time, and the build fails if the page disagrees with them.</p>
+          </div>
+          <ol class="sources">
+            <li id="s1">Market-data checks: <a data-report="docs/reports/M0.md" href="https://github.com/mtk1606/audit/blob/main/docs/reports/M0.md">docs/reports/M0.md</a> and the five run manifests in <a data-report="docs/evidence/m0-normalization" href="https://github.com/mtk1606/audit/tree/main/docs/evidence/m0-normalization">docs/evidence/m0-normalization/</a> (message counts summed).</li>
+            <li id="s2">Published parameters and tables: <a data-report="tests/golden/as2008_table_qf2008.json" href="https://github.com/mtk1606/audit/blob/main/tests/golden/as2008_table_qf2008.json">tests/golden/as2008_table_qf2008.json</a>, transcribed from Avellaneda and Stoikov, Quantitative Finance 8(3), 2008, section 3.3.</li>
+            <li id="s3">First seeded comparison: <a data-report="docs/evidence/m1-qf2008/run/comparison.json" href="https://github.com/mtk1606/audit/blob/main/docs/evidence/m1-qf2008/run/comparison.json">docs/evidence/m1-qf2008/run/comparison.json</a> and <a data-report="docs/reports/M1-qf2008.md" href="https://github.com/mtk1606/audit/blob/main/docs/reports/M1-qf2008.md">its report</a>.</li>
+            <li id="s4">Replication study: <a data-report="docs/evidence/m1-sensitivity/run/sensitivity.json" href="https://github.com/mtk1606/audit/blob/main/docs/evidence/m1-sensitivity/run/sensitivity.json">sensitivity.json</a>, its <a data-report="docs/evidence/m1-sensitivity/run/manifest.json" href="https://github.com/mtk1606/audit/blob/main/docs/evidence/m1-sensitivity/run/manifest.json">manifest</a> (clean commit, <span data-ev="m1.elapsed">317</span> s elapsed) and <a data-report="docs/reports/M1-sensitivity.md" href="https://github.com/mtk1606/audit/blob/main/docs/reports/M1-sensitivity.md">report</a>.</li>
+            <li id="s5">Test declared before computing: commit <code>6adb9a3</code> and the entry "M1 bounded sensitivity protocol" in <a data-report="docs/DECISIONS.md" href="https://github.com/mtk1606/audit/blob/main/docs/DECISIONS.md">docs/DECISIONS.md</a>.</li>
+            <li id="s6">Simulator checks: <a data-report="tests/integration/test_grid_reduces_to_as.py" href="https://github.com/mtk1606/audit/blob/main/tests/integration/test_grid_reduces_to_as.py">test_grid_reduces_to_as.py</a> and <a data-report="tests/property/test_engine_properties.py" href="https://github.com/mtk1606/audit/blob/main/tests/property/test_engine_properties.py">test_engine_properties.py</a>.</li>
+            <li id="s7">Corrected rule: <a data-report="docs/DERIVATION_M4.draft.md" href="https://github.com/mtk1606/audit/blob/main/docs/DERIVATION_M4.draft.md">derivation</a> (section 3 on the sign) and <a data-report="tests/unit/test_corrected.py" href="https://github.com/mtk1606/audit/blob/main/tests/unit/test_corrected.py">test_corrected.py</a>.</li>
+            <li id="s8">Synthetic pipeline run: <a data-report="docs/evidence/m3-fixture/run" href="https://github.com/mtk1606/audit/tree/main/docs/evidence/m3-fixture/run">docs/evidence/m3-fixture/run/</a> (pco_folds.json, manifest.json, attribution.json) and <a data-report="docs/reports/M3.md" href="https://github.com/mtk1606/audit/blob/main/docs/reports/M3.md">its report</a>.</li>
+            <li id="s9">Test count: <a data-report="STATE.md" href="https://github.com/mtk1606/audit/blob/main/STATE.md">STATE.md</a>. GitHub checks: <a href="https://github.com/mtk1606/audit/actions/workflows/ci.yml">the "verify" workflow runs</a>.</li>
+            <li id="s10">Replay-time projection: <a data-report="docs/reports/M2.md" href="https://github.com/mtk1606/audit/blob/main/docs/reports/M2.md">docs/reports/M2.md</a> (measured 3.6 s on a synthetic hour, projected to a full day).</li>
+            <li id="s11">Planned split: <a data-report="configs/ablation/lobster.toml" href="https://github.com/mtk1606/audit/blob/main/configs/ablation/lobster.toml">configs/ablation/lobster.toml</a> and <code>split_episodes</code> in <a data-report="src/asaudit/attribution/run.py" href="https://github.com/mtk1606/audit/blob/main/src/asaudit/attribution/run.py">attribution/run.py</a>.</li>
+            <li id="s12">Engine design: <a data-report="src/asaudit/sim/engine.py" href="https://github.com/mtk1606/audit/blob/main/src/asaudit/sim/engine.py">sim/engine.py</a> and <a data-report="src/asaudit/sim/fills/queue.py" href="https://github.com/mtk1606/audit/blob/main/src/asaudit/sim/fills/queue.py">sim/fills/queue.py</a>.</li>
+            <li id="s13">Bugs: <a data-report="tests/integration/test_common_random_numbers.py" href="https://github.com/mtk1606/audit/blob/main/tests/integration/test_common_random_numbers.py">test_common_random_numbers.py</a>, <a data-report="tests/integration/test_ablation_pipeline.py" href="https://github.com/mtk1606/audit/blob/main/tests/integration/test_ablation_pipeline.py">test_ablation_pipeline.py</a>, and "Invalidated fixture run" in <a data-report="docs/DECISIONS.md" href="https://github.com/mtk1606/audit/blob/main/docs/DECISIONS.md">docs/DECISIONS.md</a>.</li>
+            <li id="s14">Reproduction runs: <a data-report="site/ACCURACY_AUDIT.md" href="https://github.com/mtk1606/audit/blob/main/site/ACCURACY_AUDIT.md">site/ACCURACY_AUDIT.md</a>, section "Reproduce commands".</li>
+            <li id="s15">Data access: "M2 implementation decisions" in <a data-report="docs/DECISIONS.md" href="https://github.com/mtk1606/audit/blob/main/docs/DECISIONS.md">docs/DECISIONS.md</a>.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 13. NEXT -->
       <section class="step" id="next" aria-labelledby="h-next">
-        <div class="rail">12<b>Next</b></div>
+        <div class="rail">13<b>Next</b></div>
         <div class="body">
           <div class="prose">
             <h2 id="h-next">The decisive experiment</h2>
-            <p>Turning the synthetic machinery into evidence takes four steps, in this order:</p>
+            <p>Turning the tested machinery into evidence takes four steps, in this order:</p>
             <ol>
-              <li>Replay one validated LOBSTER day through all eight worlds. Measure the real replay time and confirm the property tests hold on real flow.</li>
-              <li>Commit and tag the pre-registration before computing any market attribution.</li>
-              <li>Run the attribution on all five symbols with a search budget large enough for the benchmark policy to converge. Report adverse selection first, with bounds.</li>
-              <li>Only if that attribution is stable, open the held-out data once to test the corrected rule.</li>
+              <li>Replay one real LOBSTER day through all eight worlds. Measure the real replay time, and confirm the market-mechanics tests hold on real order flow.</li>
+              <li>Commit and tag the pre-registration before computing any real-market result.</li>
+              <li>Measure all five stocks with a search budget large enough for the benchmark rule to converge. Report adverse selection first, with the cancellation extremes.</li>
+              <li>Only if those results are stable, open the held-back data once to test the corrected rule.</li>
             </ol>
           </div>
         </div>
       </section>
 
-      <!-- 13. ROLE -->
+      <!-- 14. ROLE -->
       <section class="step" id="role" aria-labelledby="h-role">
-        <div class="rail">13<b>My role</b></div>
+        <div class="rail">14<b>My role</b></div>
         <div class="body">
           <div class="prose">
             <h2 id="h-role">What I did</h2>
             <p>
-              I defined the research question, the milestone plan and its acceptance criteria. I built the data
-              validation, the replication and its exact-moment test, the event-driven simulator, the calibration and
-              attribution pipeline, the corrected quoting rule and the reproduction tooling. I wrote the tests that
-              guard them, found and fixed the bugs described above, discarded the run they invalidated, and documented
-              the results that did not go my way.
+              I defined the research question, the plan and its pass marks. I built the data checks, the replication
+              and its exact-calculation test, the event-driven simulator, the calibration and measurement pipeline,
+              the corrected quoting rule and the reproduction tooling. I wrote the tests that guard them, found and
+              fixed the bugs described above, discarded the run they invalidated, and documented the results that did
+              not go my way.
             </p>
           </div>
         </div>

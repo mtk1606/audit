@@ -46,6 +46,8 @@ export function claims(ev) {
     "m1.t1.ratio.z": fix(Math.abs(t1ratio.z), 2),
     "m1.t1.ratio.paper": fix(t1ratio.paper, 2),
     "m1.t1.ratio.pop": fix(t1ratio.population, 2),
+    "m1.t1.ratio.se": fix(t1ratio.se_log * 100, 0),
+    "m1.elapsed": String(Math.round(ev.m1.elapsed_seconds)),
     "m1.commit": ev.m1.commit,
     "m1.strict.invalid": ev.m1.strict_invalid_tables.join(" and "),
     "gate.tests": String(ev.gate.tests_passed),

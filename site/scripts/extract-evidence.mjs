@@ -60,6 +60,7 @@ const runs = sens.results.map((r) => {
         population: v.population,
         z: v.z,
         relative_deviation: v.relative_deviation,
+        se_log: v.se_log,
         status: "tested",
       });
     }
@@ -124,6 +125,7 @@ const evidence = {
   m1: {
     source: sensPath,
     commit: sensManifest.git_sha.slice(0, 7),
+    elapsed_seconds: sensManifest.elapsed_seconds,
     threshold: sens.threshold_abs_z,
     family_size: sens.family_size,
     paper_n: params.n_simulations,

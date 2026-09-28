@@ -15,14 +15,19 @@ Milestone: M1 awaiting user confirmation (amended criterion); M2-M5 built ahead 
 - [x] M4 corrected rule derived (docs/DERIVATION_M4.draft.md, owner review) and implemented; reduces to AS with both terms off; holdout gate with ledger.
 - [ ] M4 held-out evaluation: not run (gated, requires M3 sign-off).
 - [x] M5 `asaudit reproduce --paper [--fixture]`, `asaudit benchmark`, Dockerfile, nightly CI workflow.
-- [ ] M5 clean-container reproduction and remote CI: not run here.
+- [x] M5 remote CI: verify workflow green on GitHub (7/7 runs through ebc0930).
+- [ ] M5 clean-container reproduction: see "Container" below.
 
 ## Gate status
-ruff: pass; format: pass; mypy --strict: pass (61 files); pytest: 143 passed, 0 failed. Remote CI: not run.
+ruff: pass; format: pass; mypy --strict: pass (61 files); pytest: 146 passed, 0 failed.
+Remote CI: the "verify" workflow (ruff, format, mypy, pytest on Python 3.12) passed on GitHub for all 7 pushes through ebc0930; the "site" build passed at ebc0930. The nightly workflow has never run (schedules fire only on the default branch).
+
+## Container
+Image builds from python:3.12.7-bookworm with uv 0.8.22 from PyPI (ghcr.io and plain-HTTP Debian mirrors are unreachable from this environment). Result of running it: recorded in site/ACCURACY_AUDIT.md.
 
 ## Open blockers
 - Market data access from this environment (LOBSTER host denied). Run locally, or allow the host in the environment's network settings.
-- PREREGISTRATION.md must be owner-committed and tagged before any market M3 number.
+- PREREGISTRATION.md must be owner-committed and tagged before any market M3 number. Enforced in code: load_sessions refuses LOBSTER data until PREREGISTRATION.md is committed and a git tag contains it (tests/test_preregistration_gate.py); the nightly market step is skipped until the file exists.
 
 ## Awaiting user decision
 1. Adopt the amended M1 criterion and completion wording, or keep M1 in progress.

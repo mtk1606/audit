@@ -60,3 +60,21 @@ mount(
 );
 mount("grid-svg", (el) => mountGrid(el), "Diagram unavailable.");
 mount("split-svg", (el) => mountSplit(el), "Diagram unavailable.");
+
+// Scroll containers that actually overflow must be reachable by keyboard.
+function markScrollRegions(): void {
+  for (const el of document.querySelectorAll<HTMLElement>(".table-wrap, .cmd pre, .eq")) {
+    if (el.scrollWidth > el.clientWidth + 1) {
+      el.tabIndex = 0;
+      el.setAttribute("role", "region");
+      if (!el.hasAttribute("aria-label")) el.setAttribute("aria-label", "Scrollable content");
+    } else if (el.getAttribute("aria-label") === "Scrollable content") {
+      el.removeAttribute("tabindex");
+      el.removeAttribute("role");
+      el.removeAttribute("aria-label");
+    }
+  }
+}
+markScrollRegions();
+window.addEventListener("resize", () => requestAnimationFrame(markScrollRegions));
+document.querySelectorAll("details").forEach((d) => d.addEventListener("toggle", markScrollRegions));

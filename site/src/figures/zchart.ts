@@ -32,7 +32,7 @@ function ordered(tests: ZTest[]): ZTest[] {
     t.table * 100 + STRATEGY_ORDER.indexOf(t.strategy) * 10 + METRIC_ORDER.indexOf(t.metric);
   return [...tests].sort((a, b) => key(a) - key(b));
 }
-const RULE_NAME: Record<string, string> = { saturate: "Capped", poisson: "Poisson", strict: "Strict" };
+const RULE_NAME: Record<string, string> = { saturate: "Capped", poisson: "Random-arrival", strict: "Strict" };
 
 function rowLabel(t: ZTest): string {
   const who = t.strategy === "inventory" ? "Inventory" : t.strategy === "symmetric" ? "Symmetric" : "";
@@ -75,6 +75,8 @@ export function mountZChart(root: HTMLElement, runs: ZRun[], threshold: number):
     const H = top + tables.length * groupGap + tests.length * rowH + 34;
     const x = linear(-LIMIT, LIMIT, labelW + 14, width - 40);
     const svg = svgRoot(width, H, `Z-scores for ${tests.length} published values under ${RULE_NAME[run.rule]} fills at dt ${run.dt}`);
+    // The marks are focusable for their tooltips, so the chart is a group, not an image.
+    svg.setAttribute("role", "group");
 
     // Band, zero and grid.
     svg.append(s("rect", { x: x(-threshold), y: top - 8, width: x(threshold) - x(-threshold), height: H - top - 26, fill: "var(--band)" }));
@@ -116,7 +118,7 @@ export function mountZChart(root: HTMLElement, runs: ZRun[], threshold: number):
           ]),
           s("line", { x1: labelW + 14, x2: width - 40, y1: cy, y2: cy, stroke: "var(--rule)", "stroke-width": 0.5 }),
         );
-        const hit = s("g", { tabindex: 0, role: "button", "aria-label": `${label}, table ${table}: paper ${t.paper}, exact ${fmt(t.population ?? 0, 3)}, z ${fmt(z)}` });
+        const hit = s("g", { tabindex: 0, role: "img", "aria-label": `${label}, table ${table}: paper ${t.paper}, exact ${fmt(t.population ?? 0, 3)}, z ${fmt(z)}` });
         hit.append(s("rect", { x: labelW + 14, y, width: width - 54 - labelW, height: rowH, fill: "transparent" }));
         if (outside) {
           hit.append(

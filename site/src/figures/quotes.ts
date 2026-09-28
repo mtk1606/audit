@@ -34,7 +34,7 @@ export function asQuotes(p: ASParams, q: number, tau: number, gamma: number): Qu
 }
 
 function probText(raw: number): string {
-  if (raw > 1) return `${raw >= 100 ? Math.round(raw).toLocaleString("en-US") : fmt(raw, 2)}  above 1, not a probability`;
+  if (raw > 1) return `${raw >= 100 ? Math.round(raw).toLocaleString("en-US") : fmt(raw, 2)}: above 100%, impossible`;
   return raw < 0.001 ? raw.toExponential(1) : fmt(raw, 3);
 }
 
@@ -87,17 +87,17 @@ export function mountQuotes(root: HTMLElement, params: ASParams): void {
     const close = Math.abs(x(r.reservation) - x(params.s0)) < 60;
     mark(r.reservation, "var(--muted)", `Reservation ${fmt(r.reservation)}`, close ? 0 : 18, close ? "start" : "middle");
     const bidLeft = x(r.bid) < x(r.ask);
-    mark(r.bid, "var(--accent)", `Bid ${fmt(r.bid)}`, 0, bidLeft ? "end" : "start");
-    mark(r.ask, "var(--ask)", `Ask ${fmt(r.ask)}`, 0, bidLeft ? "start" : "end");
+    mark(r.bid, "var(--accent)", `Buy ${fmt(r.bid)}`, 0, bidLeft ? "end" : "start");
+    mark(r.ask, "var(--ask)", `Sell ${fmt(r.ask)}`, 0, bidLeft ? "start" : "end");
     host.replaceChildren(svg);
 
     readout.innerHTML = "";
     const cells: [string, string][] = [
       ["Total spread", fmt(r.spread, 3)],
-      ["Bid distance from mid", fmt(r.deltaBid, 3)],
-      ["Ask distance from mid", fmt(r.deltaAsk, 3)],
-      ["Bid fill probability per step", probText(r.rawBid)],
-      ["Ask fill probability per step", probText(r.rawAsk)],
+      ["Buy quote distance from mid", fmt(r.deltaBid, 3)],
+      ["Sell quote distance from mid", fmt(r.deltaAsk, 3)],
+      ["Buy quote: fill chance per step", probText(r.rawBid)],
+      ["Sell quote: fill chance per step", probText(r.rawAsk)],
     ];
     for (const [k, v] of cells) {
       const d = document.createElement("div");
@@ -107,13 +107,13 @@ export function mountQuotes(root: HTMLElement, params: ASParams): void {
       const vv = document.createElement("span");
       vv.className = "v";
       vv.textContent = v;
-      if (v.includes("above 1")) vv.style.color = "var(--ask)";
+      if (v.includes("impossible")) vv.style.color = "var(--ask)";
       d.append(kk, vv);
       readout.append(d);
     }
     const over = r.rawBid > 1 || r.rawAsk > 1;
     takeaway.textContent = over
-      ? "The model now asks for a per-step fill probability above 1. The paper never says how its simulation handled this."
+      ? "The model now asks for a fill chance above 100% in a single step. The paper never says how its simulation handled this."
       : q === 0
         ? "With no inventory, the quotes sit symmetrically around the mid-price."
         : q > 0

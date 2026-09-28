@@ -1,3 +1,12 @@
+/* Self-hosted fonts (latin subsets, only the weights the page uses). */
+@import "@fontsource/source-serif-4/latin-500.css";
+@import "@fontsource/source-serif-4/latin-600.css";
+@import "@fontsource/ibm-plex-sans/latin-400.css";
+@import "@fontsource/ibm-plex-sans/latin-500.css";
+@import "@fontsource/ibm-plex-sans/latin-600.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-500.css";
+
 /* Layout: an editorial column (38rem prose) inside a 68rem frame. A left rail
    carries the research-step number on wide screens; figures break out to the
    full frame. Surfaces are rules and whitespace, not cards. */
@@ -6,7 +15,7 @@
   --surface: #fcfcfb;
   --ink: #15181d;
   --ink-2: #454c57;
-  --muted: #6c7480;
+  --muted: #5d6571;
   --rule: #dcdfe4;
   --rule-strong: #b9bec7;
   --accent: #2b59c3; /* book blue: bids, "within band" */
@@ -187,7 +196,7 @@ p {
 }
 .site-head nav {
   display: flex;
-  gap: 1.25rem;
+  gap: 0.35rem 1.1rem;
   flex-wrap: wrap;
 }
 .site-head nav a {
@@ -563,7 +572,7 @@ input[type="range"] {
   font-size: var(--step--1);
   color: var(--ink-2);
 }
-.aside h4 {
+.aside h3 {
   margin: 0;
   font: 600 var(--step--1) / 1.4 var(--f-body);
   color: var(--ink);
@@ -967,4 +976,177 @@ td .mono {
   display: grid;
   gap: 0.55rem;
   align-content: start;
+}
+
+/* Title and first-30-seconds primer */
+.title-block {
+  display: grid;
+  gap: 0.9rem;
+}
+.hero h1 {
+  max-width: 20ch;
+}
+.subtitle {
+  font-family: var(--f-display);
+  font-size: var(--step-2);
+  line-height: 1.3;
+  color: var(--ink-2);
+  max-width: 34rem;
+  text-wrap: balance;
+}
+.primer {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--rule-strong);
+  counter-reset: primer;
+}
+.primer li {
+  counter-increment: primer;
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+  padding: 0.9rem 1.25rem 0.9rem 0;
+  min-width: 0;
+}
+.primer li + li {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--rule);
+}
+.primer b {
+  font-weight: 600;
+  font-size: var(--step--1);
+}
+.primer b::before {
+  content: counter(primer) "  ";
+  font-family: var(--f-mono);
+  color: var(--accent);
+  font-weight: 500;
+}
+.primer span {
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+@media (max-width: 900px) {
+  .primer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .primer li:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .primer li:nth-child(n + 3) {
+    border-top: 1px solid var(--rule);
+  }
+}
+@media (max-width: 520px) {
+  .primer {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .primer li,
+  .primer li + li {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .primer li + li {
+    border-top: 1px solid var(--rule);
+  }
+}
+
+/* Research status block */
+.status {
+  border: 1px solid var(--rule-strong);
+  background: var(--surface);
+  padding: 1.1rem 1.25rem 1.2rem;
+  display: grid;
+  gap: 0.8rem;
+  max-width: 50rem;
+}
+.status-title {
+  font-family: var(--f-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+.status ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+.status li {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+.status li b {
+  color: var(--ink);
+  font-weight: 600;
+}
+@media (max-width: 520px) {
+  .status li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+  }
+}
+
+/* Source marks and list */
+sup {
+  line-height: 0;
+}
+a.src {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  text-decoration: none;
+  padding: 0 0.12rem;
+  margin-left: 0.08rem;
+  border-radius: 2px;
+  color: var(--accent);
+}
+a.src:hover,
+a.src:focus-visible {
+  background: var(--accent-soft);
+}
+.sources {
+  margin: 0;
+  padding-left: 1.6rem;
+  display: grid;
+  gap: 0.55rem;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  max-width: 50rem;
+}
+.sources li {
+  scroll-margin-top: 1.5rem;
+}
+.sources li::marker {
+  font-family: var(--f-mono);
+  color: var(--accent);
+}
+.sources li:target {
+  background: var(--accent-soft);
+  outline: 4px solid var(--accent-soft);
+}
+
+/* Reserve chart height before scripts run, to avoid layout shift */
+.chart-host.sized {
+  min-height: var(--h, 0);
+}
+
+/* Row headers in prose tables */
+tbody th[scope="row"] {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--step--1);
+  color: var(--ink);
+  font-weight: 500;
 }

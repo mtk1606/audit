@@ -138,8 +138,39 @@ def child(seq: np.random.SeedSequence, *keys: int) -> np.random.SeedSequence:
     return np.random.SeedSequence(seq.entropy, spawn_key=(*seq.spawn_key, *keys))
 
 
+class PreregistrationRequired(PermissionError):
+    """Market-data results may not be computed before the pre-registration is in force."""
+
+
+def require_preregistration(path: Path = Path("PREREGISTRATION.md")) -> str:
+    """PRD 1.2: PREREGISTRATION.md must be committed and covered by a git tag.
+
+    Returns the tag. Every market-data entry point goes through load_sessions,
+    so attribution, reproduction, benchmark and holdout runs all hit this gate.
+    """
+    import subprocess
+
+    if not path.exists():
+        raise PreregistrationRequired(
+            f"{path} not found: commit and tag the pre-registration before any market run"
+        )
+    added = subprocess.run(
+        ["git", "log", "-n1", "--format=%H", "--", str(path)], capture_output=True, text=True
+    ).stdout.strip()
+    if not added:
+        raise PreregistrationRequired(f"{path} is not committed")
+    tags = subprocess.run(
+        ["git", "tag", "--contains", added], capture_output=True, text=True
+    ).stdout.split()
+    if not tags:
+        raise PreregistrationRequired(f"no git tag contains the commit that last changed {path}")
+    return tags[0]
+
+
 def load_sessions(cfg: AblationConfig, root_seed: np.random.SeedSequence) -> list[ReplaySession]:
     d = cfg.data
+    if d.source == "lobster":
+        require_preregistration()
     out: list[ReplaySession] = []
     for i, symbol in enumerate(d.symbols):
         child_seed = child(root_seed, i)

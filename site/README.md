@@ -1,70 +1,76 @@
 # as-audit project site
 
-A static case-study site for the Avellaneda-Stoikov audit. Vite and TypeScript, no framework, no runtime dependencies. Charts and diagrams are hand-built SVG.
+A static case-study page for the Avellaneda-Stoikov audit. Vite and TypeScript, no framework, hand-built SVG charts, self-hosted fonts, no runtime third-party requests.
 
 ## Every number comes from the repository
 
 ```
 docs/evidence/**, STATE.md, tests/golden/**
-        │  scripts/extract-evidence.mjs
+        │  scripts/extract-evidence.mjs      (refuses dirty or failed runs)
         ▼
-src/data/evidence.json ──► src/claims.mjs (formats every quantitative claim)
-        │                        │
-        │                        ├─► scripts/check-claims.mjs   fails the build if any
-        │                        │   <span data-ev="…"> in index.html disagrees
-        ▼                        ▼
-figures (z-chart, quote explorer)   main.ts re-renders the same values at runtime
+src/data/evidence.json ──► src/claims.mjs    (formats every quantitative claim)
+                                 │
+                                 ├─► scripts/check-claims.mjs  (build gate)
+                                 └─► src/main.ts               (renders the same values)
 ```
 
-- `npm run build` re-extracts the evidence, runs the claim check, typechecks, then builds. Edit a number in `index.html` by hand and the build fails.
-- The extractor refuses a dirty or incomplete run (it checks `git_dirty` and `status` in the manifests) and a `STATE.md` without a clean test result.
-- Illustrations are labelled as illustrations. The queue explainer and the quote explorer compute from the project's formulas and the paper's published parameters. They show no simulated or market data.
-- `ACCURACY_AUDIT.md` lists every public claim and its source.
+The build fails when:
+
+1. any `<span data-ev="…">` value in `index.html` differs from the evidence;
+2. an evidence value sits in a sentence or cell without a numbered source mark (`<a class="src" href="#sN">`);
+3. a source mark points at an entry missing from the Sources section.
+
+`ACCURACY_AUDIT.md` lists every public claim, its source and its evidence type.
 
 ## Develop
 
 ```bash
 cd site
 npm ci
-npm run dev        # http://localhost:5173
-npm run build      # dist/
-npm run preview    # serve dist/
-npm run check      # claim check only
+npm run dev          # http://localhost:5173
+npm run build        # dist/, with evidence extraction, claim check and typecheck
+npm run check        # claim check only
+npm run typecheck
 ```
 
-Node 20 or later.
+Node 20 or later (CI uses 22).
 
-## Configure
+## Configure for deployment
 
-- `.env`: `VITE_SITE_URL` sets canonical and Open Graph URLs. Set it to the deployed origin, with a trailing slash.
-- `BASE_PATH`: set when serving from a subpath, for example `/audit/` on GitHub Pages.
-- `src/config.ts`: repository, LinkedIn and portfolio links. `REPO_REF` is the branch that holds the evidence; switch it to `main` once merged. The static `href`s in `index.html` use the same branch, so update both, or leave the runtime rewrite to handle JavaScript-enabled visitors.
+| Setting | Where | Value |
+|---|---|---|
+| `VITE_SITE_URL` | build environment, or `site/.env` (see `.env.example`) | The deployed origin, `https://…/` with a trailing slash. Drives canonical, `og:url`, `og:image` and `twitter:image`. |
+| `BASE_PATH` | build environment | Only for subpath hosting, e.g. `/audit/` on GitHub Pages. Default `/`. |
+| `REPO_REF` | `src/config.ts` | **`main`** after the branch is merged (current value). Evidence links resolve to `https://github.com/mtk1606/audit/blob/main/…`. Set it to a branch name only while the evidence exists on that branch alone. |
 
-## Social preview
-
-`public/og.png` is rendered from the real replication z-values:
-
-```bash
-CHROMIUM_PATH=/path/to/chrome npm run og
-```
-
-Render it on a machine that can reach Google Fonts, or the image uses fallback faces.
+`npm run build` without a valid `VITE_SITE_URL` prints a warning and omits the URL-dependent tags rather than shipping a placeholder. `npm run build:release` fails instead. Every host config below uses `build:release`.
 
 ## Deploy
 
 | Host | How |
 |---|---|
-| GitHub Pages | `.github/workflows/site.yml` builds on every push and deploys from `main`. Enable Pages with source "GitHub Actions". |
-| Netlify | `site/netlify.toml`, base directory `site`. |
-| Vercel | Root directory `site`; `vercel.json` sets build, output and cache headers. |
-| Any static host | Upload `dist/`. |
+| GitHub Pages | `.github/workflows/site.yml` builds on every push that touches the site or its evidence, and deploys from `main`. Enable Pages with source "GitHub Actions". `BASE_PATH` and `VITE_SITE_URL` are set in the workflow. |
+| Netlify | `netlify.toml` at the repository root (base `site`). Set `VITE_SITE_URL` in the site's environment variables. |
+| Vercel | Project root directory `site`; `site/vercel.json` sets install, build, output and cache headers. Set `VITE_SITE_URL`. |
+| Any static host | `VITE_SITE_URL=https://…/ npm run build:release`, then upload `dist/`. |
 
-`npm run single -- out.html` writes a self-contained single-file version with CSS and JS inlined; fonts still load from Google Fonts.
+`dist/` contains only `index.html`, `assets/` (hashed JS, CSS, fonts), `og.png` and `robots.txt`.
 
-## Accessibility and performance
+## Social preview
 
-- Semantic sections with labelled headings, a skip link, visible focus, and keyboard-operable controls: native range inputs, and buttons with `aria-pressed`.
-- The z-chart marks are focusable and have text labels. A data table sits under every result chart, and outside-band marks differ in shape as well as colour.
-- Light and dark themes via `prefers-color-scheme` and `data-theme`. Chart colours were checked with a colour-vision-deficiency palette validator in both themes.
-- `prefers-reduced-motion` is respected.
-- About 30 KB gzipped of HTML, CSS and JS (measured from `vite build` output), plus fonts. No images except the social preview.
+`public/og.png` (1200×630) is rendered from the real replication values, with the same self-hosted fonts:
+
+```bash
+CHROMIUM_PATH=/path/to/chrome npm run og
+```
+
+The script fails if any font does not load.
+
+## Quality checks (run 2026-09-28)
+
+- axe-core 4.10 (WCAG 2 A/AA, 2.1 AA, best practice), light and dark themes, all disclosures open: 0 violations.
+- Lighthouse 12.2 mobile: performance 99, accessibility 100, best practices 100, SEO 100. Desktop: 100 on all four measured categories. CLS 0.002, total blocking time 0 ms, 165 KiB total transfer.
+- Rendered at 375, 430, 768, 1024, 1440 and 1920 px, light and dark: no horizontal scroll, no element overflowing the viewport, no console errors, fonts loaded, CLS ≤ 0.0022.
+- Keyboard: every control is reachable, focus is always visible, and chart marks are focusable with text alternatives. A data table sits under the result chart. Overflowing code and table regions become focusable scroll regions.
+
+`npm run single -- <path outside dist/> [--fragment]` writes a self-contained single-file copy for previews. It refuses to write into `dist/`.

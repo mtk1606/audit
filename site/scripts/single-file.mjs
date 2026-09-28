@@ -1,12 +1,15 @@
 // Inlines the built CSS and JS into one self-contained HTML file.
-// Usage: npm run build && npm run single -- <output.html> [--fragment]
+// Usage: npm run build && npm run single -- <output.html outside dist/> [--fragment]
 // --fragment drops the document wrapper (for hosts that add their own).
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const [out = join(root, "dist/single.html"), flag] = process.argv.slice(2);
+const [out, flag] = process.argv.slice(2);
+if (!out || out.startsWith(join(root, "dist")) || out.startsWith("dist")) {
+  throw new Error("give an output path outside dist/, so the file is never deployed");
+}
 let html = readFileSync(join(root, "dist/index.html"), "utf8");
 html = html.replace(/<link rel="stylesheet"[^>]*href="\/?(assets\/[^"]+\.css)"[^>]*>/, (_, p) =>
   `<style>${readFileSync(join(root, "dist", p), "utf8")}</style>`,

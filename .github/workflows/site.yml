@@ -17,7 +17,7 @@ jobs:
         with: { node-version: 22, cache: npm, cache-dependency-path: site/package-lock.json }
       - run: npm ci
       # Evidence extraction and the claim check run inside build; a mismatch fails the job.
-      - run: npm run build
+      - run: npm run build:release
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
           VITE_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
