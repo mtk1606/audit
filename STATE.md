@@ -15,15 +15,15 @@ Milestone: M1 awaiting user confirmation (amended criterion); M2-M5 built ahead 
 - [x] M4 corrected rule derived (docs/DERIVATION_M4.draft.md, owner review) and implemented; reduces to AS with both terms off; holdout gate with ledger.
 - [ ] M4 held-out evaluation: not run (gated, requires M3 sign-off).
 - [x] M5 `asaudit reproduce --paper [--fixture]`, `asaudit benchmark`, Dockerfile, nightly CI workflow.
-- [x] M5 remote CI: verify workflow green on GitHub (7/7 runs through ebc0930).
-- [ ] M5 clean-container reproduction: see "Container" below.
+- [x] M5 remote CI: verify workflow green on GitHub (8/8 runs through 473fedd).
+- [x] M5 clean-container reproduction: image built at 473fedd, run with --network none: 146 tests pass, `reproduce --paper --fixture` exit 0 (24 min).
 
 ## Gate status
 ruff: pass; format: pass; mypy --strict: pass (61 files); pytest: 146 passed, 0 failed.
-Remote CI: the "verify" workflow (ruff, format, mypy, pytest on Python 3.12) passed on GitHub for all 7 pushes through ebc0930; the "site" build passed at ebc0930. The nightly workflow has never run (schedules fire only on the default branch).
+Remote CI: the "verify" workflow (ruff, format, mypy, pytest on Python 3.12) passed on GitHub for all 8 pushes through 473fedd; the "site" release build passed at ebc0930 and 473fedd. Nightly: dispatched once at 473fedd (see site/ACCURACY_AUDIT.md).
 
 ## Container
-Image builds from python:3.12.7-bookworm with uv 0.8.22 from PyPI (ghcr.io and plain-HTTP Debian mirrors are unreachable from this environment). Result of running it: recorded in site/ACCURACY_AUDIT.md.
+Image builds from python:3.12.7-bookworm with uv 0.8.22 from PyPI (ghcr.io and plain-HTTP Debian mirrors are unreachable from this environment). Run offline at 473fedd: 146 tests pass; synthetic reproduction exit 0. Output byte-identity inside the container not checked.
 
 ## Open blockers
 - Market data access from this environment (LOBSTER host denied). Run locally, or allow the host in the environment's network settings.

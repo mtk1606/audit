@@ -317,7 +317,7 @@ bid, ask     = r ∓ (δa + δb)/2
               <span class="stage">Step 6</span>
               <h3>Make it reproducible</h3>
               <p>One-command reproduction, a benchmark for other strategies, a container recipe and automated checks.</p>
-              <span class="data">Checks pass on GitHub; container not yet built</span>
+              <span class="data">Checks pass on GitHub; container runs offline; market path not run</span>
               <span class="chip partial">Partially verified</span>
             </li>
           </ol>
@@ -604,9 +604,8 @@ bid, ask     = r ∓ (δa + δb)/2
             </section>
           </div>
           <p class="note">
-            GitHub Actions runs linting, strict type checking and the full test suite on every push. All 7 runs up to
-            commit <code>ebc0930</code> passed<sup><a class="src" href="#s9" aria-label="Source 9">9</a></sup>. The
-            nightly full reproduction is configured but has not run.
+            GitHub Actions runs linting, strict type checking and the full test suite on every push. All 8 runs up to
+            commit <code>473fedd</code> passed<sup><a class="src" href="#s9" aria-label="Source 9">9</a></sup>.
           </p>
         </div>
       </section>
@@ -663,9 +662,9 @@ bid, ask     = r ∓ (δa + δb)/2
                 <tr><td>About 21 s to replay one trading day</td><td><span class="chip estimated">Estimated, not measured</span></td><td>Projected from a synthetic session<sup><a class="src" href="#s10" aria-label="Source 10">10</a></sup></td></tr>
                 <tr><td>How much A1, A2 and A3 each cost AS</td><td><span class="chip pending">Real-data test pending</span></td><td>Pipeline works on synthetic data; no real run yet<sup><a class="src" href="#s8" aria-label="Source 8">8</a></sup></td></tr>
                 <tr><td>Corrected rule improves on AS</td><td><span class="chip pending">Not evaluated</span></td><td>Held-back data untouched</td></tr>
-                <tr><td>Automated checks on GitHub</td><td><span class="chip verified">Verified</span></td><td>7 of 7 runs passed up to <code>ebc0930</code><sup><a class="src" href="#s9" aria-label="Source 9">9</a></sup></td></tr>
+                <tr><td>Automated checks on GitHub</td><td><span class="chip verified">Verified</span></td><td>8 of 8 runs passed up to <code>473fedd</code><sup><a class="src" href="#s9" aria-label="Source 9">9</a></sup></td></tr>
                 <tr><td>One-command reproduction</td><td><span class="chip partial">Partially verified</span></td><td>Synthetic path run end to end from a clean checkout<sup><a class="src" href="#s14" aria-label="Source 14">14</a></sup>; market path not run</td></tr>
-                <tr><td>Container image</td><td><span class="chip pending">Not yet executed</span></td><td>Recipe written; never built</td></tr>
+                <tr><td>Container image</td><td><span class="chip verified">Verified</span></td><td>Built and run with networking off at <code>473fedd</code>: all tests pass and the synthetic reproduction completes<sup><a class="src" href="#s14" aria-label="Source 14">14</a></sup></td></tr>
                 <tr><td>Live crypto order-book capture</td><td><span class="chip pending">Pending</span></td><td>Collector built and tested locally; the one-hour live run is outstanding</td></tr>
               </tbody>
             </table>
@@ -716,7 +715,7 @@ uv run asaudit reproduce --paper --workers 8</code></pre></div>
             <li id="s11">Planned split: <a data-report="configs/ablation/lobster.toml" href="https://github.com/mtk1606/audit/blob/main/configs/ablation/lobster.toml">configs/ablation/lobster.toml</a> and <code>split_episodes</code> in <a data-report="src/asaudit/attribution/run.py" href="https://github.com/mtk1606/audit/blob/main/src/asaudit/attribution/run.py">attribution/run.py</a>.</li>
             <li id="s12">Engine design: <a data-report="src/asaudit/sim/engine.py" href="https://github.com/mtk1606/audit/blob/main/src/asaudit/sim/engine.py">sim/engine.py</a> and <a data-report="src/asaudit/sim/fills/queue.py" href="https://github.com/mtk1606/audit/blob/main/src/asaudit/sim/fills/queue.py">sim/fills/queue.py</a>.</li>
             <li id="s13">Bugs: <a data-report="tests/integration/test_common_random_numbers.py" href="https://github.com/mtk1606/audit/blob/main/tests/integration/test_common_random_numbers.py">test_common_random_numbers.py</a>, <a data-report="tests/integration/test_ablation_pipeline.py" href="https://github.com/mtk1606/audit/blob/main/tests/integration/test_ablation_pipeline.py">test_ablation_pipeline.py</a>, and "Invalidated fixture run" in <a data-report="docs/DECISIONS.md" href="https://github.com/mtk1606/audit/blob/main/docs/DECISIONS.md">docs/DECISIONS.md</a>.</li>
-            <li id="s14">Reproduction runs: <a data-report="site/ACCURACY_AUDIT.md" href="https://github.com/mtk1606/audit/blob/main/site/ACCURACY_AUDIT.md">site/ACCURACY_AUDIT.md</a>, section "Reproduce commands".</li>
+            <li id="s14">Reproduction runs: <a data-report="site/ACCURACY_AUDIT.md" href="https://github.com/mtk1606/audit/blob/main/site/ACCURACY_AUDIT.md">site/ACCURACY_AUDIT.md</a>, sections "Reproduce commands" and "Container run".</li>
             <li id="s15">Data access: "M2 implementation decisions" in <a data-report="docs/DECISIONS.md" href="https://github.com/mtk1606/audit/blob/main/docs/DECISIONS.md">docs/DECISIONS.md</a>.</li>
           </ol>
         </div>

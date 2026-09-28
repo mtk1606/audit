@@ -103,10 +103,10 @@ Evidence types: **Real** = market data. **Exact** = deterministic calculation, n
 
 | Claim on page | Evidence |
 |---|---|
-| "All 7 runs up to commit `ebc0930` passed" [9] | GitHub Actions workflow `verify` (`.github/workflows/ci.yml`: ruff, format, mypy --strict, pytest on Python 3.12), runs 1-7 on branch `claude/vibrant-pasteur-ppo9f4`, all `conclusion: success`, read through the GitHub API on 2026-09-28. The `site` workflow run 1 at `ebc0930` also succeeded. |
-| "Nightly full reproduction configured but has not run" | `.github/workflows/nightly.yml`; no runs listed. Scheduled runs fire only on the default branch. |
+| "All 8 runs up to commit `473fedd` passed" [9] | GitHub Actions workflow `verify` (`.github/workflows/ci.yml`: ruff, format, mypy --strict, pytest on Python 3.12), runs 1-8 on branch `claude/vibrant-pasteur-ppo9f4`, all `conclusion: success`, read through the GitHub API on 2026-09-28. The `site` workflow (release build with the Pages URL) succeeded at `ebc0930` and `473fedd`. |
+| Nightly workflow | Not claimed on the page. Dispatched manually once at `473fedd`; see "Nightly run" below. |
 
-Runs for commits after `ebc0930` are not claimed on the page.
+Runs for commits after `473fedd` are not claimed on the page.
 
 ## 10: evidence boundary
 
@@ -123,6 +123,10 @@ Every row carries its own source mark, except rows whose basis is the absence of
 | LOBSTER reproduction | Not run. Labelled "Not yet run". Now refused in code until `PREREGISTRATION.md` is committed and tagged |
 | `uv run asaudit benchmark …` | Run with this exact command line from the clean worktree at `64180d8`, manifest `status: completed` |
 
-## Container
+## Container run
 
-The Dockerfile builds (`python:3.12.7-bookworm`, uv 0.8.22 from PyPI, `uv sync --locked`). The result of running the image is recorded in the "Container run" section at the end of this file.
+- Image `as-audit:local` (`sha256:b8d71a9c…`, 534 MB) built from the clean commit `473fedd`: `python:3.12.7-bookworm`, uv 0.8.22 from PyPI, `uv sync --locked`. Inside the image `git status --porcelain` is empty, so provenance checks pass.
+- `docker run --network none … uv run --frozen pytest -q`: **146 passed**.
+- `docker run --network none as-audit:local reproduce --paper --fixture --workers 4`: **exit 0**, 24 min 20 s. The original seeded comparison, moments, sensitivity and synthetic attribution all completed.
+- Not checked: byte-identity of the container's outputs. That run wrote its results inside the container, which was discarded. Byte-identity was checked for the same command run natively (see above).
+- Build requirement in restricted networks: pass `--network host` and proxy build args. `ghcr.io` and plain-HTTP Debian mirrors are not needed by the Dockerfile.
