@@ -1,0 +1,54 @@
+{
+  "allow_dirty": false,
+  "config": {
+    "acceptance_dt": 0.005,
+    "dts": [
+      0.005,
+      0.0025,
+      0.001
+    ],
+    "family_alpha": 0.05,
+    "family_size": 27,
+    "paper_n": 1000,
+    "probability_rules": [
+      "strict",
+      "saturate",
+      "poisson"
+    ],
+    "reference": "tests/golden/as2008_table_qf2008.json"
+  },
+  "config_hash": "acaa9e4f66a63401e29b8733129d18d109869107adbbc752572f18e8ebf681de",
+  "data_checksums": {
+    "configs/replication/m1_sensitivity.toml": "4e704dbb5ac07c5ebea135b4b8f769daf02b1529d41601f87a27c606741caf23",
+    "tests/golden/as2008_table_qf2008.json": "a62f5f313d474cec8b98879b091504b770a5bc29ac12ec8bdc848ea5e4a38491"
+  },
+  "data_quality": {
+    "source": "deterministic calculation"
+  },
+  "elapsed_seconds": 316.98536685100004,
+  "env": {
+    "httpx": "0.28.1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.44-fc-v37-x86_64-with-glibc2.39",
+    "polars": "1.44.2",
+    "pydantic": "2.13.5",
+    "python": "3.11.15",
+    "structlog": "26.1.0",
+    "typer": "0.27.2",
+    "websockets": "17.1"
+  },
+  "finished_utc": "2026-09-28T17:22:01.619577+00:00",
+  "git_dirty": false,
+  "git_sha": "e77692c464c830d9a398f489628bac93d33fdb0d",
+  "n_events": 0,
+  "n_fills": 0,
+  "output_checksums": {
+    "sensitivity.json": "f7aed39935cca970f4ce123c29b2a8538cca75295d79ef0a1d577429520db12c"
+  },
+  "run_id": "20260928T171644639307Z_e77692c464_acaa9e4f66_e46d7418",
+  "seed": null,
+  "seed_reason": "deterministic calculation; no random draws",
+  "session_id": "m1-sensitivity",
+  "started_utc": "2026-09-28T17:16:44.639307+00:00",
+  "status": "completed"
+}

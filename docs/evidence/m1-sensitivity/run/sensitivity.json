@@ -1,0 +1,1841 @@
+{
+  "consistent_rules_at_paper_dt": [
+    "saturate"
+  ],
+  "family_size": 27,
+  "method": "exact population moments; paper n=1000 sampling error; Bonferroni",
+  "results": [
+    {
+      "acceptance_candidate": true,
+      "consistent": false,
+      "dt": 0.005,
+      "failures": 0,
+      "invalid": [
+        "1/inventory",
+        "2/inventory",
+        "3/inventory"
+      ],
+      "max_abs_z": 1.882981158930982,
+      "rule": "strict",
+      "tables": [
+        {
+          "gamma": 0.1,
+          "inventory": {
+            "error": "invalid probability at a reachable inventory state",
+            "status": "invalid_probability"
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 2.99916673766106,
+            "profit_kurtosis": 5.427783147451814,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.26,
+                "population": 0.0,
+                "se": 0.26569948228288326,
+                "z": 0.9785491404276988
+              },
+              "final_q_std": {
+                "paper": 8.4,
+                "population": 8.401659452278393,
+                "se": 0.19003307489366697,
+                "z": -0.008732439231018806
+              },
+              "profit_mean": {
+                "paper": 68.4,
+                "population": 68.22817850809274,
+                "se": 0.4265366803168008,
+                "z": 0.40282934583644675
+              },
+              "profit_std": {
+                "paper": 12.7,
+                "population": 13.457347670412004,
+                "se": 0.4486662943902327,
+                "z": -1.687997694235735
+              }
+            }
+          },
+          "table": 1
+        },
+        {
+          "gamma": 0.01,
+          "inventory": {
+            "error": "invalid probability at a reachable inventory state",
+            "status": "invalid_probability"
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 2.998175785552761,
+            "profit_kurtosis": 5.626860926265189,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.09,
+                "population": 0.0,
+                "se": 0.27550886791181295,
+                "z": 0.3266682509428622
+              },
+              "final_q_std": {
+                "paper": 8.7,
+                "population": 8.711877120616169,
+                "se": 0.19684288609084707,
+                "z": -0.060338073943338226
+              },
+              "profit_mean": {
+                "paper": 68.8,
+                "population": 68.66618009732048,
+                "se": 0.4334864416206435,
+                "z": 0.30870608589098425
+              },
+              "profit_std": {
+                "paper": 12.8,
+                "population": 13.677615352670006,
+                "se": 0.4660776070474603,
+                "z": -1.882981158930982
+              }
+            }
+          },
+          "table": 2
+        },
+        {
+          "gamma": 1.0,
+          "inventory": {
+            "error": "invalid probability at a reachable inventory state",
+            "status": "invalid_probability"
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0221351807510892,
+            "profit_kurtosis": 3.9268954352923484,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.0,
+                "population": 0.0,
+                "se": 0.16412487823332708,
+                "z": 0.0
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.1892814841528025,
+                "se": 0.12019430970521171,
+                "z": -0.7428095753598858
+              },
+              "profit_mean": {
+                "paper": 44.0,
+                "population": 43.86897891351741,
+                "se": 0.3412141022199937,
+                "z": 0.38398496905651397
+              },
+              "profit_std": {
+                "paper": 11.0,
+                "population": 10.751452470269445,
+                "se": 0.2922601985662868,
+                "z": 0.8504323577066973
+              }
+            }
+          },
+          "table": 3
+        }
+      ],
+      "tests_run": 12
+    },
+    {
+      "acceptance_candidate": true,
+      "consistent": true,
+      "dt": 0.005,
+      "failures": 0,
+      "invalid": [],
+      "max_abs_z": 1.882981158930982,
+      "rule": "saturate",
+      "tables": [
+        {
+          "gamma": 0.1,
+          "inventory": {
+            "expected_probability_exceedances": 0.033814640891048936,
+            "inventory_kurtosis": 2.9939733664619093,
+            "profit_kurtosis": 3.0273309386948655,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.08,
+                "population": 0.0,
+                "se": 0.09259827443469729,
+                "z": 0.8639469848481689
+              },
+              "final_q_std": {
+                "paper": 2.9,
+                "population": 2.92679126262024,
+                "se": 0.0714386497893899,
+                "z": -0.37502476179524685
+              },
+              "profit_mean": {
+                "paper": 65.0,
+                "population": 64.89254308561917,
+                "se": 0.20891667528461497,
+                "z": 0.5143529794088515
+              },
+              "profit_std": {
+                "paper": 6.6,
+                "population": 6.543152441953643,
+                "se": 0.15010757501040814,
+                "z": 0.37871212057363063
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 2.99916673766106,
+            "profit_kurtosis": 5.427783147451814,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.26,
+                "population": 0.0,
+                "se": 0.26569948228288326,
+                "z": 0.9785491404276988
+              },
+              "final_q_std": {
+                "paper": 8.4,
+                "population": 8.401659452278393,
+                "se": 0.19003307489366697,
+                "z": -0.008732439231018806
+              },
+              "profit_mean": {
+                "paper": 68.4,
+                "population": 68.22817850809274,
+                "se": 0.4265366803168008,
+                "z": 0.40282934583644675
+              },
+              "profit_std": {
+                "paper": 12.7,
+                "population": 13.457347670412004,
+                "se": 0.4486662943902327,
+                "z": -1.687997694235735
+              }
+            }
+          },
+          "table": 1,
+          "variance_ratio": {
+            "paper": 3.702708907254362,
+            "population": 4.230043835342612,
+            "relative_deviation": 0.14241868353601683,
+            "se_log": 0.08094630070572895,
+            "z": -1.6448888453761417
+          }
+        },
+        {
+          "gamma": 0.01,
+          "inventory": {
+            "expected_probability_exceedances": 2.6476279603780695e-33,
+            "inventory_kurtosis": 2.998246024084083,
+            "profit_kurtosis": 3.6392584847571388,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.12,
+                "population": 0.0,
+                "se": 0.16486021451532745,
+                "z": 0.7278893840626618
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.21253844078933,
+                "se": 0.12002790386421815,
+                "z": -0.9376023171798414
+              },
+              "profit_mean": {
+                "paper": 68.6,
+                "population": 68.39962764494612,
+                "se": 0.28482447339990313,
+                "z": 0.7034941648870979
+              },
+              "profit_std": {
+                "paper": 8.7,
+                "population": 8.960560658474378,
+                "se": 0.23197184352980224,
+                "z": -1.1232426078508264
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 2.998175785552761,
+            "profit_kurtosis": 5.626860926265189,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.09,
+                "population": 0.0,
+                "se": 0.27550886791181295,
+                "z": 0.3266682509428622
+              },
+              "final_q_std": {
+                "paper": 8.7,
+                "population": 8.711877120616169,
+                "se": 0.19684288609084707,
+                "z": -0.060338073943338226
+              },
+              "profit_mean": {
+                "paper": 68.8,
+                "population": 68.66618009732048,
+                "se": 0.4334864416206435,
+                "z": 0.30870608589098425
+              },
+              "profit_std": {
+                "paper": 12.8,
+                "population": 13.677615352670006,
+                "se": 0.4660776070474603,
+                "z": -1.882981158930982
+              }
+            }
+          },
+          "table": 2,
+          "variance_ratio": {
+            "paper": 2.1646188400052853,
+            "population": 2.329970401572661,
+            "relative_deviation": 0.076388303802702,
+            "se_log": 0.08561836103398693,
+            "z": -0.8597603702076959
+          }
+        },
+        {
+          "gamma": 1.0,
+          "inventory": {
+            "expected_probability_exceedances": 10.349703163635292,
+            "inventory_kurtosis": 2.9680116248383253,
+            "profit_kurtosis": 3.0755612491665474,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.02,
+                "population": 0.0,
+                "se": 0.05198561243767943,
+                "z": 0.38472183094843954
+              },
+              "final_q_std": {
+                "paper": 1.7,
+                "population": 1.641392874112495,
+                "se": 0.0464636748677264,
+                "z": 1.2613536500147422
+              },
+              "profit_mean": {
+                "paper": 31.4,
+                "population": 31.454501789176632,
+                "se": 0.15568813833119963,
+                "z": -0.35007027356631604
+              },
+              "profit_std": {
+                "paper": 5.0,
+                "population": 4.8379192928056804,
+                "se": 0.11392190914027704,
+                "z": 1.4227351737473295
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0221351807510892,
+            "profit_kurtosis": 3.9268954352923484,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.0,
+                "population": 0.0,
+                "se": 0.16412487823332708,
+                "z": 0.0
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.1892814841528025,
+                "se": 0.12019430970521171,
+                "z": -0.7428095753598858
+              },
+              "profit_mean": {
+                "paper": 44.0,
+                "population": 43.86897891351741,
+                "se": 0.3412141022199937,
+                "z": 0.38398496905651397
+              },
+              "profit_std": {
+                "paper": 11.0,
+                "population": 10.751452470269445,
+                "se": 0.2922601985662868,
+                "z": 0.8504323577066973
+              }
+            }
+          },
+          "table": 3,
+          "variance_ratio": {
+            "paper": 4.840000000000001,
+            "population": 4.938749975041408,
+            "relative_deviation": 0.020402887405249537,
+            "se_log": 0.0718563722098369,
+            "z": -0.28108205772365297
+          }
+        }
+      ],
+      "tests_run": 27
+    },
+    {
+      "acceptance_candidate": true,
+      "consistent": false,
+      "dt": 0.005,
+      "failures": 7,
+      "invalid": [],
+      "max_abs_z": 38.518685207259765,
+      "rule": "poisson",
+      "tables": [
+        {
+          "gamma": 0.1,
+          "inventory": {
+            "expected_probability_exceedances": 0.10388770267751045,
+            "inventory_kurtosis": 2.9978687966439623,
+            "profit_kurtosis": 3.0436788021097603,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.08,
+                "population": 0.0,
+                "se": 0.09476136682528105,
+                "z": 0.8442258979601072
+              },
+              "final_q_std": {
+                "paper": 2.9,
+                "population": 2.9952267542311617,
+                "se": 0.07289886849197424,
+                "z": -1.3062857654868225
+              },
+              "profit_mean": {
+                "paper": 65.0,
+                "population": 57.171716940141735,
+                "se": 0.20323339225459436,
+                "z": 38.518685207259765
+              },
+              "profit_std": {
+                "paper": 6.6,
+                "population": 6.361641171425537,
+                "se": 0.1466645766181665,
+                "z": 1.6251969907840587
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.000365357924444,
+            "profit_kurtosis": 5.431980315955333,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.26,
+                "population": 0.0,
+                "se": 0.25512702341173377,
+                "z": 1.0191001977097582
+              },
+              "final_q_std": {
+                "paper": 8.4,
+                "population": 8.06730839509672,
+                "se": 0.18270197101113,
+                "z": 1.8209524673546778
+              },
+              "profit_mean": {
+                "paper": 68.4,
+                "population": 60.98457442773548,
+                "se": 0.40964165018842025,
+                "z": 18.10222561317605
+              },
+              "profit_std": {
+                "paper": 12.7,
+                "population": 12.92180127674771,
+                "se": 0.4310899422426963,
+                "z": -0.5145127617541118
+              }
+            }
+          },
+          "table": 1,
+          "variance_ratio": {
+            "paper": 3.702708907254362,
+            "population": 4.125796255984227,
+            "relative_deviation": 0.11426427497472202,
+            "se_log": 0.08107310669920519,
+            "z": -1.3345281617152303
+          }
+        },
+        {
+          "gamma": 0.01,
+          "inventory": {
+            "expected_probability_exceedances": 3.9952798911108206e-27,
+            "inventory_kurtosis": 2.9994636170574043,
+            "profit_kurtosis": 3.8329131543990913,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.12,
+                "population": 0.0,
+                "se": 0.16833994961252005,
+                "z": 0.712843269088606
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.3225938509539175,
+                "se": 0.12245218271446869,
+                "z": -1.8178022312020137
+              },
+              "profit_mean": {
+                "paper": 68.6,
+                "population": 60.34201250917984,
+                "se": 0.2872184822435722,
+                "z": 28.751588081358456
+              },
+              "profit_std": {
+                "paper": 8.7,
+                "population": 9.036654425669264,
+                "se": 0.24221488572908942,
+                "z": -1.3898998183200146
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 2.9993498099413016,
+            "profit_kurtosis": 5.631060409175753,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.09,
+                "population": 0.0,
+                "se": 0.26399937018492137,
+                "z": 0.34090990420529593
+              },
+              "final_q_std": {
+                "paper": 8.7,
+                "population": 8.347893993379516,
+                "se": 0.18885357527120836,
+                "z": 1.8644391884815068
+              },
+              "profit_mean": {
+                "paper": 68.8,
+                "population": 60.62407828480974,
+                "se": 0.4154573941229752,
+                "z": 19.679326522637812
+              },
+              "profit_std": {
+                "paper": 12.8,
+                "population": 13.106163168453223,
+                "se": 0.4468829786988827,
+                "z": -0.6851081447421173
+              }
+            }
+          },
+          "table": 2,
+          "variance_ratio": {
+            "paper": 2.1646188400052853,
+            "population": 2.103467430377644,
+            "relative_deviation": 0.028250428434546948,
+            "se_log": 0.08676611031214117,
+            "z": 0.33028045208535933
+          }
+        },
+        {
+          "gamma": 1.0,
+          "inventory": {
+            "expected_probability_exceedances": 12.163617379280984,
+            "inventory_kurtosis": 2.9827681902805834,
+            "profit_kurtosis": 3.087741741007765,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.02,
+                "population": 0.0,
+                "se": 0.053881886556427575,
+                "z": 0.37118225211092204
+              },
+              "final_q_std": {
+                "paper": 1.7,
+                "population": 1.701447726363169,
+                "se": 0.04762692851372774,
+                "z": -0.030397222922991112
+              },
+              "profit_mean": {
+                "paper": 31.4,
+                "population": 28.239767079753886,
+                "se": 0.1483599444589976,
+                "z": 21.30111959646567
+              },
+              "profit_std": {
+                "paper": 5.0,
+                "population": 4.6018843734435055,
+                "se": 0.10902539792314993,
+                "z": 3.6515860903999555
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.023392846908383,
+            "profit_kurtosis": 3.930224718892771,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.0,
+                "population": 0.0,
+                "se": 0.16141515388768726,
+                "z": 0.0
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.103578996278242,
+                "se": 0.11835927582711024,
+                "z": -0.030238409733683393
+              },
+              "profit_mean": {
+                "paper": 44.0,
+                "population": 42.31456937415773,
+                "se": 0.33561952323628047,
+                "z": 5.021849174893522
+              },
+              "profit_std": {
+                "paper": 11.0,
+                "population": 10.5738891163098,
+                "se": 0.28764272651459005,
+                "z": 1.4813893918106291
+              }
+            }
+          },
+          "table": 3,
+          "variance_ratio": {
+            "paper": 4.840000000000001,
+            "population": 5.279564485953952,
+            "relative_deviation": 0.09081910866817178,
+            "se_log": 0.07196421334663682,
+            "z": -1.2079460863151459
+          }
+        }
+      ],
+      "tests_run": 27
+    },
+    {
+      "acceptance_candidate": false,
+      "consistent": false,
+      "dt": 0.0025,
+      "failures": 3,
+      "invalid": [
+        "1/inventory",
+        "2/inventory",
+        "3/inventory"
+      ],
+      "max_abs_z": 3.926503029254432,
+      "rule": "strict",
+      "tables": [
+        {
+          "gamma": 0.1,
+          "inventory": {
+            "error": "invalid probability at a reachable inventory state",
+            "status": "invalid_probability"
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0048363886168934,
+            "profit_kurtosis": 5.457223368055023,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.26,
+                "population": 0.0,
+                "se": 0.28472676994201956,
+                "z": 0.9131561463396828
+              },
+              "final_q_std": {
+                "paper": 8.4,
+                "population": 9.003388261553669,
+                "se": 0.20362181624796663,
+                "z": -2.9632790467740158
+              },
+              "profit_mean": {
+                "paper": 68.4,
+                "population": 68.22817850809275,
+                "se": 0.45650636199478634,
+                "z": 0.3763835648564622
+              },
+              "profit_std": {
+                "paper": 12.7,
+                "population": 14.407106760497806,
+                "se": 0.4817924026269123,
+                "z": -3.543241344591617
+              }
+            }
+          },
+          "table": 1
+        },
+        {
+          "gamma": 0.01,
+          "inventory": {
+            "error": "invalid probability at a reachable inventory state",
+            "status": "invalid_probability"
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0037544940439775,
+            "profit_kurtosis": 5.657615587189522,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.09,
+                "population": 0.0,
+                "se": 0.2980968431656596,
+                "z": 0.301915307268064
+              },
+              "final_q_std": {
+                "paper": 8.7,
+                "population": 9.426207857457765,
+                "se": 0.21293996925074804,
+                "z": -3.410387725766118
+              },
+              "profit_mean": {
+                "paper": 68.8,
+                "population": 68.66618009732039,
+                "se": 0.4684045074379155,
+                "z": 0.2856930293253889
+              },
+              "profit_std": {
+                "paper": 12.8,
+                "population": 14.784094468543648,
+                "se": 0.5053082739937141,
+                "z": -3.926503029254432
+              }
+            }
+          },
+          "table": 2
+        },
+        {
+          "gamma": 1.0,
+          "inventory": {
+            "error": "invalid probability at a reachable inventory state",
+            "status": "invalid_probability"
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.028236576422934,
+            "profit_kurtosis": 3.9451284104381354,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.0,
+                "population": 0.0,
+                "se": 0.16730471696373686,
+                "z": 0.0
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.289852075907489,
+                "se": 0.12256481376287176,
+                "z": -1.5489933046755113
+              },
+              "profit_mean": {
+                "paper": 44.0,
+                "population": 43.868978913517374,
+                "se": 0.3475788892763354,
+                "z": 0.37695352199155113
+              },
+              "profit_std": {
+                "paper": 11.0,
+                "population": 10.953435576897217,
+                "se": 0.29861480884203595,
+                "z": 0.15593474176096592
+              }
+            }
+          },
+          "table": 3
+        }
+      ],
+      "tests_run": 12
+    },
+    {
+      "acceptance_candidate": false,
+      "consistent": false,
+      "dt": 0.0025,
+      "failures": 6,
+      "invalid": [],
+      "max_abs_z": 4.243667577119449,
+      "rule": "saturate",
+      "tables": [
+        {
+          "gamma": 0.1,
+          "inventory": {
+            "expected_probability_exceedances": 0.00016445888715432621,
+            "inventory_kurtosis": 3.0096222118555995,
+            "profit_kurtosis": 3.0346322323446016,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.08,
+                "population": 0.0,
+                "se": 0.10074453603273431,
+                "z": 0.7940877307133172
+              },
+              "final_q_std": {
+                "paper": 2.9,
+                "population": 3.184513810162796,
+                "se": 0.07699540543375324,
+                "z": -3.6952050393135645
+              },
+              "profit_mean": {
+                "paper": 65.0,
+                "population": 64.44404766528228,
+                "se": 0.22119788618581943,
+                "z": 2.513370920057903
+              },
+              "profit_std": {
+                "paper": 6.6,
+                "population": 6.935068241895056,
+                "se": 0.15905134354001954,
+                "z": -2.106667158147889
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0048363886168934,
+            "profit_kurtosis": 5.457223368055023,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.26,
+                "population": 0.0,
+                "se": 0.28472676994201956,
+                "z": 0.9131561463396828
+              },
+              "final_q_std": {
+                "paper": 8.4,
+                "population": 9.003388261553669,
+                "se": 0.20362181624796663,
+                "z": -2.9632790467740158
+              },
+              "profit_mean": {
+                "paper": 68.4,
+                "population": 68.22817850809275,
+                "se": 0.45650636199478634,
+                "z": 0.3763835648564622
+              },
+              "profit_std": {
+                "paper": 12.7,
+                "population": 14.407106760497806,
+                "se": 0.4817924026269123,
+                "z": -3.543241344591617
+              }
+            }
+          },
+          "table": 1,
+          "variance_ratio": {
+            "paper": 3.702708907254362,
+            "population": 4.315708181291827,
+            "relative_deviation": 0.1655542710463882,
+            "se_log": 0.08117293337187734,
+            "z": -1.8872884919915744
+          }
+        },
+        {
+          "gamma": 0.01,
+          "inventory": {
+            "expected_probability_exceedances": 1.503537725835795e-57,
+            "inventory_kurtosis": 3.0032185023289544,
+            "profit_kurtosis": 3.654169402370699,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.12,
+                "population": 0.0,
+                "se": 0.17870503512708022,
+                "z": 0.6714975877129927
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.650412042182202,
+                "se": 0.1297019693884259,
+                "z": -4.243667577119449
+              },
+              "profit_mean": {
+                "paper": 68.6,
+                "population": 68.35552456263753,
+                "se": 0.3074717837025074,
+                "z": 0.7951150327309657
+              },
+              "profit_std": {
+                "paper": 8.7,
+                "population": 9.680163451092556,
+                "se": 0.2510198076355266,
+                "z": -3.904725528734867
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0037544940439775,
+            "profit_kurtosis": 5.657615587189522,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.09,
+                "population": 0.0,
+                "se": 0.2980968431656596,
+                "z": 0.301915307268064
+              },
+              "final_q_std": {
+                "paper": 8.7,
+                "population": 9.426207857457765,
+                "se": 0.21293996925074804,
+                "z": -3.410387725766118
+              },
+              "profit_mean": {
+                "paper": 68.8,
+                "population": 68.66618009732039,
+                "se": 0.4684045074379155,
+                "z": 0.2856930293253889
+              },
+              "profit_std": {
+                "paper": 12.8,
+                "population": 14.784094468543648,
+                "se": 0.5053082739937141,
+                "z": -3.926503029254432
+              }
+            }
+          },
+          "table": 2,
+          "variance_ratio": {
+            "paper": 2.1646188400052853,
+            "population": 2.3325130216261734,
+            "relative_deviation": 0.07756293095022593,
+            "se_log": 0.08588462798827289,
+            "z": -0.8697941370213688
+          }
+        },
+        {
+          "gamma": 1.0,
+          "inventory": {
+            "expected_probability_exceedances": 4.770126476361973,
+            "inventory_kurtosis": 3.018103114054433,
+            "profit_kurtosis": 3.053843588678042,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.02,
+                "population": 0.0,
+                "se": 0.058054532915078456,
+                "z": 0.34450367603948834
+              },
+              "final_q_std": {
+                "paper": 1.7,
+                "population": 1.833574503164405,
+                "se": 0.050294599207770394,
+                "z": -2.6558418849825167
+              },
+              "profit_mean": {
+                "paper": 31.4,
+                "population": 31.180741135707596,
+                "se": 0.156377631003151,
+                "z": 1.4021114329835633
+              },
+              "profit_std": {
+                "paper": 5.0,
+                "population": 4.8601059808222615,
+                "se": 0.1138490372344185,
+                "z": 1.2287676960297222
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.028236576422934,
+            "profit_kurtosis": 3.9451284104381354,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.0,
+                "population": 0.0,
+                "se": 0.16730471696373686,
+                "z": 0.0
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.289852075907489,
+                "se": 0.12256481376287176,
+                "z": -1.5489933046755113
+              },
+              "profit_mean": {
+                "paper": 44.0,
+                "population": 43.868978913517374,
+                "se": 0.3475788892763354,
+                "z": 0.37695352199155113
+              },
+              "profit_std": {
+                "paper": 11.0,
+                "population": 10.953435576897217,
+                "se": 0.29861480884203595,
+                "z": 0.15593474176096592
+              }
+            }
+          },
+          "table": 3,
+          "variance_ratio": {
+            "paper": 4.840000000000001,
+            "population": 5.079362836707676,
+            "relative_deviation": 0.04945513155117265,
+            "se_log": 0.07183212054377834,
+            "z": -0.6719989161534828
+          }
+        }
+      ],
+      "tests_run": 27
+    },
+    {
+      "acceptance_candidate": false,
+      "consistent": false,
+      "dt": 0.0025,
+      "failures": 9,
+      "invalid": [],
+      "max_abs_z": 21.05819685590221,
+      "rule": "poisson",
+      "tables": [
+        {
+          "gamma": 0.1,
+          "inventory": {
+            "expected_probability_exceedances": 0.0005244175931165307,
+            "inventory_kurtosis": 3.0105579096840445,
+            "profit_kurtosis": 3.0426195454822174,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.08,
+                "population": 0.0,
+                "se": 0.10127561935447928,
+                "z": 0.7899235819036412
+              },
+              "final_q_std": {
+                "paper": 2.9,
+                "population": 3.2013150020421364,
+                "se": 0.07736014911900858,
+                "z": -3.8949640800019956
+              },
+              "profit_mean": {
+                "paper": 65.0,
+                "population": 60.430922984062356,
+                "se": 0.21697380109052497,
+                "z": 21.05819685590221
+              },
+              "profit_std": {
+                "paper": 6.6,
+                "population": 6.800315950478871,
+                "se": 0.15635923246359262,
+                "z": -1.2811264632263648
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0054633293242285,
+            "profit_kurtosis": 5.459423795462674,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.26,
+                "population": 0.0,
+                "se": 0.27775710668504183,
+                "z": 0.9360696584977852
+              },
+              "final_q_std": {
+                "paper": 8.4,
+                "population": 8.782976544470126,
+                "se": 0.1987687929589286,
+                "z": -1.926743825170077
+              },
+              "profit_mean": {
+                "paper": 68.4,
+                "population": 64.46962903853832,
+                "se": 0.44537588889881263,
+                "z": 8.82484000465201
+              },
+              "profit_std": {
+                "paper": 12.7,
+                "population": 14.054406749453147,
+                "se": 0.47015610031334887,
+                "z": -2.880759706298535
+              }
+            }
+          },
+          "table": 1,
+          "variance_ratio": {
+            "paper": 3.702708907254362,
+            "population": 4.271366671799068,
+            "relative_deviation": 0.15357884694381174,
+            "se_log": 0.08123566244415382,
+            "z": -1.7586998926506119
+          }
+        },
+        {
+          "gamma": 0.01,
+          "inventory": {
+            "expected_probability_exceedances": 3.218447475220217e-51,
+            "inventory_kurtosis": 3.003511684870722,
+            "profit_kurtosis": 3.747942956691901,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.12,
+                "population": 0.0,
+                "se": 0.17953787872185553,
+                "z": 0.6683826324243639
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.6767522900519785,
+                "se": 0.13028577466239188,
+                "z": -4.4268247362116915
+              },
+              "profit_mean": {
+                "paper": 68.6,
+                "population": 64.15757696024498,
+                "se": 0.30699493325347355,
+                "z": 14.47067217909776
+              },
+              "profit_std": {
+                "paper": 8.7,
+                "population": 9.665017108622795,
+                "se": 0.25496357968499095,
+                "z": -3.784921398636935
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0043801159773422,
+            "profit_kurtosis": 5.659859078965726,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.09,
+                "population": 0.0,
+                "se": 0.29014237154666095,
+                "z": 0.31019254278593406
+              },
+              "final_q_std": {
+                "paper": 8.7,
+                "population": 9.174653259572665,
+                "se": 0.20739488375552653,
+                "z": -2.288644979941639
+              },
+              "profit_mean": {
+                "paper": 68.8,
+                "population": 64.47646569017591,
+                "se": 0.4559524525068556,
+                "z": 9.482423630036457
+              },
+              "profit_std": {
+                "paper": 12.8,
+                "population": 14.389555434886901,
+                "se": 0.49198590388383934,
+                "z": -3.2308962967000037
+              }
+            }
+          },
+          "table": 2,
+          "variance_ratio": {
+            "paper": 2.1646188400052853,
+            "population": 2.2166110758875273,
+            "relative_deviation": 0.02401911824906544,
+            "se_log": 0.08644180915958107,
+            "z": -0.27458005378295525
+          }
+        },
+        {
+          "gamma": 1.0,
+          "inventory": {
+            "expected_probability_exceedances": 6.019059047490817,
+            "inventory_kurtosis": 3.022054593562374,
+            "profit_kurtosis": 3.0579203083514965,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.02,
+                "population": 0.0,
+                "se": 0.05852790568984605,
+                "z": 0.34171733576091
+              },
+              "final_q_std": {
+                "paper": 1.7,
+                "population": 1.848562255134022,
+                "se": 0.0506040085486099,
+                "z": -2.935780373827777
+              },
+              "profit_mean": {
+                "paper": 31.4,
+                "population": 29.405248580895442,
+                "se": 0.1512312668716467,
+                "z": 13.190072796239587
+              },
+              "profit_std": {
+                "paper": 5.0,
+                "population": 4.694418254296254,
+                "se": 0.11032325373131055,
+                "z": 2.7698761173957256
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0288644818044164,
+            "profit_kurtosis": 3.9467914585156927,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.0,
+                "population": 0.0,
+                "se": 0.16585443612872422,
+                "z": 0.0
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.243983280889036,
+                "se": 0.12157899636547305,
+                "z": -1.1842775906474377
+              },
+              "profit_mean": {
+                "paper": 44.0,
+                "population": 43.08240004074552,
+                "se": 0.344585880239421,
+                "z": 2.6629064389316404
+              },
+              "profit_std": {
+                "paper": 11.0,
+                "population": 10.858457327219334,
+                "se": 0.29613257526797,
+                "z": 0.477970627353591
+              }
+            }
+          },
+          "table": 3,
+          "variance_ratio": {
+            "paper": 4.840000000000001,
+            "population": 5.350233003738138,
+            "relative_deviation": 0.1054200420946565,
+            "se_log": 0.07187206209346518,
+            "z": -1.3944972276050616
+          }
+        }
+      ],
+      "tests_run": 27
+    },
+    {
+      "acceptance_candidate": false,
+      "consistent": false,
+      "dt": 0.001,
+      "failures": 4,
+      "invalid": [
+        "1/inventory",
+        "2/inventory",
+        "3/inventory"
+      ],
+      "max_abs_z": 5.087642905565944,
+      "rule": "strict",
+      "tables": [
+        {
+          "gamma": 0.1,
+          "inventory": {
+            "error": "invalid probability at a reachable inventory state",
+            "status": "invalid_probability"
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0084488691128946,
+            "profit_kurtosis": 5.475684545027548,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.26,
+                "population": 0.0,
+                "se": 0.2955557556593158,
+                "z": 0.8796986525266638
+              },
+              "final_q_std": {
+                "paper": 8.4,
+                "population": 9.345847814404847,
+                "se": 0.21140071041700217,
+                "z": -4.474194114764788
+              },
+              "profit_mean": {
+                "paper": 68.4,
+                "population": 68.2281785080927,
+                "se": 0.47352560533076965,
+                "z": 0.36285575684399884
+              },
+              "profit_std": {
+                "paper": 12.7,
+                "population": 14.946342882810447,
+                "se": 0.5007920406571406,
+                "z": -4.485580241776188
+              }
+            }
+          },
+          "table": 1
+        },
+        {
+          "gamma": 0.01,
+          "inventory": {
+            "error": "invalid probability at a reachable inventory state",
+            "status": "invalid_probability"
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0073490368389773,
+            "profit_kurtosis": 5.677020731310915,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.09,
+                "population": 0.0,
+                "se": 0.31086280393398347,
+                "z": 0.28951678637986195
+              },
+              "final_q_std": {
+                "paper": 8.7,
+                "population": 9.829921135816143,
+                "se": 0.22209128211022752,
+                "z": -5.087642905565944
+              },
+              "profit_mean": {
+                "paper": 68.8,
+                "population": 68.66618009732044,
+                "se": 0.488094215761639,
+                "z": 0.27416817974526686
+              },
+              "profit_std": {
+                "paper": 12.8,
+                "population": 15.40787558771929,
+                "se": 0.5276529058252564,
+                "z": -4.942407326726529
+              }
+            }
+          },
+          "table": 2
+        },
+        {
+          "gamma": 1.0,
+          "inventory": {
+            "error": "invalid probability at a reachable inventory state",
+            "status": "invalid_probability"
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0319468643272662,
+            "profit_kurtosis": 3.9562053687952843,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.0,
+                "population": 0.0,
+                "se": 0.16918393516005303,
+                "z": 0.0
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.349286922843801,
+                "se": 0.12397301106229046,
+                "z": -2.0108160696245925
+              },
+              "profit_mean": {
+                "paper": 44.0,
+                "population": 43.86897891351738,
+                "se": 0.35133522171260545,
+                "z": 0.37292328917080514
+              },
+              "profit_std": {
+                "paper": 11.0,
+                "population": 11.07262862569283,
+                "se": 0.3023959695609163,
+                "z": -0.2401772278853078
+              }
+            }
+          },
+          "table": 3
+        }
+      ],
+      "tests_run": 12
+    },
+    {
+      "acceptance_candidate": false,
+      "consistent": false,
+      "dt": 0.001,
+      "failures": 11,
+      "invalid": [],
+      "max_abs_z": 5.904414065317685,
+      "rule": "saturate",
+      "tables": [
+        {
+          "gamma": 0.1,
+          "inventory": {
+            "expected_probability_exceedances": 2.2407114243818196e-08,
+            "inventory_kurtosis": 3.019579010388758,
+            "profit_kurtosis": 3.038889126521419,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.08,
+                "population": 0.0,
+                "se": 0.1053818222189094,
+                "z": 0.7591442083229135
+              },
+              "final_q_std": {
+                "paper": 2.9,
+                "population": 3.331215261859325,
+                "se": 0.08022560650717658,
+                "z": -5.375032743700739
+              },
+              "profit_mean": {
+                "paper": 65.0,
+                "population": 64.17333235013163,
+                "se": 0.22793860150505094,
+                "z": 3.6267119496653186
+              },
+              "profit_std": {
+                "paper": 6.6,
+                "population": 7.15001207850344,
+                "se": 0.16398688580680118,
+                "z": -3.354000387271387
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0084488691128946,
+            "profit_kurtosis": 5.475684545027548,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.26,
+                "population": 0.0,
+                "se": 0.2955557556593158,
+                "z": 0.8796986525266638
+              },
+              "final_q_std": {
+                "paper": 8.4,
+                "population": 9.345847814404847,
+                "se": 0.21140071041700217,
+                "z": -4.474194114764788
+              },
+              "profit_mean": {
+                "paper": 68.4,
+                "population": 68.2281785080927,
+                "se": 0.47352560533076965,
+                "z": 0.36285575684399884
+              },
+              "profit_std": {
+                "paper": 12.7,
+                "population": 14.946342882810447,
+                "se": 0.5007920406571406,
+                "z": -4.485580241776188
+              }
+            }
+          },
+          "table": 1,
+          "variance_ratio": {
+            "paper": 3.702708907254362,
+            "population": 4.369747387466857,
+            "relative_deviation": 0.18014877672550234,
+            "se_log": 0.08131274920542646,
+            "z": -2.037079229509316
+          }
+        },
+        {
+          "gamma": 0.01,
+          "inventory": {
+            "expected_probability_exceedances": 2.3216697665756515e-98,
+            "inventory_kurtosis": 3.006317012515116,
+            "profit_kurtosis": 3.6630221349266074,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.12,
+                "population": 0.0,
+                "se": 0.1865454530125446,
+                "z": 0.6432748590871865
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.8983788201778085,
+                "se": 0.13521728173968306,
+                "z": -5.904414065317685
+              },
+              "profit_mean": {
+                "paper": 68.6,
+                "population": 68.32913052177628,
+                "se": 0.3202289873905679,
+                "z": 0.8458618329056811
+              },
+              "profit_std": {
+                "paper": 8.7,
+                "population": 10.085299749231808,
+                "se": 0.26181960655523534,
+                "z": -5.2910466387839294
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0073490368389773,
+            "profit_kurtosis": 5.677020731310915,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.09,
+                "population": 0.0,
+                "se": 0.31086280393398347,
+                "z": 0.28951678637986195
+              },
+              "final_q_std": {
+                "paper": 8.7,
+                "population": 9.829921135816143,
+                "se": 0.22209128211022752,
+                "z": -5.087642905565944
+              },
+              "profit_mean": {
+                "paper": 68.8,
+                "population": 68.66618009732044,
+                "se": 0.488094215761639,
+                "z": 0.27416817974526686
+              },
+              "profit_std": {
+                "paper": 12.8,
+                "population": 15.40787558771929,
+                "se": 0.5276529058252564,
+                "z": -4.942407326726529
+              }
+            }
+          },
+          "table": 2,
+          "variance_ratio": {
+            "paper": 2.1646188400052853,
+            "population": 2.3340379059511807,
+            "relative_deviation": 0.07826738953518575,
+            "se_log": 0.08604898140804067,
+            "z": -0.8757277859282757
+          }
+        },
+        {
+          "gamma": 1.0,
+          "inventory": {
+            "expected_probability_exceedances": 0.7097722353282776,
+            "inventory_kurtosis": 3.052565379569195,
+            "profit_kurtosis": 3.0362746351214103,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.02,
+                "population": 0.0,
+                "se": 0.06155018788662972,
+                "z": 0.32493808202240293
+              },
+              "final_q_std": {
+                "paper": 1.7,
+                "population": 1.9442459452307177,
+                "se": 0.052659804193396595,
+                "z": -4.638185594722465
+              },
+              "profit_mean": {
+                "paper": 31.4,
+                "population": 30.860453008033787,
+                "se": 0.15525621376538015,
+                "z": 3.4752038509812158
+              },
+              "profit_std": {
+                "paper": 5.0,
+                "population": 4.8240189240329565,
+                "se": 0.1126052877072284,
+                "z": 1.5628136080482378
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0319468643272662,
+            "profit_kurtosis": 3.9562053687952843,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.0,
+                "population": 0.0,
+                "se": 0.16918393516005303,
+                "z": 0.0
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.349286922843801,
+                "se": 0.12397301106229046,
+                "z": -2.0108160696245925
+              },
+              "profit_mean": {
+                "paper": 44.0,
+                "population": 43.86897891351738,
+                "se": 0.35133522171260545,
+                "z": 0.37292328917080514
+              },
+              "profit_std": {
+                "paper": 11.0,
+                "population": 11.07262862569283,
+                "se": 0.3023959695609163,
+                "z": -0.2401772278853078
+              }
+            }
+          },
+          "table": 3,
+          "variance_ratio": {
+            "paper": 4.840000000000001,
+            "population": 5.268457273583902,
+            "relative_deviation": 0.08852423007931831,
+            "se_log": 0.07178691765646732,
+            "z": -1.1815921936405105
+          }
+        }
+      ],
+      "tests_run": 27
+    },
+    {
+      "acceptance_candidate": false,
+      "consistent": false,
+      "dt": 0.001,
+      "failures": 13,
+      "invalid": [],
+      "max_abs_z": 10.936778077674761,
+      "rule": "poisson",
+      "tables": [
+        {
+          "gamma": 0.1,
+          "inventory": {
+            "expected_probability_exceedances": 1.0220883679796725e-07,
+            "inventory_kurtosis": 3.019672707541138,
+            "profit_kurtosis": 3.0420419737762656,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.08,
+                "population": 0.0,
+                "se": 0.10546546035634448,
+                "z": 0.7585421779765402
+              },
+              "final_q_std": {
+                "paper": 2.9,
+                "population": 3.3338611241085516,
+                "se": 0.08028270079589765,
+                "z": -5.404167022377024
+              },
+              "profit_mean": {
+                "paper": 65.0,
+                "population": 62.52920960019906,
+                "se": 0.22591574797010494,
+                "z": 10.936778077674761
+              },
+              "profit_std": {
+                "paper": 6.6,
+                "population": 7.085519871368554,
+                "se": 0.16267545693984833,
+                "z": -2.9845920245245257
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.0087002102005793,
+            "profit_kurtosis": 5.476567925302398,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.26,
+                "population": 0.0,
+                "se": 0.2923642989236139,
+                "z": 0.8893014672353354
+              },
+              "final_q_std": {
+                "paper": 8.4,
+                "population": 9.244920224196795,
+                "se": 0.20917338955217166,
+                "z": -4.039329409948946
+              },
+              "profit_mean": {
+                "paper": 68.4,
+                "population": 66.69042563272265,
+                "se": 0.4684310204376035,
+                "z": 3.649575482170861
+              },
+              "profit_std": {
+                "paper": 12.7,
+                "population": 14.78493447989815,
+                "se": 0.49545068113420104,
+                "z": -4.2081574600427505
+              }
+            }
+          },
+          "table": 1,
+          "variance_ratio": {
+            "paper": 3.702708907254362,
+            "population": 4.3540696085852355,
+            "relative_deviation": 0.17591463915911,
+            "se_log": 0.08133756457427452,
+            "z": -1.9922684179329135
+          }
+        },
+        {
+          "gamma": 0.01,
+          "inventory": {
+            "expected_probability_exceedances": 9.192006867421716e-92,
+            "inventory_kurtosis": 3.006348763843898,
+            "profit_kurtosis": 3.699756041452699,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.12,
+                "population": 0.0,
+                "se": 0.18666781941872743,
+                "z": 0.6428531729447149
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.902248848804097,
+                "se": 0.13530297969252514,
+                "z": -5.929277024254761
+              },
+              "profit_mean": {
+                "paper": 68.6,
+                "population": 66.607136790158,
+                "se": 0.3196442940793081,
+                "z": 6.234627824601628
+              },
+              "profit_std": {
+                "paper": 8.7,
+                "population": 10.066734396224323,
+                "se": 0.26311798331487696,
+                "z": -5.194378502775059
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.007600451600026,
+            "profit_kurtosis": 5.677923673288037,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.09,
+                "population": 0.0,
+                "se": 0.3071545814769921,
+                "z": 0.2930120708837338
+              },
+              "final_q_std": {
+                "paper": 8.7,
+                "population": 9.712651727976908,
+                "se": 0.21950030392946854,
+                "z": -4.6134411198915775
+              },
+              "profit_mean": {
+                "paper": 68.8,
+                "population": 66.94773677464241,
+                "se": 0.4822918193877159,
+                "z": 3.840544564303607
+              },
+              "profit_std": {
+                "paper": 12.8,
+                "population": 15.224062063555175,
+                "se": 0.5214272160015021,
+                "z": -4.648898233858571
+              }
+            }
+          },
+          "table": 2,
+          "variance_ratio": {
+            "paper": 2.1646188400052853,
+            "population": 2.2870932445609173,
+            "relative_deviation": 0.05658012500497911,
+            "se_log": 0.08626739853423505,
+            "z": -0.6379860315249453
+          }
+        },
+        {
+          "gamma": 1.0,
+          "inventory": {
+            "expected_probability_exceedances": 1.0313824484113774,
+            "inventory_kurtosis": 3.0530593895562026,
+            "profit_kurtosis": 3.036949333798507,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.02,
+                "population": 0.0,
+                "se": 0.061624960615941575,
+                "z": 0.3245438179610984
+              },
+              "final_q_std": {
+                "paper": 1.7,
+                "population": 1.9466130682760292,
+                "se": 0.05270909855679889,
+                "z": -4.678757084230553
+              },
+              "profit_mean": {
+                "paper": 31.4,
+                "population": 30.12890347150832,
+                "se": 0.1529620868439045,
+                "z": 8.309879622581338
+              },
+              "profit_std": {
+                "paper": 5.0,
+                "population": 4.750164910643509,
+                "se": 0.11101260505174586,
+                "z": 2.250511004944317
+              }
+            }
+          },
+          "symmetric": {
+            "expected_probability_exceedances": 0.0,
+            "inventory_kurtosis": 3.032197415259113,
+            "profit_kurtosis": 3.9568691748113363,
+            "status": "completed",
+            "tests": {
+              "final_q_mean": {
+                "paper": 0.0,
+                "population": 0.0,
+                "se": 0.168580872221472,
+                "z": 0.0
+              },
+              "final_q_std": {
+                "paper": 5.1,
+                "population": 5.330213611631239,
+                "se": 0.12356218484343108,
+                "z": -1.863139697011256
+              },
+              "profit_mean": {
+                "paper": 44.0,
+                "population": 43.552064834636546,
+                "se": 0.3500909800655813,
+                "z": 1.2794821656917401
+              },
+              "profit_std": {
+                "paper": 11.0,
+                "population": 11.033148280973384,
+                "se": 0.3013611145217482,
+                "z": -0.10999521629055978
+              }
+            }
+          },
+          "table": 3,
+          "variance_ratio": {
+            "paper": 4.840000000000001,
+            "population": 5.394876851120413,
+            "relative_deviation": 0.1146439775042174,
+            "se_log": 0.07179623981316548,
+            "z": -1.5117094087345544
+          }
+        }
+      ],
+      "tests_run": 27
+    }
+  ],
+  "scope": "tests the declared discrete law, not the authors' unpublished code",
+  "threshold_abs_z": 3.1130172634086897
+}
